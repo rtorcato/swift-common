@@ -1,3 +1,3 @@
-# MatrixSwiftBase
+# Swift-Common
 
-This package is useful at quickly building swiftUI apps.
+This package is like rtorcato/js-common but for Apple's swift programming language
