@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/realm/SwiftLint
+    rev: 0.63.3
+    hooks:
+      - id: swiftlint
+        args: [--fix, --quiet]
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, chore, docs, refactor, test, build, ci, perf, style, revert]
+
+default_install_hook_types:
+  - pre-commit
+  - commit-msg

@@ -47,6 +47,23 @@ jobs:
       - name: swiftlint --strict
         run: swiftlint lint --strict --reporter github-actions-logging
 
+  dead-code:
+    name: Periphery
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select latest stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Install Periphery
+        run: brew install periphery
+
+      - name: periphery scan
+        run: periphery scan --strict --format github-actions
+
   platforms:
     name: xcodebuild ${{ matrix.platform }}
     runs-on: macos-latest

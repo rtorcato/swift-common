@@ -17,10 +17,10 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 - [x] **Dependabot** (`.github/dependabot.yml`) — weekly updates for the `swift` (SwiftPM) and `github-actions` ecosystems.
 - [x] **CodeQL** (`.github/workflows/codeql.yml`) — weekly scheduled scan plus push/PR triggers; uses CodeQL's Swift autobuild.
 - [x] **`.editorconfig`** — UTF-8, LF, 4-space indent for Swift; 2-space for YAML/JSON; tab for Makefile.
-- [ ] **Conventional commits + commit-msg hook** — `js-tooling` wires up `commitlint` + Husky. Swift equivalent: a `.git/hooks/commit-msg` script (or the `pre-commit` framework with `conventional-pre-commit`) enforcing the same `feat:` / `fix:` / `chore:` prefixes. Current history is all generic "update" messages — this would tighten that up.
+- [x] **Conventional commits + commit-msg hook** — wired via `pre-commit` framework: `conventional-pre-commit` runs at `commit-msg` stage, enforcing `feat:` / `fix:` / `chore:` / `docs:` / `refactor:` / `test:` / `build:` / `ci:` / `perf:` / `style:` / `revert:` prefixes.
 - [ ] **Auto-release via semantic-release** — `semantic-release` itself is language-agnostic; with `@semantic-release/github` and `@semantic-release/git` (no npm plugin) it can tag versions and write `CHANGELOG.md` for a Swift package based on conventional commits. Use the `/semantic-release/base` preset from `js-tooling`, not `/github` (which assumes npm publish).
-- [ ] **Dead-code detection** — `js-tooling` uses `knip`. Swift equivalent: `periphery scan` (https://github.com/peripheryapp/periphery). Run as a CI job or pre-push hook.
-- [ ] **`pre-commit` framework** for cross-tool hook management — same role Husky plays in JS. Lets you run `swiftlint --fix`, `periphery`, and `commitlint` from one config (`.pre-commit-config.yaml`) without per-hook shell scripts.
+- [x] **Dead-code detection** — `.periphery.yml` configured with `retain_public: true` (library mode), `dead-code` job added to CI runs `periphery scan --strict`.
+- [x] **`pre-commit` framework** — `.pre-commit-config.yaml` runs SwiftLint (`--fix`) at pre-commit stage and `conventional-pre-commit` at commit-msg stage. **One-time setup:** `brew install pre-commit && pre-commit install --install-hooks`. Periphery is CI-only (too slow for per-commit).
 
 ## Foundation utilities — port from @rtorcato/js-common
 
