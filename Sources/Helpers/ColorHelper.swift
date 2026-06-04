@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 final public class ColorHelper {
     
@@ -36,7 +39,6 @@ final public class ColorHelper {
 //            return Color(uiColor)
 //        }
     
-
         /*
          example: static let imageColor = ColorHelper.getColorFromRGB(r: 95, g: 99, b: 120)
          */
@@ -44,16 +46,14 @@ final public class ColorHelper {
             return Color(red: r / 255, green: g / 255, blue: b / 255)
         }
     
-   
-    
-   // #if os(iOS) || os(watchOS)
-        public static func getRandomColor() -> UIColor {
-            return UIColor(displayP3Red: Double.random(in: 0...1), green: Double.random(in: 0...1), blue: Double.random(in: 0...1), alpha: 1.0)
-        }
-   // #endif
+    #if canImport(UIKit)
+    public static func getRandomColor() -> UIColor {
+        return UIColor(displayP3Red: Double.random(in: 0...1), green: Double.random(in: 0...1), blue: Double.random(in: 0...1), alpha: 1.0)
+    }
+    #endif
 }
 
-//extension UIColor {
+// extension UIColor {
 //    static var random: UIColor {
 //        return UIColor(
 //            red: .random(in: 0...1),
@@ -62,4 +62,4 @@ final public class ColorHelper {
 //            alpha: 1.0
 //        )
 //    }
-//}
+// }
