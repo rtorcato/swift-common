@@ -101,7 +101,7 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild \
-            -scheme MatrixSwiftBase \
+            -scheme MatrixSwiftBaseUI \
             -destination "generic/platform=${{ matrix.platform }}" \
             -skipPackagePluginValidation \
             build | xcbeautify --renderer github-actions
