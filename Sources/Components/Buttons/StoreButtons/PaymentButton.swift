@@ -9,10 +9,9 @@
  Abstract:
  A button that hosts PKPaymentButton for simulating smoothie purchases with Apple Pay.
  */
-#if !os(watchOS)
+#if !os(watchOS) && !os(tvOS)
 import SwiftUI
 import PassKit
-
 
 public struct PaymentButton: View {
     var action: () -> Void
@@ -23,7 +22,6 @@ public struct PaymentButton: View {
         return 45
 #endif
     }
-    
     
     public var body: some View {
         Representable(action: action)
@@ -83,7 +81,7 @@ extension PaymentButton {
     
     class Coordinator: NSObject {
         var action: () -> Void
-        //paymentButtonType: .checkout
+        // paymentButtonType: .checkout
         var button = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .automatic)
         
         init(action: @escaping () -> Void) {
