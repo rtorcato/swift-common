@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 
 #if os(iOS)
+import LocalAuthentication
+
 final class LocalAuthenticationHelper {
-    private(set) var context:LAContext
+    private(set) var context: LAContext
     private(set) var canEvaluatePolicy = false
     private(set) var biometryType: LABiometryType = .none
     
     static let shared = LocalAuthenticationHelper() // Singleton
-    
     
     // On initialize of this class, get the biometryType
     init() {
@@ -23,13 +23,13 @@ final class LocalAuthenticationHelper {
         self.biometryType = self.context.biometryType
     }
     
-    static func getBioMetricStatus()->Bool{
+    static func getBioMetricStatus() -> Bool {
         let context = LAContext()
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: .none)
     }
     
     // canEvaluatePolicy will let us know if the user's device supports biometrics authentication
-    func deviceBiometricsSupported()->Bool{
+    func deviceBiometricsSupported() -> Bool {
         let canEvaluatePolicy = self.context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
         return canEvaluatePolicy
     }
@@ -50,10 +50,10 @@ final class LocalAuthenticationHelper {
         }
     }
     
-    static func authenticateUser(localizedReason: String = "To Unlock User"){
+    static func authenticateUser(localizedReason: String = "To Unlock User") {
         let scanner = LAContext()
-        scanner.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason) { (status, err) in
-            if err != nil{
+        scanner.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason) { (_, err) in
+            if err != nil {
                 print(err!.localizedDescription)
                 return
             }
@@ -93,4 +93,3 @@ final class LocalAuthenticationHelper {
 //    }
 }
 #endif
-

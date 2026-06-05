@@ -6,18 +6,15 @@
 //
 
 import SwiftUI
+
+#if os(iOS)
 import PassKit
 
 public struct AddToWalletButton: View {
     public var body: some View {
-        
-        //            if (!self.isLoading){
-        //
-        //            }
         AddPassToWalletButton {
             print("add pass")
         }
-        //        ProgressView()
     }
 }
 
@@ -26,3 +23,4 @@ struct AddToWalletButton_Previews: PreviewProvider {
         AddToWalletButton()
     }
 }
+#endif

@@ -9,7 +9,7 @@ let package = Package(
     // exclude: ["instructions.md"],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(name: "MatrixSwiftBase", targets: ["MatrixSwiftBase"]),
+        .library(name: "MatrixSwiftBase", targets: ["MatrixSwiftBase"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -27,24 +27,19 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "MatrixSwiftBase",
-            dependencies: [
-//                .product(name: "PopupView", package: "PopupView"),
-//                .product(name: "Lottie", package: "lottie-ios"),
-//                .product(name: "SDWebImage", package: "SDWebImage"),
-//                .product(name: "SDWebImageSVGCoder", package: "SDWebImageSVGCoder"),
-//                .product(name: "SVGView", package: "SVGView")
-            ], // ["SwiftyUtils"],
+            dependencies: [],
             path: "Sources",
-            resources: [
-                // .process("Swift-Base-Kit-Assets.xcassets")
-                // .process("example.png"),
-                // .copy("settings.plist")
-            ]),
+            exclude: [
+                "Examples",
+                "app-example.entitlements.plist",
+                "Info-copy.plist"
+            ],
+            resources: []),
         .testTarget(
             name: "MatrixSwiftBaseTests",
-            dependencies: ["MatrixSwiftBase"]),
+            dependencies: ["MatrixSwiftBase"])
 //            dependencies: ["MatrixSwiftBase", "SwiftyUtils"]),
     ]
 )
 
-//x-xcode-log://9054D712-B231-4370-9DFF-BA7072106FEE dependency 'Lottie' in target 'MatrixSwiftBase' requires explicit declaration; reference the package in the target dependency with '.product(name: "Lottie", package: "lottie-ios")'
+// x-xcode-log://9054D712-B231-4370-9DFF-BA7072106FEE dependency 'Lottie' in target 'MatrixSwiftBase' requires explicit declaration; reference the package in the target dependency with '.product(name: "Lottie", package: "lottie-ios")'

@@ -8,6 +8,8 @@
 //
 
 import SwiftUI
+
+#if canImport(UIKit) && !os(watchOS)
 import PhotosUI
 
 @MainActor
@@ -15,13 +17,12 @@ public class ImagePicker: ObservableObject {
     @Published var imageSelection: PhotosPickerItem? {
         didSet {
             Task {
-                try await loadTransferable(from:imageSelection)
+                try await loadTransferable(from: imageSelection)
             }
         }
     }
     @Published var image: Image?
     @Published var uiImage: UIImage?
-    
     
     func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {
         do {
@@ -36,3 +37,4 @@ public class ImagePicker: ObservableObject {
         }
     }
 }
+#endif
