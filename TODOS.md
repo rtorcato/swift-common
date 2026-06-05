@@ -41,20 +41,20 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 ### Add new categories
 
 - [ ] **Arrays** (`Extensions/Array+Common.swift`) — `unique()`, `chunked(into:)`, `compactNonNil`, `groupBy(_:)`, `shuffled()`, safe `subscript(safe:)`.
-- [ ] **Functions** (`Helpers/FunctionHelper.swift`) — `debounce`, `throttle`, `memoize` (closure-based + `Combine` operators where useful).
-- [ ] **Async helpers** (`Concurrency/AsyncHelpers.swift`) — `delay(_:)`, `retry(times:delay:_:)`, `race(_:)`, `withTimeout(_:_:)` for `async throws` closures.
+- [x] **Functions** (`Helpers/FunctionHelper.swift`) — `debounce`, `throttle`, `memoize` (thread-safe, closure-based).
+- [x] **Async helpers** (`Helpers/AsyncHelpers.swift`) — `retry(attempts:delay:_:)`, `withTimeout(_:_:)` for `async throws` closures.
 - [ ] **Sleep** (`Concurrency/Sleep.swift`) — typed wrapper over `Task.sleep` (`Sleep.seconds(_:)`, `Sleep.milliseconds(_:)`).
 - [ ] **Interval** (`Concurrency/Interval.swift`) — `Task`-based repeating interval with cancellation; modern alternative to `Timer`.
 - [ ] **Random** (`Helpers/RandomHelper.swift`) — random int/double/bool/string, `Collection.randomElement(count:)`, seeded RNG wrapper.
-- [ ] **Regex** (`Helpers/RegexHelper.swift`) — Swift `Regex` + `NSRegularExpression` wrappers: `matches(_:in:)`, `replace(_:with:in:)`, named-capture extraction.
+- [x] **Regex** (`Helpers/RegexHelper.swift`) — `matches(_:in:)`, `allMatches(_:in:)`, `replace(_:with:in:)`, `captureGroups(_:in:)`.
 - [ ] **Math** (`Helpers/MathHelper.swift`) — `clamp`, `lerp`, `mapRange`, `roundedTo(places:)`, `degreesToRadians` / `radiansToDegrees`.
 - [ ] **Geometry** (`Helpers/GeometryHelper.swift`) — `CGPoint` / `CGRect` / `CGSize` math: distance, midpoint, intersection, center, inset. Distinct from the existing `Shapes/` folder (those are drawable SwiftUI shapes, this is computation).
 - [ ] **Dictionary** (`Extensions/Dictionary+Common.swift`) — `merging(_:strategy:)`, `mapValues`, `filterKeys`, `compactMapValues`, JSON-friendly key transforms.
 - [ ] **Objects / Codable** (`Helpers/CodableHelper.swift`) — partial decode, key omission, deep merge of `[String: Any]`, snake↔camel key conversion.
 - [ ] **Sets** (`Extensions/Set+Common.swift`) — set-algebra helpers, symmetric-difference convenience, `isSuperset(of:)` shortcuts.
 - [ ] **Events** (`Events/EventEmitter.swift`) — `Combine`-backed or `NotificationCenter`-backed typed event bus with `on`/`off`/`emit`. Type-safe alternative to raw `NotificationCenter`.
-- [ ] **Errors** (`Errors/AppError.swift`) — `LocalizedError`-conforming base type with code + userInfo, plus `Result` helpers. Promotes `NetworkError` from being the only error type.
-- [ ] **Try / Result** (`Helpers/ResultHelper.swift`) — `Result.tryCatch(_:)`, async-throws ↔ `Result` bridges, `attempt(_:)` for swallowing-or-logging.
+- [x] **Errors** (`Errors/AppError.swift`) — `LocalizedError`-conforming `AppError` with code + message + userInfo. Includes sync + async `Result.tryCatch(_:)` extension covering the "Try / Result" item below.
+- [x] **Try / Result** — covered by `Result.tryCatch(_:)` extension on `AppError.swift`.
 - [ ] **Env** (`Helpers/EnvHelper.swift`) — typed `ProcessInfo` env-var accessors with defaults (`env("API_URL", default: "...")`).
 - [ ] **Logging** (`Logging/Logger.swift`) — thin wrapper over `os.Logger` with level-tagged convenience methods and consistent subsystem/category. Don't rebuild `os.Logger` — just standardize how the package and downstream apps use it.
 - [ ] **Task cancellation** (`Concurrency/Cancellation.swift`) — `withCancellableTask`, group-cancellation helpers, equivalent of JS `AbortController`.
@@ -64,4 +64,4 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 
 - [ ] **Rebuild `Networking/` as a proper module.** Listed above under "Expand partial coverage" but worth flagging separately: until there's a real `HTTPClient`, every consumer iOS app will roll its own. This is the single change that would most improve the package's reusability claim.
 - [x] **Subpath / submodule exports.** Package split into `MatrixSwiftBaseCore` (pure utilities) and `MatrixSwiftBaseUI` (SwiftUI components + UI-coupled helpers). Consumers depending on just Core never compile or link UI code. Networking is currently in Core as a stub; promote to its own `MatrixSwiftBaseNetworking` product when the HTTPClient rebuild lands.
-- [ ] **Strip unused SwiftUI imports from currently UI-categorized helpers.** Some files (e.g., `StringHelper`, `DateHelper`, `DoubleHelper`, `KeychainManager`, `ThreadHelper`) live under `MatrixSwiftBaseUI/` purely because they declare `import SwiftUI` — but the import is unused. Removing the import would let them move to Core, shrinking what UI-free consumers pull. Low-priority; case-by-case effort.
+- [x] **Strip unused SwiftUI imports from currently UI-categorized helpers.** `StringHelper`, `DateHelper`, `DoubleHelper`, `ThreadHelper`, and `KeychainManager` all moved from UI to Core after dropping their unused `import SwiftUI` (KeychainManager also had a dead `cache = [UUID: UIImage]()` field removed).

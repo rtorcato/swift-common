@@ -5,11 +5,11 @@
 //  Created by Richard Torcato on 2022-12-29.
 //
 
-import SwiftUI
+import Foundation
+import Security
 
 public final class KeychainManager {
-    private var cache = [UUID: UIImage]()
-    
+
     public static func savePassword(
         service: String,
         account: String,

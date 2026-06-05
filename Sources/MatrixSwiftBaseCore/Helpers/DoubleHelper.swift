@@ -7,8 +7,6 @@
 
 import Foundation
 
-import SwiftUI
-
 final class DoubleHelper {
     
     static let instance = DoubleHelper() // Singleton

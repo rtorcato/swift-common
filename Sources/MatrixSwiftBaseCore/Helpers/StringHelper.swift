@@ -5,7 +5,7 @@
 //  Created by Richard Torcato on 2022-10-17.
 //
 
-import SwiftUI
+import Foundation
 
 public final class StringHelper {
     

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import SwiftUI
-
 final class ThreadHelper {
     
     static let shared = ThreadHelper() // Singleton
