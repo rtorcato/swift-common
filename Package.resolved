@@ -8,42 +8,6 @@
         "revision" : "4e51b71c6ef1b645c9a83de112d627c919143137",
         "version" : "4.1.3"
       }
-    },
-    {
-      "identity" : "sdwebimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage",
-      "state" : {
-        "branch" : "master",
-        "revision" : "a812079ae91a7f2e627364c42ea7b98abfa366ed"
-      }
-    },
-    {
-      "identity" : "sdwebimagesvgcoder",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSVGCoder",
-      "state" : {
-        "branch" : "master",
-        "revision" : "4e8e17925ed0c6f160c0d4c4ce58d5dfbcd26093"
-      }
-    },
-    {
-      "identity" : "svgview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/SVGView",
-      "state" : {
-        "branch" : "main",
-        "revision" : "b2f2b2a7b576604ad17c11b3af33c27992bc5bcf"
-      }
-    },
-    {
-      "identity" : "swiftkeychainwrapper",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jrendel/SwiftKeychainWrapper",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "185a3165346a03767101c4f62e9a545a0fe0530f"
-      }
     }
   ],
   "version" : 2

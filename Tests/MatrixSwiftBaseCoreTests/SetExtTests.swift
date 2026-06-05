@@ -1,5 +1,5 @@
 import XCTest
-@testable import MatrixSwiftBase
+@testable import MatrixSwiftBaseCore
 
 final class SetExtTests: XCTestCase {
 

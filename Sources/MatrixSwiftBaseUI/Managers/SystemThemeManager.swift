@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MatrixSwiftBaseCore
 
 public final class SystemThemeManager: ObservableObject {
     @AppStorage("appSystemTheme") public var appSystemTheme: String = SystemThemes.unspecified.rawValue
