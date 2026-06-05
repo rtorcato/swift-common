@@ -10,7 +10,7 @@ import SwiftUI
 struct PopupButton<Content: View>: View {
     @Binding var isShowing: Bool
     
-    var hideAll: () -> ()
+    var hideAll: () -> Void
     @ViewBuilder var content: () -> Content
     
     var body: some View {

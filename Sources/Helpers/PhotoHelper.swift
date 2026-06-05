@@ -14,9 +14,9 @@ final class PhotoHelper {
     static let instance = PhotoHelper() // Singleton
     
     // do not check on startup
-    static func checkPhotoAccess()-> String {
+    static func checkPhotoAccess() -> String {
         // Check the app's authorization status (either read/write or add-only access).
-        let readWriteStatus:PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        let readWriteStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         //    print(readWriteStatus.rawValue)\
         var value = ""
         switch readWriteStatus {

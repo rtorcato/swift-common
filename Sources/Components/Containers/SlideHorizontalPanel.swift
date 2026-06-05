@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct SlideVerticalPanel<PanelContent: View, Content: View> : View  {
+public struct SlideVerticalPanel<PanelContent: View, Content: View>: View {
     enum SlideOutDirection {
         case right
         case left
@@ -21,17 +21,15 @@ public struct SlideVerticalPanel<PanelContent: View, Content: View> : View  {
     var slideOutPosition: SlideOutPosition = .left
     var panelWidth: Int = 300
     // var @Binding var isDark: Bool
-    var panelContent : PanelContent
-    var content : Content
+    var panelContent: PanelContent
+    var content: Content
     
     // for future drag gesture use
     //    @State var width = UIScreen.main.bounds.width - 90
     //    // to hide view
     //    @State var x = -UIScreen.main.bounds.width + 90
     
-    
-    init(isOpen: Binding<Bool>, @ViewBuilder panelContent: @escaping () -> PanelContent, @ViewBuilder content: @escaping () -> Content)
-    {
+    init(isOpen: Binding<Bool>, @ViewBuilder panelContent: @escaping () -> PanelContent, @ViewBuilder content: @escaping () -> Content) {
         self._isOpen = isOpen
         self.panelContent = panelContent()
         self.content = content()
@@ -66,7 +64,7 @@ public struct SlideVerticalPanel<PanelContent: View, Content: View> : View  {
                 self.panelContent
                     .zIndex(2)
                     .frame(width: CGFloat(self.panelWidth))
-                    .frame(maxHeight:.infinity)
+                    .frame(maxHeight: .infinity)
                 
                     .transition(.asymmetric(
                         insertion: .move(edge: .leading),
@@ -110,7 +108,7 @@ public struct SlideVerticalPanel<PanelContent: View, Content: View> : View  {
 
 struct SlideVerticalPanel_Previews: PreviewProvider {
     static var previews: some View {
-        HStack{
+        HStack {
             SlideVerticalPanel(isOpen: .constant(true), panelContent: {Text("hello")}, content: {Text("Hello")})
             //        SlideVerticalPanel(isOpen: .constant(true), panelContent: Text("hello")){
             //            Text("Main content")

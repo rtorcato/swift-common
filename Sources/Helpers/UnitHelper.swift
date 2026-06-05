@@ -15,6 +15,6 @@ public struct UnitHelper {
         Int(round(Double(C) * 9 / 5 + 32))
     }
     static func convertToCelsius( F: Int) -> Int {
-        Int(round((Double (F) - 32) * 5 / 9))
+        Int(round((Double(F) - 32) * 5 / 9))
     }
 }

@@ -53,4 +53,3 @@ struct CartView_Previews: PreviewProvider {
             .environmentObject(CartManager())
     }
 }
-

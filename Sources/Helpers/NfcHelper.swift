@@ -7,22 +7,21 @@
 
 import SwiftUI
 import Foundation
-//import Stripe
-
+// import Stripe
 
 final class NfcHelper {
     
     static let instance = NfcHelper() // Singleton
     
-    init(){
+    init() {
 
     }
     
-    ///Setup stripe keys
+    /// Setup stripe keys
     ///
     ///
-    static func setup(){
-        //#warning("Please user your own Stripe Publishable key below")
+    static func setup() {
+        // #warning("Please user your own Stripe Publishable key below")
         // Stripe.setDefaultPublishableKey("pk_test_xxxxxxxxxxxxxxxxxxxxxx")
         // StripeAPI.defaultPublishableKey = AppConstants.STRIPE_PUBLISHING_KEY
     }

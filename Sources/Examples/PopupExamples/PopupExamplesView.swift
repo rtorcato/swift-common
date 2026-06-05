@@ -4,29 +4,29 @@
 ////
 ////  Created by Richard Torcato on 2022-11-04.
 ////
-//#if os(iOS)
-//import SwiftUI
-//import PopupView
+// #if os(iOS)
+// import SwiftUI
+// import PopupView
 //
-//public struct ToastsState {
+// public struct ToastsState {
 //    var showingTopFirst = false
 //    var showingTopSecond = false
 //    var showingBottomFirst = false
 //    var showingBottomSecond = false
-//}
+// }
 //
-//public struct PopupsState {
+// public struct PopupsState {
 //    var showingMiddle = false
 //    var showingBottomFirst = false
 //    var showingBottomSecond = false
-//}
+// }
 //
-//public struct ActionSheetsState {
+// public struct ActionSheetsState {
 //    var showingFirst = false
 //    var showingSecond = false
-//}
+// }
 //
-//public struct PopupExamplesView : View {
+// public struct PopupExamplesView : View {
 //    @State var floats = ToastsState()
 //    @State var toasts = ToastsState()
 //    @State var popups = PopupsState()
@@ -206,11 +206,11 @@
 //        }
 //
 //    }
-//}
+// }
 //
-//struct PopupExamplesView_Previews: PreviewProvider {
+// struct PopupExamplesView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        PopupExamplesView()
 //    }
-//}
-//#endif
+// }
+// #endif

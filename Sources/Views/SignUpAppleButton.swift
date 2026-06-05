@@ -21,7 +21,7 @@ struct SignUpAppleButton: UIViewRepresentable {
     func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
         let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signUp, authorizationButtonStyle: .black)
         
-        //change style from default to sign up
+        // change style from default to sign up
         
         button.addTarget(context.coordinator, action: #selector(Coordinator.handleAuthoRequest), for: .touchUpInside)
         
@@ -32,8 +32,7 @@ struct SignUpAppleButton: UIViewRepresentable {
         
     }
     
-    
-    class Coordinator:  NSObject, ASAuthorizationControllerDelegate,  ASAuthorizationControllerPresentationContextProviding {
+    class Coordinator: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
       
         var parent: SignUpAppleButton
         
@@ -78,7 +77,6 @@ struct SignUpAppleButton: UIViewRepresentable {
                 parent.error = new
             }
         }
-        
         
         func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
            

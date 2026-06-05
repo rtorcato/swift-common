@@ -9,13 +9,13 @@ import SwiftUI
 
 #if os(iOS)
 final actor ImageCache {
-    private var cache = [UUID: UIImage] ()
+    private var cache = [UUID: UIImage]()
     
     func save(image: UIImage, withID id: UUID) {
         cache[id] = image
     }
     
-    func getImage (for id: UUID) -> UIImage? {
+    func getImage(for id: UUID) -> UIImage? {
         cache[id]
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-#if os (iOS)
+#if os(iOS)
 public struct VHStack<Content: View>: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ViewBuilder var content: () -> Content

@@ -1,35 +1,24 @@
-# By default, SwiftLint uses a set of sensible default rules you can adjust:
-disabled_rules: # rule identifiers turned on by default to exclude from running
-    - weak_delegate
-    - cyclomatic_complexity
-    - force_unwrapping
-    - function_body_length
-    - type_name
-    - line_length
-    - identifier_name
-    - trailing_whitespace
+disabled_rules:
+  - weak_delegate
+  - cyclomatic_complexity
+  - force_unwrapping
+  - function_body_length
+  - type_name
+  - line_length
+  - identifier_name
+  - trailing_whitespace
+
 excluded:
-  - file1
-  - file2
-  - folder1
-  - folder2/ExcludedFileFromSwiftLintRules.swift
+  - .build
+  - .swiftpm
+  - DerivedData
+  - Sources/Examples
+
 file_length:
   warning: 500
   error: 1200
-# naming rules can set warnings/errors for min_length and max_length
-# additionally they can set excluded names
-type_name:
-  min_length: 4 # only warning
-  max_length: # warning and error
-    warning: 40
-    error: 50
-  excluded: iPhone # excluded via string
-  allowed_symbols: ["_"] # these are allowed in type names
 
 nesting:
   type_level:
-    warning: 3 --> this means the warning appears if you nest 3 level deep instead of 1
+    warning: 3
     error: 6
-  statement_level:
-    warning: 5
-    error: 10

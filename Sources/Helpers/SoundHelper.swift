@@ -14,7 +14,7 @@ public final class SoundHelper {
     
     private var audioPlayer: AVAudioPlayer?
     
-    public init(){}
+    public init() {}
     
     public static func playSound(sound: String, type: SoundFileTypes = .mp3) {
         let fileType: String? = type.description
@@ -69,9 +69,9 @@ public final class SoundHelper {
 ////    SoundFileTypes.allCases.forEach { soundFileType in
 ////        print(soundFileType.rawValue)
 ////    }
-//}
+// }
 //
-//enum ImageFileTypes: String, CaseIterable {
+// enum ImageFileTypes: String, CaseIterable {
 //    case jpeg
 //    case png
 //    case gif
@@ -79,9 +79,9 @@ public final class SoundHelper {
 //    var description : String {
 //        return String(describing: self)
 //    }
-//}
+// }
 //
-//func playSound(sound: String, type: SoundFileTypes) {
+// func playSound(sound: String, type: SoundFileTypes) {
 //    let fileType: String? = type.description
 //    if let path = Bundle.main.path(forResource: sound, ofType: fileType) {
 //        do {
@@ -91,5 +91,5 @@ public final class SoundHelper {
 //            print("Could not play the sound file.")
 //        }
 //    }
-//}
+// }
 //

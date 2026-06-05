@@ -30,12 +30,11 @@ class VisionKitHelper {
     
     static let shared = VisionKitHelper() // Singleton
    
-    
-    static func isScannerAvailable(isAvailable:Bool, isSupported:Bool) -> Bool {
+    static func isScannerAvailable(isAvailable: Bool, isSupported: Bool) -> Bool {
         return isAvailable && isSupported
     }
     
-    static func requestDataScannerAccessStatus(isScannerAvailable:Bool) async {
+    static func requestDataScannerAccessStatus(isScannerAvailable: Bool) async {
 //        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
 //            dataScannerAccessStatus = .cameraNotAvailable
 //            return

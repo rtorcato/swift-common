@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: Custom View which will return the properties of the view
 public struct ResponsiveView<Content: View>: View {
-    var content: ((ResponsiveViewProperties)->Content)
+    var content: ((ResponsiveViewProperties) -> Content)
     // Returning properties
     
 //    public init(){
@@ -19,7 +19,7 @@ public struct ResponsiveView<Content: View>: View {
 //    }
     
     public var body: some View {
-        GeometryReader{proxy in
+        GeometryReader {proxy in
             let size = proxy.size
             let isLandscape = (size.width > size.height)
             let isiPad = UIDevice.current.userInterfaceIdiom == .pad
@@ -31,7 +31,7 @@ public struct ResponsiveView<Content: View>: View {
                     // Updating fraction on intial
                     updateFraction(fraction: isLandscape && !isSplit ? 0.3 : 0.5)
                 }
-                .onChange(of: isSplit, perform: { newValue in
+                .onChange(of: isSplit, perform: { _ in
                     updateFraction(fraction: isLandscape && !isSplit ? 0.3 : 0.5)
                 })
                 .onChange(of: isLandscape) { newValue in
@@ -40,17 +40,17 @@ public struct ResponsiveView<Content: View>: View {
         }
     }
     
-    func updateFraction(fraction: Double){
+    func updateFraction(fraction: Double) {
         NotificationCenter.default.post(name: NSNotification.Name("UPDATEFRACTION"), object: nil, userInfo: [ "fraction": fraction])
     }
 }
-//extension ResponsiveView {
-   public struct ResponsiveViewProperties{
+// extension ResponsiveView {
+   public struct ResponsiveViewProperties {
         public var isLandscape: Bool
         public var isiPad: Bool
         public var isSplit: Bool
         public var size: CGSize
     }
-//}
+// }
 
 #endif

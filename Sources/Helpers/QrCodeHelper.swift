@@ -26,6 +26,5 @@ final class QrCodeHelper {
                                       AVMetadataObject.ObjectType.interleaved2of5,
                                       AVMetadataObject.ObjectType.qr]
     
-    
 }
 #endif

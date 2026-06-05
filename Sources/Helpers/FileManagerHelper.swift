@@ -33,7 +33,7 @@ public final class FileManagerHelper {
         return paths[0]
     }
     
-    public static func listDocumentsDirectory() -> Void {
+    public static func listDocumentsDirectory() {
         let fm = FileManager.default
         let path = FileManagerHelper.getDocumentsDirectory()
         print(path.absoluteString)
@@ -48,7 +48,7 @@ public final class FileManagerHelper {
         }
     }
     
-    public static func getBundleDirectory() -> Void {
+    public static func getBundleDirectory() {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
 
@@ -104,11 +104,11 @@ public enum FileManagerError: Error, LocalizedError {
     }
 }
 
-//public struct FileManagerErrorType: Identifiable {
+// public struct FileManagerErrorType: Identifiable {
 //    public let id = UUID()
 //    public let error: FileManagerError
 //    public init(){
 //        self.id = UUID()
 //
 //    }
-//}
+// }

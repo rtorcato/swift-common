@@ -13,7 +13,6 @@ class LocalFileHelper {
     static let instance = LocalFileHelper()
     private init() { }
     
-    
     #if os(iOS)
     func saveImage(image: UIImage, imageName: String, folderName: String) {
         

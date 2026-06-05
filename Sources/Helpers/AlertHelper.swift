@@ -8,11 +8,11 @@ import SwiftUI
 import Foundation
 
 public final class AlertHelper {
-    /// Show a simple alert anywhere from code
-    /// - Parameters:
-    ///   - title: Alert title
-    ///   - message: Alert message
-    ///   - actionLabel: Label for default button
+    // Show a simple alert anywhere from code
+    // - Parameters:
+    //   - title: Alert title
+    //   - message: Alert message
+    //   - actionLabel: Label for default button
     /*
     public static func showSimpleAlert(title: String, message: String, actionLabel: String = "OK") {
 //    #if os(iOS)
@@ -31,5 +31,3 @@ public final class AlertHelper {
 //        #endif
     }     */
 }
-
-

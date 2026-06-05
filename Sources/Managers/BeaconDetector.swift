@@ -9,14 +9,14 @@ import SwiftUI
 import CoreLocation
 import Combine
 
-//https://www.youtube.com/watch?v=lCNpEaZiKqU
+// https://www.youtube.com/watch?v=lCNpEaZiKqU
 
 class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
     var didChange = PassthroughSubject<Void, Never>()
     var locationManager: CLLocationManager?
-    var lastDistance:CLProximity = CLProximity.unknown
+    var lastDistance: CLProximity = CLProximity.unknown
     
-    override init(){
+    override init() {
         super.init()
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -27,7 +27,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
 //        <#code#>
 //    }
     
-    func startScanning(){
+    func startScanning() {
         _ = UUID(uuidString: "")
     }
 }

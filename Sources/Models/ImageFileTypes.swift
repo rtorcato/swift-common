@@ -12,7 +12,7 @@ enum ImageFileTypes: String, CaseIterable {
     case png
     case gif
     
-    var description : String {
+    var description: String {
         return String(describing: self)
     }
 }

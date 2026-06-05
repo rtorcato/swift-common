@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public final class ColorSchemeHelper {
-    @Environment (\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) var colorScheme
     
     //  static let instance = ColorSchemeHelper() // Singleton
     

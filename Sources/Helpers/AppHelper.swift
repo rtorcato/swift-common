@@ -19,7 +19,6 @@ public final class AppHelper {
     //
     //    }
     
-    
     public static var isMacOS: Bool {
 #if os(iOS)
         return true
@@ -43,11 +42,10 @@ public final class AppHelper {
 #endif
     
 #if os(iOS)
-    static var deviceName: String{
+    static var deviceName: String {
         return UIDevice.current.name
     }
 #endif
-    
     
     public static var appVersion: String {
         (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
@@ -64,8 +62,8 @@ public final class AppHelper {
 #endif
     
 #if os(iOS)
-    public static func isUsingSplitView()->Bool{
-        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else{ return false }
+    public static func isUsingSplitView() -> Bool {
+        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
         return screen.windows.first?.frame.size != screen.screen.bounds.size
     }
 #endif
@@ -91,7 +89,7 @@ public final class AppHelper {
         try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)
     }
     
-    public static func getDeviceToken(){
+    public static func getDeviceToken() {
         //
     }
 #if os(iOS)

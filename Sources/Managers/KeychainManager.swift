@@ -8,9 +8,9 @@
 import SwiftUI
 
 public final class KeychainManager {
-    private var cache = [UUID: UIImage] ()
+    private var cache = [UUID: UIImage]()
     
-    public static func savePassword (
+    public static func savePassword(
         service: String,
         account: String,
         password: String
@@ -52,13 +52,13 @@ public final class KeychainManager {
         guard status != errSecSuccess else {
             throw KeychainError.unknown(status)
         }
-        let password = String(decoding: result as? Data ?? Data(), as: UTF8.self)
-        return password
+        let data = (result as? Data) ?? Data()
+        return String(bytes: data, encoding: .utf8) ?? ""
     }
    
 }
 
-extension KeychainManager{
+extension KeychainManager {
     public enum KeychainError: Error {
         case duplicateEntry
         case unknown(OSStatus)

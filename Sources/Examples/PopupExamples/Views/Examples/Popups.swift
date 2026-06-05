@@ -124,7 +124,6 @@ struct PopupBottomSecond: View {
     }
 }
 
-
 struct Popups_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {

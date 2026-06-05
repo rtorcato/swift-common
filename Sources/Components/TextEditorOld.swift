@@ -6,13 +6,13 @@
 //
 import SwiftUI
 
-//if #available(iOS 14.0, *) {
+// if #available(iOS 14.0, *) {
 //  TextEditor(text: $noteData.noteText)
-//} else {
+// } else {
 //  // Fallback on earlier versions
-//}
+// }
 
-//struct TextEditor: UIViewRepresentable {
+// struct TextEditor: UIViewRepresentable {
 //    @Binding var text: String
 //
 //    func makeCoordinator() -> Coordinator {
@@ -57,10 +57,10 @@ import SwiftUI
 //            self.parent.text = textView.text
 //        }
 //    }
-//}
+// }
 //
-//struct TextEditor_Previews: PreviewProvider {
+// struct TextEditor_Previews: PreviewProvider {
 //    static var previews: some View {
 //        TextEditor(text: .constant("placeholder text"))
 //    }
-//}
+// }

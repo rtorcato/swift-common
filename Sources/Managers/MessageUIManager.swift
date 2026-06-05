@@ -17,7 +17,7 @@ public class MessageUIManager {
     
     // static let shared = MailManager() // Singleton
     
-    public init(){}
+    public init() {}
     
     public func getEMailComposer() -> MFMailComposeViewController {
         let mailComposeVC = MFMailComposeViewController()

@@ -34,7 +34,7 @@ public class CoreDataHelper {
     
     /// Prints out the core data path
     /// - Parameter persistentContainer: persistentContainer
-    public static func printCoreDataPath(persistentContainer: NSPersistentContainer){
+    public static func printCoreDataPath(persistentContainer: NSPersistentContainer) {
         guard let path = persistentContainer
             .persistentStoreDescriptions
             .first?

@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct RowStack<Content: View>: View {
     @ViewBuilder var content: () -> Content
-    var alignment:Alignment = .topLeading
+    var alignment: Alignment = .topLeading
     
 //    init(alignment: Alignment = .topLeading, @ViewBuilder _ content: () -> Content) {
 //        self.content = content()
@@ -18,18 +18,16 @@ public struct RowStack<Content: View>: View {
     public var body: some View {
         HStack {
             content()
-        }.frame(maxWidth:.infinity, maxHeight:.infinity, alignment: alignment)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
 }
 
 struct RowStack_Previews: PreviewProvider {
     static var previews: some View {
-        RowStack{
+        RowStack {
             Text("Hello")
         }
-        .frame(height:100)
+        .frame(height: 100)
         .background(.red)
     }
 }
-
-

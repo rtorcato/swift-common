@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct ShoppingCartView: View {
@@ -48,4 +46,3 @@ struct ShoppingCartView_Previews: PreviewProvider {
             .environmentObject(CartManager())
     }
 }
-

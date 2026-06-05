@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct EmojiList: View {
-    let columns = [GridItem(.adaptive (minimum: 75.00), spacing: 10)]
+    let columns = [GridItem(.adaptive(minimum: 75.00), spacing: 10)]
     var body: some View {
         
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(0x1f600...0x1f679, id: \.self) { value in
                     GroupBox {
-                        VStack{
+                        VStack {
                             Text("\(emoji(value))")
                                 .font(.largeTitle)
                                 .fixedSize()
@@ -28,7 +28,7 @@ struct EmojiList: View {
         }
     }
     private func emoji(_ value: Int) -> String {
-        guard let scalar = UnicodeScalar (value) else { return "?" }
+        guard let scalar = UnicodeScalar(value) else { return "?" }
         return String(Character(scalar))
     }
 }

@@ -17,7 +17,7 @@ final public class NetworkState: ObservableObject {
     private let nwMonitor = NWPathMonitor()
     private let workerQueue = DispatchQueue.global()
     
-    public init(){}
+    public init() {}
     
     public func start() {
         nwMonitor.start(queue: workerQueue)
@@ -45,7 +45,7 @@ extension NWInterface.InterfaceType: CaseIterable {
     ]
 }
 
-//@StateObject var nw = NetworkState()
+// @StateObject var nw = NetworkState()
 //    .onAppear {
 //               nw.start()
 //           }

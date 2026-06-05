@@ -24,9 +24,7 @@ final class ThreadHelper {
 //    }
 }
 
-
-
-//func getData2(url: URL) async throws -> Data {
+// func getData2(url: URL) async throws -> Data {
 //    return try await withCheckedThrowingContinuation { continuation in
 //        URLSession.shared.dataTask(with: url) { data, response, error in
 //            if let data = data {
@@ -38,4 +36,4 @@ final class ThreadHelper {
 //            }
 //        }
 //    }
-//}
+// }

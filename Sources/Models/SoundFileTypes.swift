@@ -15,7 +15,7 @@ public enum SoundFileTypes: String, CaseIterable {
     public var value: String? {
         return String(describing: self)
     }
-    public var description : String {
+    public var description: String {
         return String(describing: self)
     }
 //    SoundFileTypes.allCases.forEach { soundFileType in

@@ -11,14 +11,14 @@ import SwiftUI
 public struct OffsetModifier: ViewModifier {
     @Binding var offset: CGFloat
     
-    public init(offset: Binding<CGFloat>){
+    public init(offset: Binding<CGFloat>) {
         self._offset = offset
     }
     
     public func body(content: Content) -> some View {
         content
             .overlay {
-                GeometryReader{ proxy in
+                GeometryReader { proxy in
                     let minY = proxy.frame(in: .named("SCROLL")).minY
                     
                     Color.clear
@@ -31,7 +31,7 @@ public struct OffsetModifier: ViewModifier {
     }
 }
 
-struct OffsetKey: PreferenceKey{
+struct OffsetKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
     
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {

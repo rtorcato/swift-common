@@ -15,7 +15,6 @@ public class CartManager: ObservableObject {
     let paymentHandler = PaymentHandler()
     @Published var paymentSuccess = false
     
-    
     // Functions to add and remove from cart
     func addToCart(product: ShoppingCartItem) {
         products.append(product)

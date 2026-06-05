@@ -23,7 +23,7 @@ public extension Color {
 }
 
 // not used
-//extension UIColor {
+// extension UIColor {
 //    public convenience init?(hex: String) {
 //        let r, g, b, a: CGFloat
 //
@@ -49,4 +49,4 @@ public extension Color {
 //
 //        return nil
 //    }
-//}
+// }

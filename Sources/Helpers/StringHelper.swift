@@ -11,7 +11,7 @@ public final class StringHelper {
     
 //    public static let shared = StringHelper() // Singleton
     
-    public init(){ }
+    public init() { }
     
     public static func toPhoneNumber(value: String) -> String {
         return value.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
@@ -28,7 +28,7 @@ public final class StringHelper {
         return regex.firstMatch(in: inputText, range: NSRange(inputText.startIndex..., in: inputText)) != nil
     }
     
-    public static func isStringNumeric(_ val:String) -> Bool{
+    public static func isStringNumeric(_ val: String) -> Bool {
         return Double(val) != nil
     }
 }

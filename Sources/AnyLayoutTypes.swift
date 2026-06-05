@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AnyLayoutTypes: Int, CaseIterable {
-    case zStack, hStack, vStack //, altStack
+    case zStack, hStack, vStack // , altStack
     
     var index: Int {
         AnyLayoutTypes.allCases.firstIndex(where: {$0 == self})!
@@ -28,7 +28,7 @@ enum AnyLayoutTypes: Int, CaseIterable {
     }
 }
 
-//struct ConditionalLayoutExample2: View {
+// struct ConditionalLayoutExample2: View {
 //    @Environment(\.horizontalSizeClass) private var size
 //    
 //    var body: some View {
@@ -42,4 +42,4 @@ enum AnyLayoutTypes: Int, CaseIterable {
 //        }
 //        .animation(.default, value: size)
 //    }
-//}
+// }

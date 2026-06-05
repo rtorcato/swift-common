@@ -26,7 +26,7 @@ public struct BorderRadiusModifier: ViewModifier {
 }
 
 extension View {
-    public func borderRadiusModifier(radius: Binding<CGFloat>, lineWidth:  Binding<CGFloat>, color: Binding<Color>, backgroundColor: Binding<Color>) -> some View {
+    public func borderRadiusModifier(radius: Binding<CGFloat>, lineWidth: Binding<CGFloat>, color: Binding<Color>, backgroundColor: Binding<Color>) -> some View {
         self.modifier(BorderRadiusModifier(radius: radius, lineWidth: lineWidth, color: color, backgroundColor: backgroundColor))
     }
 }

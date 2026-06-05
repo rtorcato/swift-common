@@ -6,14 +6,13 @@
 //
 
 import Foundation
-//import SwiftUI
+// import SwiftUI
 
 extension Date.FormatStyle {
     static var abbreviatedDate: Self {
             .init(date: .abbreviated)
     }
 }
-
 
 // Convenience methods for dates.
 extension Date {
@@ -57,5 +56,3 @@ extension Date {
             return text
     }
 }
-
-

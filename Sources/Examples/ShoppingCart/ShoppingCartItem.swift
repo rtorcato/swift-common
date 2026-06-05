@@ -24,5 +24,3 @@ public struct ShoppingCartItem: Identifiable {
     
     static var sampleCartItem = ShoppingCartItem(name: "Mink sweater", image: "sweater8", price: 83)
 }
-
-

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 public struct CardContainer<Content: View>: View {
     var alignment: Alignment = .topLeading
     var cornerRadius: CGFloat = 10
@@ -18,7 +17,7 @@ public struct CardContainer<Content: View>: View {
     public var body: some View {
         HStack {
             content()
-        }.frame(maxWidth:.infinity, maxHeight:.infinity, alignment: alignment)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
             .cornerRadius(cornerRadius)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
@@ -29,11 +28,11 @@ public struct CardContainer<Content: View>: View {
 
 struct CardContainer_Previews: PreviewProvider {
     static var previews: some View {
-        HStack{
-            CardContainer{
+        HStack {
+            CardContainer {
                 VStack {
                     Color.red
-                        .frame(height:400)
+                        .frame(height: 400)
 //                    Image("post2")
 //                        .resizable()
 //                        .aspectRatio(contentMode: .fit)

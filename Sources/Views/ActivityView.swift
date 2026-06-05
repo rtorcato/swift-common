@@ -4,11 +4,11 @@
 //
 //  Created by Richard Torcato on 2022-09-30.
 //
-//#if os(macOS)
-//import SwiftUI
-//import UIKit
+// #if os(macOS)
+// import SwiftUI
+// import UIKit
 //
-//struct ActivityIndicator: UIViewRepresentable {
+// struct ActivityIndicator: UIViewRepresentable {
 //
 //    let isAnimating: Bool
 //
@@ -26,11 +26,11 @@
 //            uiView.stopAnimating()
 //        }
 //    }
-//}
+// }
 //
-//struct ActivityIndicator_Previews: PreviewProvider {
+// struct ActivityIndicator_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ActivityIndicator(isAnimating: true)
 //    }
-//}
-//#endif
+// }
+// #endif

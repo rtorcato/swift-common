@@ -12,7 +12,7 @@ final public class WebLinkHelper {
     //    @Environment(\.openURL) var openURL
     
     #if os(iOS)
-    public static func openWebLink(_ urlString:String) {
+    public static func openWebLink(_ urlString: String) {
         guard let url = URL(string: urlString) else {
             return
         }
@@ -33,6 +33,3 @@ final public class WebLinkHelper {
     }
     #endif
 }
-
-
-

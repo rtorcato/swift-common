@@ -14,7 +14,7 @@ public final class StoreKitHelper {
     #endif
     //    static let instance = StoreKitHelper() // Singleton
     
-    public init(){
+    public init() {
         
     }
     #if os(iOS)
@@ -27,8 +27,8 @@ public final class StoreKitHelper {
     #endif
     
     #if os(macOS)
-    public func requestMacStoreReview(itunesStoreURL:String) {
-        //"https://itunes.apple.com/app/id123456789?action=write-review"
+    public func requestMacStoreReview(itunesStoreURL: String) {
+        // "https://itunes.apple.com/app/id123456789?action=write-review"
         guard let writeReviewURL = URL(string: itunesStoreURL) else {
               print("Invalid itunes store URL")
               return
@@ -36,8 +36,6 @@ public final class StoreKitHelper {
         NSWorkspace.shared.open(writeReviewURL)
     }
     #endif
-    
-    
     
     //    public static func requestReview() {
     //        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {

@@ -89,7 +89,7 @@ class DateHelper {
 // MARK: Current Week Days
 // @Published var currentWeek: [Date] = []
 //
-//  MARK: Current Day
+// MARK: Current Day
 // @Published var currentDay: Date = Date()
 //
 // MARK: Filtering Today Tasks

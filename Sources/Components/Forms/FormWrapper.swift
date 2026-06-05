@@ -16,7 +16,7 @@ struct FormWrapper: View {
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
-        VStack{
+        VStack {
             TextField("Enter Integer Number", text: $intNumberString)
                 .focused($focusedField, equals: .int)
             #if os(iOS)

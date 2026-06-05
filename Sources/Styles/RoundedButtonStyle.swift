@@ -11,13 +11,13 @@ struct RoundedButtonStyle: ButtonStyle {
     private let width: CGFloat?
     private let height: CGFloat?
     
-    init(width: CGFloat? = nil, height: CGFloat? = 60){
+    init(width: CGFloat? = nil, height: CGFloat? = 60) {
         self.width = width
         self.height = height
     }
     func makeBody(configuration: Configuration) -> some View {
         RoundedButton(configuration: configuration)
-            .frame(width:width, height: height)
+            .frame(width: width, height: height)
     }
     
     struct RoundedButton: View {

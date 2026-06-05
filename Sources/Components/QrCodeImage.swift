@@ -1,4 +1,3 @@
-
 //
 //  QrCodeImage.swift
 //  QrCodeExample
@@ -8,7 +7,6 @@
 #if os(iOS)
 import SwiftUI
 import CoreImage.CIFilterBuiltins
-
 
 public struct QrCodeImage {
     let context = CIContext()
@@ -30,7 +28,6 @@ public struct QrCodeImage {
         return qrImage
     }
 }
-
 
 public struct QrCodeImageSampleView: View {
     @State private var text = "matrixdigital.com"

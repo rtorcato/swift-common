@@ -17,7 +17,7 @@ public struct MapView: View {
     @AppStorage("MapView.zoom")
     private var zoom: Zoom = .medium
     
-    public init(coordinate:CLLocationCoordinate2D){
+    public init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
     }
     
@@ -61,4 +61,3 @@ struct MapView_Previews: PreviewProvider {
         MapView(coordinate: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868))
     }
 }
-

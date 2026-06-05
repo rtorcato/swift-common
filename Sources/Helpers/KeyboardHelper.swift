@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 public struct KeyboardHelper {
     // static let shared = KeyboardHelper() // Singleton
 }

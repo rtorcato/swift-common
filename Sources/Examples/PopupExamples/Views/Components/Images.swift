@@ -7,7 +7,7 @@
 
 import SwiftUI
 #if os(iOS)
-private struct AlertImageView<Content> : View where Content : View {
+private struct AlertImageView<Content>: View where Content: View {
     let hex: String
     let alignment: Alignment
     

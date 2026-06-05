@@ -35,7 +35,7 @@ private struct SectionHeader: View {
     }
 }
 
-private struct PopupTypeView<Content:View>: View  {
+private struct PopupTypeView<Content: View>: View {
     let title: String
     let detail: String
     @ViewBuilder let icon: () -> Content
@@ -78,13 +78,11 @@ struct PopupsList: View {
     @Binding var showingBottomFirstPopup: Bool
     @Binding var showingBottomSecondPopup: Bool
     
-
     @Binding var showingFirstActionSheet: Bool
     @Binding var showingSecondActionSheet: Bool
 
-    
     var body: some View {
-        let hideAll: () -> () = {
+        let hideAll: () -> Void = {
             self.showingTopFirstFloat = false
             self.showingTopSecondFloat = false
             self.showingBottomFirstFloat = false
@@ -99,7 +97,6 @@ struct PopupsList: View {
             self.showingBottomFirstPopup = false
             self.showingBottomSecondPopup = false
             
-
             self.showingFirstActionSheet = false
             self.showingSecondActionSheet = false
 
@@ -221,7 +218,6 @@ struct PopupsList: View {
                         }
                     }
                     
-
                     Group {
                         SectionHeader(name: "Action sheets", count: 2)
                             .padding(EdgeInsets(top: 20, leading: 0, bottom: 12, trailing: 0))
@@ -253,14 +249,12 @@ struct PopupsList: View {
     }
 }
 
-
 struct PopupsList_Previews: PreviewProvider {
     static var previews: some View {
         PopupButton(
             isShowing: Binding<Bool>.init(get: { true },
                                         set: { _ in }),
-            hideAll: {})
-        {
+            hideAll: {}) {
             PopupTypeView(
                 title: "Top version 1",
                 detail: "Top float with a picture and one button"

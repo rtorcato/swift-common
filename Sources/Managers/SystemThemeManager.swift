@@ -12,7 +12,7 @@ public final class SystemThemeManager: ObservableObject {
 //    @Published public var isUsingSystemSettings:Bool = false
 //    @Published public var isUsingDarkMode:Bool = false
     
-    public init(){ }
+    public init() { }
     
     public func isSystemDefault() -> Bool {
         return appSystemTheme == SystemThemes.unspecified.rawValue

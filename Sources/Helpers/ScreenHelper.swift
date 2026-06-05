@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 public struct ScreenHelper {
     
     // MacOS Data....
@@ -31,7 +30,7 @@ extension ScreenHelper {
 }
 #endif
 
-//struct EmbedInNavigation: ViewModifier {
+// struct EmbedInNavigation: ViewModifier {
 //    @State var screenWidth:String = ""
 //    func body(content: Content) -> some View {
 //        NavigationView {
@@ -48,4 +47,4 @@ extension ScreenHelper {
 //            screenWidth = "Screen Width: \(String(format: "%.0f",UIScreen.main.bounds.size.width))"
 //        }
 //    }
-//}
+// }

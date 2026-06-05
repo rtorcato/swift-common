@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct LazyView <T: View> : View{
+public struct LazyView <T: View>: View {
     var view: () -> T
     
     public var body: some View {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct OverlayShieldView: View {
-    public init(){
+    public init() {
         
     }
     public var body: some View {
@@ -24,7 +24,7 @@ public struct OverlayShieldView: View {
 
 struct OverlayShield_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack{
+        ZStack {
             OverlayShieldView()
             Text("hello world")
         }

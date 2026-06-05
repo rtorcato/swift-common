@@ -22,29 +22,28 @@ extension View {
     
     // MARK: View Alignment helpers
     /// - Useful for moving Views btw HStack and VStack
-    public func hAlign(_ alignment: Alignment)->some View{
+    public func hAlign(_ alignment: Alignment) -> some View {
         self
-            .frame(maxWidth: .infinity,alignment: alignment)
+            .frame(maxWidth: .infinity, alignment: alignment)
     }
     
-    public func vAlign(_ alignment: Alignment)->some View{
+    public func vAlign(_ alignment: Alignment) -> some View {
         self
-            .frame(maxHeight: .infinity,alignment: alignment)
+            .frame(maxHeight: .infinity, alignment: alignment)
     }
-    
     
     // MARK: Disabling with Opacity
-    public func disableWithOpacity(_ condition: Bool)->some View{
+    public func disableWithOpacity(_ condition: Bool) -> some View {
         self
             .disabled(condition)
             .opacity(condition ? 0.6 : 1)
     }
     
     // MARK: Custom Border View With Padding
-    public func border(_ width: CGFloat,_ color: Color)->some View{
+    public func border(_ width: CGFloat, _ color: Color) -> some View {
         self
-            .padding(.horizontal,15)
-            .padding(.vertical,10)
+            .padding(.horizontal, 15)
+            .padding(.vertical, 10)
             .background {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .stroke(color, lineWidth: width)
@@ -52,7 +51,7 @@ extension View {
     }
     
     // MARK: Custom Fill View With Padding
-    public func fillView(_ color: Color)->some View{
+    public func fillView(_ color: Color) -> some View {
         self
             .padding(.horizontal, 15)
             .padding(.vertical, 10)

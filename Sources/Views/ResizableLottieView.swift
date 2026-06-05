@@ -5,11 +5,11 @@
 //  Created by Richard Torcato on 2022-10-14.
 //
 
-//import SwiftUI
+// import SwiftUI
 //
-//import Lottie
+// import Lottie
 //
-//struct ResizableLottieView: UIViewRepresentable {
+// struct ResizableLottieView: UIViewRepresentable {
 //    var fileName: String
 //    // MARK: Callback When Animation Finishes
 //    var onFinish: (LottieAnimationView)->()
@@ -45,4 +45,4 @@
 //            onFinish(animationView)
 //        }
 //    }
-//}
+// }

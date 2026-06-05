@@ -34,7 +34,6 @@ class NetworkHelper {
         }
     }
     
-    
 }
 
 extension NetworkHelper {
@@ -51,30 +50,28 @@ extension NetworkHelper {
     }
 }
 
-
-
 // example from networkexample2020 swiftbits
 extension NetworkHelper {
     struct PhotoLoadingError: Error {
         
     }
     final class RemoteObject<A>: ObservableObject {
-        @Published var result:Result<A, Error>? = nil
+        @Published var result: Result<A, Error>?
         var value: A? { try? result?.get() }
         let url: URL
         let transform: (Data) -> A?
         
-        init(url: URL, transform: @escaping (Data) -> A?){
+        init(url: URL, transform: @escaping (Data) -> A?) {
             self.url = url
             self.transform = transform
         }
         
         func load() {
-            URLSession.shared.dataTask(with: url){ (data, _, _) in
+            URLSession.shared.dataTask(with: url) { (data, _, _) in
                 DispatchQueue.main.async {
                     if let d = data, let v = self.transform(d) {
                         self.result = .success(v)
-                    }else{
+                    } else {
                         self.result = .failure(PhotoLoadingError())
                     }
                 }

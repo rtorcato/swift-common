@@ -5,10 +5,10 @@
 //  Created by Richard Torcato on 2022-10-18.
 //
 
-//import SwiftUI
-//import LottieUI
+// import SwiftUI
+// import LottieUI
 //
-//struct LottieSampleView: View {
+// struct LottieSampleView: View {
 //    let state2 = LUStateData(type: .loadedFrom(URL(string: "https://assets9.lottiefiles.com/packages/lf20_mniampqn.json")!), speed: 1.0, loopMode: .loop)
 //    
 //    var body: some View {
@@ -21,10 +21,10 @@
 //            })
 //        }
 //    }
-//}
+// }
 //
-//struct LottieSampleView_Previews: PreviewProvider {
+// struct LottieSampleView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        LottieSampleView()
 //    }
-//}
+// }

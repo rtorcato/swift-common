@@ -1,4 +1,3 @@
-
 // import SwiftyUtils
 
 public struct MatrixSwiftBase {

@@ -15,9 +15,9 @@ struct CopyTextView: View {
     private let pasteboard = UIPasteboard.general
     
     var body: some View {
-        GroupBox{
+        GroupBox {
             VStack {
-                HStack{
+                HStack {
                     Text("Label:")
                     Spacer()
                 }
@@ -31,7 +31,7 @@ struct CopyTextView: View {
                             Image(systemName: "doc.on.doc")
                         }
                     }
-                HStack(spacing:10) {
+                HStack(spacing: 10) {
                     Spacer()
                     Button {
                         copyToClipboard()
@@ -52,7 +52,7 @@ struct CopyTextView: View {
         }.padding()
     }
     
-    func paste(){
+    func paste() {
         if let string = pasteboard.string {
             text = string
         }

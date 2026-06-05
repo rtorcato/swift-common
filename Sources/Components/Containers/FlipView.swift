@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct FlipView<FrontViewType : View, BackViewType : View> : View {
+public struct FlipView<FrontViewType: View, BackViewType: View>: View {
     @Binding var isFlipped: Bool
     @ViewBuilder var frontView: () -> FrontViewType
     @ViewBuilder var backView: () -> BackViewType
@@ -34,7 +34,7 @@ public struct FlipView<FrontViewType : View, BackViewType : View> : View {
 //    }
     
     public var body: some View {
-        ZStack() {
+        ZStack {
             frontView().opacity(isFlipped ? 0.0 : 1.0)
             backView().opacity(isFlipped ? 1.0 : 0.0)
         }
@@ -45,8 +45,6 @@ public struct FlipView<FrontViewType : View, BackViewType : View> : View {
         // .shadow(color: Color.black.opacity(0.2), radius: 4, x: 10, y: 10)
     }
 }
-
-
 
 struct FlipViewSample: View {
     @State private var isFlipped: Bool = false
@@ -62,7 +60,7 @@ struct FlipViewSample: View {
             self.isFlipped.toggle()
         }
     }
-    func flipCard(_ showBack:Bool = false){
+    func flipCard(_ showBack: Bool = false) {
         withAnimation(.easeInOut(duration: 0.8)) {
             self.isFlipped = showBack
         }
@@ -85,9 +83,9 @@ struct FlipViewSample: View {
             label: { Text("Toggle")}
         )
         
-        return HStack{
-            VStack() {
-                HStack() {
+        return HStack {
+            VStack {
+                HStack {
                     FrontBtn
                     Spacer()
                     toggleBtn
@@ -123,7 +121,6 @@ struct FlipViewSample: View {
         }
     }
 }
-
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {

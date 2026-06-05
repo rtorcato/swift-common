@@ -13,7 +13,7 @@ struct CardFlip: View {
     var body: some View {
         VStack {
             if isFlipped == true {
-                Rectangle ()
+                Rectangle()
                     .foregroundColor(.pink)
                     .frame(width: 300, height: 400)
                     .cornerRadius(16)

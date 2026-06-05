@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-//HStack<Content> : View where Content : View {
-public struct SlideOutPanel<Content, MainContent>: View where Content : View, MainContent : View {
+// HStack<Content> : View where Content : View {
+public struct SlideOutPanel<Content, MainContent>: View where Content: View, MainContent: View {
     enum SlideOutDirection {
         case right
         case left
@@ -32,11 +32,7 @@ public struct SlideOutPanel<Content, MainContent>: View where Content : View, Ma
     //    // to hide view
     //    @State var x = -UIScreen.main.bounds.width + 90
     
-    public init(isOpen: Binding<Bool>, @ViewBuilder panelContent: @escaping () -> Content, @ViewBuilder mainContent: @escaping () -> MainContent)
-    //    init(isOpen: Binding<Bool>,
-    //         panelContent: @escaping () -> PanelContent,
-    //         content: @escaping () -> Content)
-    {
+    public init(isOpen: Binding<Bool>, @ViewBuilder panelContent: @escaping () -> Content, @ViewBuilder mainContent: @escaping () -> MainContent) {
         self._isOpen = isOpen
         self.panelContent = panelContent()
         self.mainContent = mainContent()
@@ -67,7 +63,7 @@ public struct SlideOutPanel<Content, MainContent>: View where Content : View, Ma
                 self.panelContent
                     .zIndex(2)
                     .frame(width: CGFloat(self.panelWidth))
-                    .frame(maxHeight:.infinity)
+                    .frame(maxHeight: .infinity)
                     .transition(.asymmetric(
                         insertion: .move(edge: .leading),
                         removal: .move(edge: .leading))
@@ -108,7 +104,7 @@ public struct SlideOutPanel<Content, MainContent>: View where Content : View, Ma
     }
 }
 
-//extension View {
+// extension View {
 //    public func slideOutPanel(isOpen: Binding<Bool>, @ViewBuilder panelContent: () -> any View) -> any View {
 //        return VStack{
 //            panelContent()
@@ -120,4 +116,4 @@ public struct SlideOutPanel<Content, MainContent>: View where Content : View, Ma
 ////        }
 ////        return SlideOutPanel<View, Content:any View>(isOpen: isOpen, panelContent: panelContent, content: () -> {Text("hello")})
 //    }
-//}
+// }

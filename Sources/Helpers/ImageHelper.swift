@@ -29,7 +29,7 @@ final class ImageHelper {
         }
     }
     
-    static func createThumbnail(){
+    static func createThumbnail() {
 //        var thumbnail: UIImage? {
 //        get async {
 //        let size = CCSize(width: 40, height: 40)
@@ -59,4 +59,3 @@ final class ImageHelper {
 //        }
 //    }
 }
-

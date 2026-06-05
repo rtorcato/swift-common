@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Bool {
     
     /*
@@ -33,5 +32,3 @@ extension Bool {
         return false
     }
 }
-
-

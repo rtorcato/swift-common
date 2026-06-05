@@ -5,10 +5,10 @@
 //  Created by Richard Torcato on 2022-10-14.
 //
 
-//import SwiftUI
-//import Lottie
+// import SwiftUI
+// import Lottie
 //
-//public struct LottieViewMAC: NSViewRepresentable{
+// public struct LottieViewMAC: NSViewRepresentable{
 //    
 //    
 //    public init(lottieFile: String, loopMode: LottieLoopMode = .loop, autostart: Bool = true, contentMode: LottieContentMode = LottieContentMode.scaleAspectFit) {
@@ -71,9 +71,9 @@
 //    public func updateNSView(_ nsView: NSViewType, context: Context) {
 //        
 //    }
-//}
+// }
 // 
-////struct LottieView: UIViewRepresentable {
+//// struct LottieView: UIViewRepresentable {
 ////    let lottieFile: String
 ////
 ////    let animationView = LottieAnimationView()
@@ -99,10 +99,10 @@
 ////    func updateUIView(_ uiView: UIViewType, context: Context) {
 ////
 ////    }
-////}
+//// }
 //
 //
-//struct LottieRemoteView: UIViewRepresentable {
+// struct LottieRemoteView: UIViewRepresentable {
 //    let lottieFileURL: URL = URL(string: "https://assets1.lottiefiles.com/packages/lf20_kd5rzej5.json")!
 //    
 // 
@@ -133,7 +133,7 @@
 //    func updateUIView(_ uiView: UIViewType, context: Context) {
 // 
 //    }
-//}
+// }
 //
 //// example: LottieView(lottieFile: "contact-us").frame(width: 300, height: 300)
 //// example LottieRemoteView(lottieFileURL:URL(string: "https://assets1.lottiefiles.com/packages/lf20_kd5rzej5.json")!).frame(width:300, height:300)

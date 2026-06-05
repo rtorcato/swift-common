@@ -46,7 +46,7 @@ public struct LocalNotification {
     public var body: String
     public var subtitle: String?
     public var bundleImageName: String?
-    public var userInfo: [AnyHashable : Any]?
+    public var userInfo: [AnyHashable: Any]?
     public var timeInterval: Double?
     public var dateComponents: DateComponents?
     public var repeats: Bool

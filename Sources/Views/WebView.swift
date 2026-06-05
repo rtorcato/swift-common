@@ -9,14 +9,13 @@
 import SwiftUI
 import WebKit
 
-
 public struct WebView: UIViewRepresentable {
 
     let request: URLRequest
     @Binding var isLoading: Bool
     @Binding var error: Error?
     
-    public init(request:URLRequest, isLoading:Binding<Bool>, error: Binding<Error?>){
+    public init(request: URLRequest, isLoading: Binding<Bool>, error: Binding<Error?>) {
         self.request = request
         self._isLoading = isLoading
         self._error = error

@@ -13,7 +13,7 @@ public struct JsonHelper {
         _ filename: String,
         dateDecodingStrategy: JSONDecoder.DateDecodingStrategy? = nil,
         keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil) -> T {
-        let data:Data
+        let data: Data
         guard let file = Bundle.main.url(forResource: filename, withExtension: nil)  else {
             fatalError("Couldn't find \(filename) in main bundle.")
         }
