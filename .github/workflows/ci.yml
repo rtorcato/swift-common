@@ -71,8 +71,6 @@ jobs:
   platforms:
     name: xcodebuild ${{ matrix.platform }}
     runs-on: macos-latest
-    # tvOS/watchOS are informational until multi-platform cleanup lands.
-    continue-on-error: ${{ matrix.platform == 'tvOS' || matrix.platform == 'watchOS' }}
     strategy:
       fail-fast: false
       matrix:
