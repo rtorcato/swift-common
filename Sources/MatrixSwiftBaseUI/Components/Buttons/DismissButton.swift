@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if !os(tvOS)
 struct DismissButton: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
@@ -37,3 +38,4 @@ struct DismissButton_Previews: PreviewProvider {
         .background(Color.green)
     }
 }
+#endif

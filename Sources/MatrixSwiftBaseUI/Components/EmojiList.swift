@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if !os(watchOS)
+#if !os(watchOS) && !os(tvOS)
 struct EmojiList: View {
     let columns = [GridItem(.adaptive(minimum: 75.00), spacing: 10)]
     var body: some View {
