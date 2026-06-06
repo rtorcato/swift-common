@@ -5,8 +5,8 @@ private final class MockURLProtocol: URLProtocol {
     nonisolated(unsafe) static var handler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
     nonisolated(unsafe) static var lastRequest: URLRequest?
 
-    override class func canInit(with request: URLRequest) -> Bool { true }
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+    override static func canInit(with request: URLRequest) -> Bool { true }
+    override static func canonicalRequest(for request: URLRequest) -> URLRequest { request }
 
     override func startLoading() {
         MockURLProtocol.lastRequest = request
@@ -77,7 +77,7 @@ final class APIClientTests: XCTestCase {
                 httpVersion: nil,
                 headerFields: ["Content-Type": "application/json"]
             )!
-            let data = #"{"id":1,"name":"Ada"}"#.data(using: .utf8)
+            let data = Data(#"{"id":1,"name":"Ada"}"#.utf8)
             return (response, data)
         }
 
@@ -142,7 +142,7 @@ final class APIClientTests: XCTestCase {
     func testInterceptorInjectsHeader() async throws {
         MockURLProtocol.handler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return (response, "{\"id\":2,\"name\":\"Bob\"}".data(using: .utf8))
+            return (response, Data(#"{"id":2,"name":"Bob"}"#.utf8))
         }
 
         let client = makeClient { request in
@@ -158,7 +158,7 @@ final class APIClientTests: XCTestCase {
     func testDefaultHeadersApplied() async throws {
         MockURLProtocol.handler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return (response, "{\"id\":3,\"name\":\"C\"}".data(using: .utf8))
+            return (response, Data(#"{"id":3,"name":"C"}"#.utf8))
         }
 
         let client = makeClient(defaultHeaders: ["X-Client": "swift-common"])
@@ -172,7 +172,7 @@ final class APIClientTests: XCTestCase {
     func testPostEncodesJSONBody() async throws {
         MockURLProtocol.handler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return (response, "{\"id\":4,\"name\":\"Ada\"}".data(using: .utf8))
+            return (response, Data(#"{"id":4,"name":"Ada"}"#.utf8))
         }
 
         let client = makeClient()
