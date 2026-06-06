@@ -46,6 +46,7 @@ public struct FlipView<FrontViewType: View, BackViewType: View>: View {
     }
 }
 
+#if !os(watchOS)
 struct FlipViewSample: View {
     @State private var isFlipped: Bool = false
     @State private var selectedFlipViewSide: FlipViewSide = .front
@@ -127,3 +128,4 @@ struct SwiftUIView_Previews: PreviewProvider {
         FlipViewSample()
     }
 }
+#endif

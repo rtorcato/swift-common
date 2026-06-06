@@ -4,7 +4,7 @@
 //
 //  Created by Richard Torcato on 2023-01-31.
 //
-#if !os(watchOS)
+#if !os(watchOS) && !os(tvOS)
 import SwiftUI
 import CoreLocation
 import Combine

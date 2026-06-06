@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if !os(watchOS)
 struct EmojiList: View {
     let columns = [GridItem(.adaptive(minimum: 75.00), spacing: 10)]
     var body: some View {
@@ -38,3 +39,4 @@ struct EmojiList_Previews: PreviewProvider {
         EmojiList()
     }
 }
+#endif
