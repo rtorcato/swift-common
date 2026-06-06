@@ -44,19 +44,19 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 - [x] **Functions** (`Helpers/FunctionHelper.swift`) — `debounce`, `throttle`, `memoize` (thread-safe, closure-based).
 - [x] **Async helpers** (`Helpers/AsyncHelpers.swift`) — `retry(attempts:delay:_:)`, `withTimeout(_:_:)` for `async throws` closures.
 - [ ] **Sleep** (`Concurrency/Sleep.swift`) — typed wrapper over `Task.sleep` (`Sleep.seconds(_:)`, `Sleep.milliseconds(_:)`).
-- [ ] **Interval** (`Concurrency/Interval.swift`) — `Task`-based repeating interval with cancellation; modern alternative to `Timer`.
+- [x] **Interval** (`Concurrency/IntervalHelper.swift`) — `every(_:_:)` and `after(_:_:)` returning cancellable `Task<Void, Never>`.
 - [ ] **Random** (`Helpers/RandomHelper.swift`) — random int/double/bool/string, `Collection.randomElement(count:)`, seeded RNG wrapper.
 - [x] **Regex** (`Helpers/RegexHelper.swift`) — `matches(_:in:)`, `allMatches(_:in:)`, `replace(_:with:in:)`, `captureGroups(_:in:)`.
 - [ ] **Math** (`Helpers/MathHelper.swift`) — `clamp`, `lerp`, `mapRange`, `roundedTo(places:)`, `degreesToRadians` / `radiansToDegrees`.
-- [ ] **Geometry** (`Helpers/GeometryHelper.swift`) — `CGPoint` / `CGRect` / `CGSize` math: distance, midpoint, intersection, center, inset. Distinct from the existing `Shapes/` folder (those are drawable SwiftUI shapes, this is computation).
-- [ ] **Dictionary** (`Extensions/Dictionary+Common.swift`) — `merging(_:strategy:)`, `mapValues`, `filterKeys`, `compactMapValues`, JSON-friendly key transforms.
+- [x] **Geometry** (`Helpers/GeometryHelper.swift`) — `distance`, `midpoint`, `center`, `inset`, `contains(_:point:)`, `aspectRatio`.
+- [x] **Dictionary** (`Extensions/DictionaryExt.swift`) — `mapKeys`, `filteringKeys`, plus `keysToCamelCase` / `keysToSnakeCase` for JSON-friendly transforms.
 - [ ] **Objects / Codable** (`Helpers/CodableHelper.swift`) — partial decode, key omission, deep merge of `[String: Any]`, snake↔camel key conversion.
 - [ ] **Sets** (`Extensions/Set+Common.swift`) — set-algebra helpers, symmetric-difference convenience, `isSuperset(of:)` shortcuts.
 - [ ] **Events** (`Events/EventEmitter.swift`) — `Combine`-backed or `NotificationCenter`-backed typed event bus with `on`/`off`/`emit`. Type-safe alternative to raw `NotificationCenter`.
 - [x] **Errors** (`Errors/AppError.swift`) — `LocalizedError`-conforming `AppError` with code + message + userInfo. Includes sync + async `Result.tryCatch(_:)` extension covering the "Try / Result" item below.
 - [x] **Try / Result** — covered by `Result.tryCatch(_:)` extension on `AppError.swift`.
-- [ ] **Env** (`Helpers/EnvHelper.swift`) — typed `ProcessInfo` env-var accessors with defaults (`env("API_URL", default: "...")`).
-- [ ] **Logging** (`Logging/Logger.swift`) — thin wrapper over `os.Logger` with level-tagged convenience methods and consistent subsystem/category. Don't rebuild `os.Logger` — just standardize how the package and downstream apps use it.
+- [x] **Env** (`Helpers/EnvHelper.swift`) — typed `string` / `int` / `bool` accessors with optional defaults, plus `all`.
+- [x] **Logging** (`Logging/AppLogger.swift`) — `os.Logger` wrapper with subsystem/category init and `debug` / `info` / `notice` / `warning` / `error` / `critical` convenience.
 - [ ] **Task cancellation** (`Concurrency/Cancellation.swift`) — `withCancellableTask`, group-cancellation helpers, equivalent of JS `AbortController`.
 - [ ] **Types / aliases** (`Types/Aliases.swift`) — shared typealiases (`JSONDictionary = [String: Any]`, `Completion<T> = (Result<T, Error>) -> Void`, etc.) so downstream apps don't redefine the same shapes.
 
