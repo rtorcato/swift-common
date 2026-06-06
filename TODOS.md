@@ -36,22 +36,22 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 - [ ] **MIME types** (`Helpers/MimeTypeHelper.swift`) — general extension↔MIME mapping using `UniformTypeIdentifiers` (UTType). Promotes the narrow `ImageFileTypes` / `SoundFileTypes` models to a general utility.
 - [ ] **System info** (`Helpers/SystemInfoHelper.swift`) — OS version, device model, locale, bundle ID, app version. Sits alongside the existing `ScreenHelper` / `SizeClassHelper`.
 - [ ] **i18n** (`Helpers/LocaleHelper.swift`, `Helpers/PluralizationHelper.swift`) — runtime locale switching, pluralization rules, currency-by-locale.
-- [ ] **HTTP client / Fetch** (`Networking/`) — the current `Networking/` is a stub (just `HttpMethod` + `NetworkError`). Build a real `HTTPClient` with `URLRequest` builder, async/await calls, retry policy, decoding via `Codable`. Replace `NetworkError` with a richer error hierarchy. This is the single biggest gap for reusability.
+- [x] **HTTP client / Fetch** (`Networking/`) — shipped. `APIClient` (async/await, configurable session/decoder/encoder/interceptor/logger), `Endpoint` protocol with `urlRequest(...)` builder, `RequestBody` enum (empty/data/json/form), `NetworkError` (invalidURL/invalidResponse/http/decoding/encoding/transport/cancelled/unknown) with `statusCode` helper and `NetworkError.map(_:)`. 22 tests cover URLProtocol-mocked send, non-2xx mapping, decoding/transport errors, interceptor injection, JSON POST. **Still open:** retry policy (the original ask).
 
 ### Add new categories
 
-- [ ] **Arrays** (`Extensions/Array+Common.swift`) — `unique()`, `chunked(into:)`, `compactNonNil`, `groupBy(_:)`, `shuffled()`, safe `subscript(safe:)`.
+- [x] **Arrays** (`Extensions/ArrayExt.swift`) — `subscript(safe:)`, `chunked(into:)`, `grouped(by:)`, `unique()`. Stdlib `shuffled()` covers that bullet. **Still missing:** `compactNonNil` for `[T?] -> [T]`.
 - [x] **Functions** (`Helpers/FunctionHelper.swift`) — `debounce`, `throttle`, `memoize` (thread-safe, closure-based).
 - [x] **Async helpers** (`Helpers/AsyncHelpers.swift`) — `retry(attempts:delay:_:)`, `withTimeout(_:_:)` for `async throws` closures.
-- [ ] **Sleep** (`Concurrency/Sleep.swift`) — typed wrapper over `Task.sleep` (`Sleep.seconds(_:)`, `Sleep.milliseconds(_:)`).
+- [x] **Sleep** (`Helpers/SleepHelper.swift`) — `SleepHelper.seconds(_:)`, `.milliseconds(_:)`, `.nanoseconds(_:)` over `Task.sleep`.
 - [x] **Interval** (`Concurrency/IntervalHelper.swift`) — `every(_:_:)` and `after(_:_:)` returning cancellable `Task<Void, Never>`.
-- [ ] **Random** (`Helpers/RandomHelper.swift`) — random int/double/bool/string, `Collection.randomElement(count:)`, seeded RNG wrapper.
+- [x] **Random** (`Helpers/RandomHelper.swift`) — `RandomHelper.int(in:)`, `.double(in:)`, `.bool()`, `.element(from:)`, `.string(length:)`. **Still missing:** `Collection.randomElement(count:)` returning N samples, seeded RNG wrapper.
 - [x] **Regex** (`Helpers/RegexHelper.swift`) — `matches(_:in:)`, `allMatches(_:in:)`, `replace(_:with:in:)`, `captureGroups(_:in:)`.
-- [ ] **Math** (`Helpers/MathHelper.swift`) — `clamp`, `lerp`, `mapRange`, `roundedTo(places:)`, `degreesToRadians` / `radiansToDegrees`.
+- [x] **Math** (`Helpers/MathHelper.swift`) — `clamp(_:min:max:)`, `lerp(from:to:t:)`, `mapRange(_:fromMin:fromMax:toMin:toMax:)`, `roundedTo(_:places:)`, `degreesToRadians(_:)`, `radiansToDegrees(_:)`.
 - [x] **Geometry** (`Helpers/GeometryHelper.swift`) — `distance`, `midpoint`, `center`, `inset`, `contains(_:point:)`, `aspectRatio`.
 - [x] **Dictionary** (`Extensions/DictionaryExt.swift`) — `mapKeys`, `filteringKeys`, plus `keysToCamelCase` / `keysToSnakeCase` for JSON-friendly transforms.
 - [ ] **Objects / Codable** (`Helpers/CodableHelper.swift`) — partial decode, key omission, deep merge of `[String: Any]`, snake↔camel key conversion.
-- [ ] **Sets** (`Extensions/Set+Common.swift`) — set-algebra helpers, symmetric-difference convenience, `isSuperset(of:)` shortcuts.
+- [x] **Sets** (`Extensions/SetExt.swift`) — `containsAll(_:)`, `containsAny(_:)`, `toggle(_:)`. The originally-listed `symmetricDifference` and `isSuperset(of:)` shortcuts are already in stdlib `Set`.
 - [ ] **Events** (`Events/EventEmitter.swift`) — `Combine`-backed or `NotificationCenter`-backed typed event bus with `on`/`off`/`emit`. Type-safe alternative to raw `NotificationCenter`.
 - [x] **Errors** (`Errors/AppError.swift`) — `LocalizedError`-conforming `AppError` with code + message + userInfo. Includes sync + async `Result.tryCatch(_:)` extension covering the "Try / Result" item below.
 - [x] **Try / Result** — covered by `Result.tryCatch(_:)` extension on `AppError.swift`.
@@ -62,6 +62,6 @@ The patterns the user's `js-tooling` package scaffolds for TS projects have Swif
 
 ### Stretch
 
-- [ ] **Rebuild `Networking/` as a proper module.** Listed above under "Expand partial coverage" but worth flagging separately: until there's a real `HTTPClient`, every consumer iOS app will roll its own. This is the single change that would most improve the package's reusability claim.
+- [x] **Rebuild `Networking/` as a proper module.** Done — see "HTTP client / Fetch" above. Networking still lives in `MatrixSwiftBaseCore`. **Next step (still open):** promote it to its own `MatrixSwiftBaseNetworking` SwiftPM product so consumers can depend on it without pulling the rest of Core.
 - [x] **Subpath / submodule exports.** Package split into `MatrixSwiftBaseCore` (pure utilities) and `MatrixSwiftBaseUI` (SwiftUI components + UI-coupled helpers). Consumers depending on just Core never compile or link UI code. Networking is currently in Core as a stub; promote to its own `MatrixSwiftBaseNetworking` product when the HTTPClient rebuild lands.
 - [x] **Strip unused SwiftUI imports from currently UI-categorized helpers.** `StringHelper`, `DateHelper`, `DoubleHelper`, `ThreadHelper`, and `KeychainManager` all moved from UI to Core after dropping their unused `import SwiftUI` (KeychainManager also had a dead `cache = [UUID: UIImage]()` field removed).
