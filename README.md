@@ -150,4 +150,4 @@ See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, 
 
 ## License
 
-No license declared yet. Treat as all-rights-reserved until one is added.
+[Apache License 2.0](./LICENSE). Copyright 2026 Richard Torcato.

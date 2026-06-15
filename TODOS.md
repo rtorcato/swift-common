@@ -5,7 +5,7 @@ Every item below is mirrored as a GitHub issue. Update both when status changes;
 ## Open-source readiness
 
 ### Blockers
-- [ ] [#5](https://github.com/rtorcato/swift-common/issues/5) — Add LICENSE (Apache-2.0) and remove the "all-rights-reserved" note in README
+- [x] [#5](https://github.com/rtorcato/swift-common/issues/5) — Add LICENSE (Apache-2.0) and remove the "all-rights-reserved" note in README
 - [ ] [#6](https://github.com/rtorcato/swift-common/issues/6) — Set up release automation (semantic-release `/base` preset) and tag `0.1.0`
 - [ ] [#7](https://github.com/rtorcato/swift-common/issues/7) — Fix doc/config drift (`CLAUDE.md` paths, `.swiftlint.yml` `Sources/Examples` exclude, `plan.md` note)
 - [ ] [#32](https://github.com/rtorcato/swift-common/issues/32) — Resolve tvOS/watchOS gating drift between README Status and `ci.yml`
