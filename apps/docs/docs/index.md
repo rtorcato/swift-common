@@ -1,7 +1,6 @@
 ---
 title: swift-common
 description: Cross-platform Swift utilities for Apple platforms — Core (pure Foundation) and UI (SwiftUI) products from a single SwiftPM package.
-slug: /
 sidebar_position: 0
 ---
 

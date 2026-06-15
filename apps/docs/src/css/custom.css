@@ -1,7 +1,7 @@
 /**
- * Custom CSS for swift-common docs.
- * Docusaurus uses Infima (https://infima.dev/) — override its CSS variables here.
- * Primary colour matches Swift's brand orange (#F05138).
+ * swift-common docs — Infima overrides + design tokens.
+ * Brand: Geist font + navy surfaces with a Swift-orange accent (#F05138 light /
+ * #FF7858 dark). All tokens namespaced --sc-* (swift-common).
  */
 
 :root {
@@ -12,10 +12,43 @@
 	--ifm-color-primary-light: #f26854;
 	--ifm-color-primary-lighter: #f37362;
 	--ifm-color-primary-lightest: #f6957d;
-	--ifm-code-font-size: 95%;
-	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+	--ifm-font-family-base: "Geist", system-ui, -apple-system, sans-serif;
+	--ifm-font-family-monospace: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+	--ifm-heading-font-weight: 800;
+	--ifm-code-font-size: 92%;
+
+	--ifm-background-color: #ffffff;
+	--ifm-background-surface-color: #ffffff;
+	--ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
+	--ifm-heading-color: #0a0e16;
+	--ifm-font-color-base: #374253;
+	--ifm-link-color: #f05138;
+	--ifm-toc-border-color: rgba(12, 18, 28, 0.1);
+	--ifm-code-background: #f3f6f9;
+	--docusaurus-highlighted-code-line-bg: rgba(240, 81, 56, 0.12);
+
+	/* swift-common custom tokens */
+	--sc-accent: #f05138;
+	--sc-accent-fill: #f05138;
+	--sc-on-accent: #ffffff;
+	--sc-bg: #ffffff;
+	--sc-bg2: #f6f8fb;
+	--sc-surface: #ffffff;
+	--sc-surface2: #f3f6f9;
+	--sc-code-bg: #f3f6f9;
+	--sc-border: rgba(12, 18, 28, 0.1);
+	--sc-border2: rgba(12, 18, 28, 0.16);
+	--sc-heading: #0a0e16;
+	--sc-text: #374253;
+	--sc-muted: #5b6675;
+	--sc-faint: #8a95a5;
+	--sc-accent-soft: rgba(240, 81, 56, 0.12);
+	--sc-accent-border: rgba(240, 81, 56, 0.4);
+	--sc-shadow: 0 22px 50px -26px rgba(20, 28, 44, 0.3);
 }
 
+/* ---------- Dark ---------- */
 [data-theme="dark"] {
 	--ifm-color-primary: #ff7858;
 	--ifm-color-primary-dark: #ff5c37;
@@ -24,5 +57,331 @@
 	--ifm-color-primary-light: #ff9479;
 	--ifm-color-primary-lighter: #ffa18a;
 	--ifm-color-primary-lightest: #ffc3b3;
-	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+	--ifm-background-color: #0a0e16;
+	--ifm-background-surface-color: #111824;
+	--ifm-navbar-background-color: #0a0e16;
+	--ifm-heading-color: #ffffff;
+	--ifm-font-color-base: #dfe5ee;
+	--ifm-link-color: #ff7858;
+	--ifm-toc-border-color: rgba(255, 255, 255, 0.08);
+	--ifm-code-background: #0d131d;
+	--docusaurus-highlighted-code-line-bg: rgba(255, 120, 88, 0.14);
+
+	--sc-accent: #ff7858;
+	--sc-accent-fill: #ff7858;
+	--sc-on-accent: #0a0e16;
+	--sc-bg: #0a0e16;
+	--sc-bg2: #0b101a;
+	--sc-surface: #111824;
+	--sc-surface2: #0d131d;
+	--sc-code-bg: #0c111b;
+	--sc-border: rgba(255, 255, 255, 0.08);
+	--sc-border2: rgba(255, 255, 255, 0.14);
+	--sc-heading: #ffffff;
+	--sc-text: #dfe5ee;
+	--sc-muted: #94a1b4;
+	--sc-faint: #647184;
+	--sc-accent-soft: rgba(255, 120, 88, 0.14);
+	--sc-accent-border: rgba(255, 120, 88, 0.34);
+	--sc-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+	border-bottom: 1px solid var(--sc-border);
+	box-shadow: none;
+}
+.navbar__link--active {
+	color: var(--sc-heading);
+}
+/* Wordmark is baked into the SVG logo — hide the navbar title to avoid
+   duplication. Leave the mobile drawer brand row alone. */
+.navbar > .navbar__inner .navbar__title,
+.navbar > .navbar__title {
+	display: none;
+}
+
+/* ---------- Backgrounds ---------- */
+html,
+body,
+#__docusaurus,
+.main-wrapper {
+	background: var(--ifm-background-color);
+}
+.theme-doc-sidebar-container {
+	background: var(--ifm-background-color) !important;
+	border-right: 1px solid var(--sc-border) !important;
+}
+.theme-doc-sidebar-container > div,
+.theme-doc-sidebar-container nav,
+.theme-doc-sidebar-menu,
+.menu,
+.menu__list {
+	background: var(--ifm-background-color);
+}
+.theme-doc-sidebar-container > div:first-child {
+	height: 100%;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+/* ---------- Sidebar ---------- */
+.menu {
+	font-size: 14px;
+	background: transparent;
+	padding: 16px 12px;
+}
+.menu__list .menu__list {
+	padding-left: 8px;
+}
+.menu__link {
+	border-radius: 8px;
+	color: var(--sc-muted);
+	line-height: 1.4;
+}
+.menu__link:hover {
+	background: var(--sc-surface2);
+	color: var(--sc-heading);
+}
+.menu__link--active:not(.menu__link--sublist) {
+	color: var(--sc-accent);
+	background: var(--sc-accent-soft);
+	font-weight: 600;
+}
+.menu__list-item-collapsible .menu__link {
+	font-weight: 600;
+	color: var(--sc-heading);
+	background: transparent;
+}
+.menu__list-item-collapsible .menu__link--active {
+	color: var(--sc-accent);
+	background: transparent;
+}
+.menu__list-item-collapsible:hover {
+	background: var(--sc-surface2);
+	border-radius: 8px;
+}
+.menu__caret:hover {
+	background: transparent;
+}
+
+/* ---------- Table of contents ---------- */
+.table-of-contents__link--active {
+	color: var(--sc-accent);
+	font-weight: 600;
+}
+.table-of-contents .table-of-contents__link:hover {
+	color: var(--sc-heading);
+}
+
+/* ---------- Footer ---------- */
+.footer,
+.footer--dark {
+	--ifm-footer-background-color: var(--sc-bg2);
+	--ifm-footer-color: var(--sc-text);
+	--ifm-footer-link-color: var(--sc-text);
+	--ifm-footer-title-color: var(--sc-faint);
+	border-top: 1px solid var(--sc-border);
+}
+.footer__title {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sc-faint);
+}
+.footer__link-item {
+	color: var(--sc-text);
+}
+.footer__link-item:hover {
+	color: var(--sc-accent);
+	text-decoration: none;
+}
+.footer__copyright {
+	color: var(--sc-faint);
+	font-size: 13px;
+	text-align: left;
+}
+.footer__col {
+	font-size: 14px;
+}
+.footer__link-item svg,
+.footer__link-item [class*="iconExternalLink"] {
+	display: none;
+}
+
+/* ---------- Code ----------
+   Prism is vsDark in both light & dark mode (to match the navy aesthetic),
+   so fenced code blocks must stay dark in BOTH themes — otherwise the pale
+   vsDark tokens wash out on a light background. */
+.theme-code-block,
+div[class*="codeBlockContainer"],
+pre[class*="language-"] {
+	border: 1px solid var(--sc-border);
+	border-radius: 12px;
+	background: #0c111b !important;
+}
+.theme-code-block code,
+pre[class*="language-"] code {
+	background: transparent !important;
+	color: #dfe5ee;
+}
+div[class*="codeBlockTitle"] {
+	background: #0a0e16 !important;
+	color: #94a1b4 !important;
+	border-bottom: 1px solid var(--sc-border);
+}
+[data-theme="light"] .theme-code-block,
+[data-theme="light"] div[class*="codeBlockContainer"],
+[data-theme="light"] pre[class*="language-"] {
+	border-color: rgba(12, 18, 28, 0.16);
+	box-shadow: 0 8px 24px -18px rgba(12, 18, 28, 0.5);
+}
+code {
+	font-family: var(--ifm-font-family-monospace);
+}
+
+/* ---------- Markdown tables ----------
+   Rounded container, horizontal row dividers only. */
+.markdown table,
+.theme-doc-markdown table,
+article table {
+	display: table;
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin: 22px 0;
+	border: 1px solid var(--sc-border);
+	border-radius: 12px;
+	overflow: hidden;
+	font-size: 14px;
+}
+.markdown table thead,
+article table thead {
+	background: var(--sc-bg2);
+}
+.markdown table thead tr,
+article table thead tr {
+	border: none;
+	background: transparent;
+}
+.markdown table th,
+article table th {
+	text-align: left;
+	font-weight: 700;
+	font-size: 12px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sc-faint);
+	border: none;
+	border-bottom: 1px solid var(--sc-border);
+	padding: 14px 18px;
+}
+.markdown table tbody tr,
+article table tbody tr {
+	background: transparent !important;
+	border: none;
+}
+.markdown table td,
+article table td {
+	border: none;
+	border-bottom: 1px solid var(--sc-border);
+	padding: 13px 18px;
+	vertical-align: middle;
+	color: var(--sc-text);
+}
+.markdown table tbody tr:last-child td,
+article table tbody tr:last-child td {
+	border-bottom: none;
+}
+.markdown table td:first-child,
+article table td:first-child {
+	font-weight: 600;
+	color: var(--sc-heading);
+	white-space: nowrap;
+}
+.markdown table td code,
+.markdown table th code,
+article table td code {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	font-size: 13px;
+}
+.markdown table td:nth-child(2) code,
+article table td:nth-child(2) code {
+	color: var(--sc-accent);
+}
+
+/* ---------- Buttons ---------- */
+.button--primary {
+	background: var(--sc-accent-fill);
+	border-color: var(--sc-accent-fill);
+	color: var(--sc-on-accent);
+	font-weight: 700;
+}
+.button--primary:hover {
+	background: var(--ifm-color-primary-light);
+	border-color: var(--ifm-color-primary-light);
+	color: var(--sc-on-accent);
+}
+.button--secondary {
+	background: transparent;
+	border-color: var(--sc-border2);
+	color: var(--sc-heading);
+}
+
+::selection {
+	background: rgba(240, 81, 56, 0.24);
+}
+
+/* ============================================================
+   HARDENED DARK SURFACES — force the navy palette even if a
+   default loads after this file.
+   ============================================================ */
+[data-theme="dark"] {
+	--ifm-background-color: #0a0e16;
+	--ifm-background-surface-color: #111824;
+	--ifm-navbar-background-color: #0a0e16;
+	--ifm-footer-background-color: #0b101a;
+}
+[data-theme="dark"],
+[data-theme="dark"] body,
+[data-theme="dark"] #__docusaurus,
+[data-theme="dark"] .main-wrapper,
+[data-theme="dark"] .navbar,
+[data-theme="dark"] main {
+	background-color: #0a0e16;
+}
+html[data-theme="light"] .footer,
+html[data-theme="light"] .footer--dark {
+	background-color: var(--sc-bg2) !important;
+	border-top: 1px solid var(--sc-border);
+}
+html[data-theme="light"] .footer__link-item {
+	color: var(--sc-text) !important;
+}
+html[data-theme="light"] .footer__title {
+	color: var(--sc-faint) !important;
+}
+html[data-theme="light"] .footer__copyright {
+	color: var(--sc-faint) !important;
+}
+html[data-theme="dark"] .footer,
+html[data-theme="dark"] .footer--dark {
+	background-color: #0a0e16 !important;
+	border-top: 1px solid var(--sc-border);
+}
+html[data-theme="dark"] .footer__link-item {
+	color: var(--sc-text) !important;
+}
+html[data-theme="dark"] .footer__title {
+	color: var(--sc-faint) !important;
+}
+html[data-theme="dark"] .footer__copyright {
+	color: var(--sc-faint) !important;
+}
+.footer__link-item:hover {
+	color: var(--sc-accent) !important;
 }

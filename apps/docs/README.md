@@ -23,8 +23,8 @@ pnpm docs:serve
 
 ```
 apps/docs/
-├── docs/
-│   ├── index.md                # landing page (Core/UI split, install)
+├── docs/                       # served at /docs/*
+│   ├── index.md                # docs landing (Core/UI split, install)
 │   ├── guides/
 │   │   ├── installation.md     # SPM snippet, Xcode add-package
 │   │   ├── conventions.md      # target placement, file naming, platform guards
@@ -33,13 +33,24 @@ apps/docs/
 │   │   ├── core.md             # MatrixSwiftBaseCore overview with code samples
 │   │   └── ui.md               # MatrixSwiftBaseUI overview with code samples
 │   └── changelog.md            # synced from root CHANGELOG.md (gitignored)
-├── src/css/custom.css          # Infima theme overrides (Swift orange)
-├── static/img/logo.svg
-├── docusaurus.config.ts        # site config, search plugin
+├── src/
+│   ├── pages/
+│   │   ├── index.tsx           # marketing landing — owns /
+│   │   └── index.module.css
+│   ├── components/
+│   │   ├── InstallTabs.tsx     # Package.swift / Xcode install tabs
+│   │   └── InstallTabs.module.css
+│   └── css/custom.css          # Infima theme overrides (Swift orange + navy)
+├── static/img/
+│   ├── logo.svg                # wordmark, light mode
+│   └── logo-dark.svg           # wordmark, dark mode
+├── docusaurus.config.ts        # site config, navbar, footer, Geist fonts
 ├── sidebars.ts                 # Start here / API Reference / Releases
 ├── tsconfig.json
 └── package.json                # @rtorcato/swift-common-docs
 ```
+
+The marketing landing (`src/pages/index.tsx`) owns `/`. Docs live at `/docs/*` (set via `routeBasePath: '/docs'` in `docusaurus.config.ts`). Design tokens are namespaced `--sc-*` in `src/css/custom.css`.
 
 ## Differences from `browser-common`'s docs setup
 

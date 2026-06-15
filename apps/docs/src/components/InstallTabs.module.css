@@ -1,0 +1,85 @@
+/* InstallTabs.module.css — underline tabs + command row */
+
+.wrap {
+	width: 100%;
+	max-width: 620px;
+	border: 1px solid var(--sc-border, rgba(255, 255, 255, 0.1));
+	border-radius: 14px;
+	overflow: hidden;
+	background: var(--sc-code-bg, #0c111b);
+	text-align: left;
+}
+
+.tabs {
+	display: flex;
+	padding: 0 8px;
+	border-bottom: 1px solid var(--sc-border, rgba(255, 255, 255, 0.08));
+}
+
+.tab,
+.tabActive {
+	appearance: none;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	padding: 13px 16px;
+	margin-bottom: -1px;
+	font-family: var(--ifm-font-family-monospace, monospace);
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--sc-muted, #94a1b4);
+	border-bottom: 2px solid transparent;
+	transition: color 0.15s;
+}
+.tab:hover {
+	color: var(--sc-heading, #fff);
+}
+.tabActive {
+	color: var(--sc-accent, #ff7858);
+	border-bottom-color: var(--sc-accent, #ff7858);
+}
+
+.cmdRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 15px 14px 15px 16px;
+}
+.cmd {
+	flex: 1;
+	min-width: 0;
+	overflow-x: auto;
+	white-space: nowrap;
+	font-family: var(--ifm-font-family-monospace, monospace);
+	font-size: 13px;
+	color: var(--sc-text, #dfe5ee);
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+.cmd::-webkit-scrollbar {
+	display: none;
+}
+.copy {
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 34px;
+	height: 34px;
+	border: 1px solid var(--sc-border, rgba(255, 255, 255, 0.1));
+	background: var(--sc-surface, #111824);
+	border-radius: 9px;
+	color: var(--sc-muted, #94a1b4);
+	cursor: pointer;
+	transition:
+		border-color 0.15s,
+		color 0.15s;
+}
+.copy:hover {
+	border-color: var(--sc-accent-border, rgba(255, 120, 88, 0.4));
+	color: var(--sc-accent, #ff7858);
+}
+.copy[data-copied="true"] {
+	color: #28c840;
+	border-color: rgba(40, 200, 64, 0.4);
+}
