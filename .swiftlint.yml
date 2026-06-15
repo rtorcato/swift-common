@@ -12,7 +12,6 @@ excluded:
   - .build
   - .swiftpm
   - DerivedData
-  - Sources/Examples
 
 file_length:
   warning: 500

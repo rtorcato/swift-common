@@ -130,9 +130,9 @@ This wires up auto-`swiftlint --fix` on commit and Conventional Commits validati
 
 ## Status
 
-Hard-gated in CI (must pass): `swift build` + `swift test`, `xcodebuild` for iOS and macOS, `swiftlint --strict`.
+Hard-gated in CI (must pass): `swift build` + `swift test`, `swiftlint --strict`, and `xcodebuild` for **all four** Apple platforms — iOS, macOS, tvOS, watchOS.
 
-Informational only (work-in-progress): `xcodebuild` for tvOS and watchOS, Periphery dead-code scan. Several files still need `#if os(...)` guards before tvOS/watchOS can be hard-gated — tracked in `TODOS.md`.
+Informational only: Periphery dead-code scan (`continue-on-error: true` until the codebase is cleaned up).
 
 The test suite is intentionally narrow at this stage (foundation utilities have full coverage; UI/Manager code is mostly uncovered). Treat green tests as evidence the foundation layer works, not that every helper is correct.
 

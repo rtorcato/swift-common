@@ -33,6 +33,6 @@ Many dependencies and target products are commented out (Lottie, SDWebImage, SDW
 
 ## Conventions
 
-- Source layout: feature-grouped under `Sources/MatrixSwiftBase/` (Components, Extensions, Managers, Models, Networking, State, Styles, Views, etc.).
-- Tests live in `Tests/MatrixSwiftBaseTests/`.
+- Source layout: feature-grouped under `Sources/MatrixSwiftBaseCore/` and `Sources/MatrixSwiftBaseUI/` (Components, Extensions, Helpers, Managers, Models, Networking, State, Styles, Views, etc.).
+- Tests live in `Tests/MatrixSwiftBaseCoreTests/` and `Tests/MatrixSwiftBaseUITests/`.
 - Commit style is loose — short imperative messages are fine.
