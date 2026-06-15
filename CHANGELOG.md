@@ -1,3 +1,9 @@
+## [0.2.0](https://github.com/rtorcato/swift-common/compare/v0.1.0...v0.2.0) (2026-06-15)
+
+### Features
+
+* bump swift-tools-version to 5.9 (closes [#12](https://github.com/rtorcato/swift-common/issues/12)) ([13a22a8](https://github.com/rtorcato/swift-common/commit/13a22a827be3fb8ca70d5efd17929dcbfd1135a7))
+
 # Changelog
 
 All notable changes to this project will be documented here. This file is
