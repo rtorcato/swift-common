@@ -1,5 +1,28 @@
 # TODOs
 
+## Open-source readiness (tracked as GitHub issues)
+
+Items below are mirrored as GitHub issues. Update both when status changes.
+
+### Blockers
+- [ ] [#5](https://github.com/rtorcato/swift-common/issues/5) — Add LICENSE (Apache-2.0) and remove all-rights-reserved note
+- [ ] [#6](https://github.com/rtorcato/swift-common/issues/6) — Set up release automation (semantic-release `/base` preset) and tag `0.1.0`
+- [ ] [#7](https://github.com/rtorcato/swift-common/issues/7) — Fix doc/config drift (CLAUDE.md paths, `.swiftlint.yml` exclude, `plan.md` note)
+
+### Open-source niceties
+- [ ] [#8](https://github.com/rtorcato/swift-common/issues/8) — Add `CONTRIBUTING.md`
+- [ ] [#9](https://github.com/rtorcato/swift-common/issues/9) — Add `SECURITY.md` and vulnerability disclosure contact
+- [ ] [#16](https://github.com/rtorcato/swift-common/issues/16) — Add GitHub issue and PR templates
+- [ ] [#10](https://github.com/rtorcato/swift-common/issues/10) — Add DocC catalog and publish to GitHub Pages
+- [ ] [#17](https://github.com/rtorcato/swift-common/issues/17) — Scaffold Docusaurus docs site at `apps/docs/` (mirror browser-common setup)
+- [ ] [#15](https://github.com/rtorcato/swift-common/issues/15) — Add Swift version + platforms badges to README
+
+### Design / library quality
+- [ ] [#11](https://github.com/rtorcato/swift-common/issues/11) — Isolate Lottie into its own product or behind a SwiftPM trait
+- [ ] [#12](https://github.com/rtorcato/swift-common/issues/12) — Bump `swift-tools-version` from 5.7 to 5.9+
+- [ ] [#13](https://github.com/rtorcato/swift-common/issues/13) — Add tests for high-traffic Managers (Keychain / ImageCache / SystemTheme)
+- [ ] [#14](https://github.com/rtorcato/swift-common/issues/14) — Sendable audit for Swift 6 strict concurrency
+
 ## Claude Code setup follow-ups
 
 - [ ] Open `/hooks` once (or restart Claude Code) so the new `.claude/settings.json` is picked up by the settings watcher. SwiftLint is installed (v0.63.3) so the auto-fix hook will start working as soon as the watcher loads it.
@@ -10,7 +33,7 @@
 
 ## Repo tooling — borrow structure from @rtorcato/js-tooling
 
-- [ ] **Auto-release via semantic-release** — `semantic-release` itself is language-agnostic; with `@semantic-release/github` and `@semantic-release/git` (no npm plugin) it can tag versions and write `CHANGELOG.md` for a Swift package based on conventional commits. Use the `/semantic-release/base` preset from `js-tooling`, not `/github` (which assumes npm publish).
+- [ ] **Auto-release via semantic-release** — tracked as [#6](https://github.com/rtorcato/swift-common/issues/6). `semantic-release` itself is language-agnostic; with `@semantic-release/github` and `@semantic-release/git` (no npm plugin) it can tag versions and write `CHANGELOG.md` for a Swift package based on conventional commits. Use the `/semantic-release/base` preset from `js-tooling`, not `/github` (which assumes npm publish).
 
 ## Foundation utilities — port from @rtorcato/js-common
 
