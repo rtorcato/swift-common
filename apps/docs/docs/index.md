@@ -54,6 +54,7 @@ struct ContentView: View {
 
 ## Where to next
 
+- [Scope](./guides/scope.md) — what this library covers, and what it intentionally leaves to SwifterSwift, Alamofire, Kingfisher, and friends.
 - [Installation](./guides/installation.md) — SPM `Package.swift` snippet and Xcode add-package flow.
 - [Conventions](./guides/conventions.md) — target placement rules, file naming, platform guards.
 - [Platform support](./guides/platforms.md) — the iOS 16+ / macOS 13+ / tvOS 16+ / watchOS 9+ matrix.

@@ -8,6 +8,7 @@ const sidebars: SidebarsConfig = {
 			collapsed: false,
 			items: [
 				'index',
+				'guides/scope',
 				'guides/installation',
 				'guides/conventions',
 				'guides/platforms',

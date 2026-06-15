@@ -23,6 +23,29 @@ The library ships as **two products** so consumers only pay for what they use:
 
 A consumer depending on just `MatrixSwiftBaseCore` never compiles or links any UI code — Swift's product isolation gives the same effect as keeping the UI in a separate repo, without the operational tax.
 
+## Scope
+
+`swift-common` is the **application-utility layer** — managers, helpers, networking, validation, and SwiftUI components reused across my iOS / macOS apps. It is **not** a stdlib-extension library.
+
+**Belongs here:**
+
+- Stateful managers (`KeychainManager`, `ImageCache`, `SystemThemeManager`, `LocationManager`, `BeaconDetector`).
+- Networking — `APIClient`, `HttpMethod`, `NetworkError` (retry policy planned, [#23](https://github.com/rtorcato/swift-common/issues/23)).
+- Validation rules and domain helpers (`CurrencyHelper`, `CryptoHelper`, `JsonHelper`, `DateHelper`, `MathHelper`).
+- SwiftUI primitives tuned to my conventions — components, containers, modifiers, shapes, styles.
+
+**Deliberately left to the ecosystem:**
+
+| Need | Use |
+| --- | --- |
+| Stdlib extensions (`Array+`, `String+`, `Date+`, `View+`) | [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) |
+| Heavy networking (interceptors, multipart, OAuth) | [Alamofire](https://github.com/Alamofire/Alamofire) |
+| Image loading / caching at scale | [Kingfisher](https://github.com/onevcat/Kingfisher) |
+| Typed `UserDefaults` | [Defaults](https://github.com/sindresorhus/Defaults) |
+| General SwiftUI extension layer | [SwiftUIX](https://github.com/SwiftUIX/SwiftUIX) |
+
+The few extensions still in `Sources/MatrixSwiftBaseCore/Extensions/` exist for legacy reasons and will be pruned where they overlap with SwifterSwift.
+
 ## Requirements
 
 - Swift 5.7+
