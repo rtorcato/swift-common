@@ -1,0 +1,28 @@
+/**
+ * Custom CSS for swift-common docs.
+ * Docusaurus uses Infima (https://infima.dev/) — override its CSS variables here.
+ * Primary colour matches Swift's brand orange (#F05138).
+ */
+
+:root {
+	--ifm-color-primary: #f05138;
+	--ifm-color-primary-dark: #ee3a1c;
+	--ifm-color-primary-darker: #e23115;
+	--ifm-color-primary-darkest: #ba2811;
+	--ifm-color-primary-light: #f26854;
+	--ifm-color-primary-lighter: #f37362;
+	--ifm-color-primary-lightest: #f6957d;
+	--ifm-code-font-size: 95%;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+	--ifm-color-primary: #ff7858;
+	--ifm-color-primary-dark: #ff5c37;
+	--ifm-color-primary-darker: #ff4f26;
+	--ifm-color-primary-darkest: #f23800;
+	--ifm-color-primary-light: #ff9479;
+	--ifm-color-primary-lighter: #ffa18a;
+	--ifm-color-primary-lightest: #ffc3b3;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}

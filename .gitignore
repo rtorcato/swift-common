@@ -8,3 +8,10 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 .claude/settings.local.json
+
+# Node / Docusaurus (apps/docs)
+node_modules/
+apps/docs/.docusaurus/
+apps/docs/build/
+apps/docs/docs/changelog.md
+*.tsbuildinfo

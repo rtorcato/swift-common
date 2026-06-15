@@ -1,0 +1,25 @@
+{
+  "name": "swift-common-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Workspace root for the swift-common Swift package. Hosts the Docusaurus docs site under apps/docs. The Swift library itself is unaffected by this file.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtorcato/swift-common.git"
+  },
+  "homepage": "https://rtorcato.github.io/swift-common/",
+  "bugs": {
+    "url": "https://github.com/rtorcato/swift-common/issues"
+  },
+  "author": "Richard Torcato",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.1.3",
+  "scripts": {
+    "docs:dev": "pnpm --filter @rtorcato/swift-common-docs dev",
+    "docs:build": "pnpm --filter @rtorcato/swift-common-docs build",
+    "docs:serve": "pnpm --filter @rtorcato/swift-common-docs serve"
+  }
+}

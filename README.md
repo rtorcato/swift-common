@@ -2,8 +2,11 @@
 
 [![CI](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml)
+[![Deploy Docs](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml)
 
 A reusable foundation library for Apple platforms — the Swift counterpart to [`@rtorcato/js-common`](https://github.com/rtorcato/js-common). Built on top of Foundation and SwiftUI; designed to be added to any iOS / macOS app as a SwiftPM dependency.
+
+📚 **Documentation: <https://rtorcato.github.io/swift-common/>** (source under [`apps/docs/`](./apps/docs/))
 
 The library ships as **two products** so consumers only pay for what they use:
 
