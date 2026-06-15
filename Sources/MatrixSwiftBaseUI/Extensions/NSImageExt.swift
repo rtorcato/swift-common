@@ -1,27 +1,22 @@
 //
-//  File.swift
-//  
+//  NSImageExt.swift
+//  MatrixSwiftBase
 //
-//  Created by Richard Torcato on 2023-01-13.
-//
+
 #if os(macOS)
 import Cocoa
 
-// Step 1: Typealias UIImage to NSImage
-public typealias UIImage = NSImage
+// Internal cross-platform shim so the rest of the library can refer to
+// `UIImage` on every Apple platform. Intentionally `internal` — exposing this
+// as `public` would pollute every macOS consumer's top-level namespace and
+// collide with their own compat shims.
+typealias UIImage = NSImage
 
-// Step 2: You might want to add these APIs that UIImage has but NSImage doesn't.
 extension NSImage {
+    /// Bridge for the `UIImage.cgImage` property that `NSImage` doesn't ship.
     public var cgImage: CGImage? {
         var proposedRect = CGRect(origin: .zero, size: size)
-
-        return cgImage(forProposedRect: &proposedRect,
-                       context: nil,
-                       hints: nil)
+        return cgImage(forProposedRect: &proposedRect, context: nil, hints: nil)
     }
-
-//    public convenience init?(named name: String) {
-//        self.init(named: Name(name))
-//    }
 }
 #endif
