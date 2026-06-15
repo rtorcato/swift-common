@@ -44,8 +44,8 @@ import MatrixSwiftBaseUI
 
 ## Requirements
 
-- **Swift**: 5.7+
-- **Xcode**: 14+ (15+ recommended for tvOS/watchOS work)
+- **Swift**: 5.9+
+- **Xcode**: 15+
 - **Platforms**: iOS 16+, macOS 13+, tvOS 16+, watchOS 9+ — see the [platform support guide](./platforms.md).
 
 ## Pinning to a release

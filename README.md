@@ -48,7 +48,7 @@ The few extensions still in `Sources/MatrixSwiftBaseCore/Extensions/` exist for 
 
 ## Requirements
 
-- Swift 5.7+
+- Swift 5.9+ (Xcode 15+)
 - iOS 16+, macOS 13+, tvOS 16+, watchOS 9+ — see Status below for the actual compile-tested matrix.
 
 ## Installation

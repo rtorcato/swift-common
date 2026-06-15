@@ -20,7 +20,7 @@ Every item below is mirrored as a GitHub issue. Update both when status changes;
 ## Design / library quality
 
 - [ ] [#11](https://github.com/rtorcato/swift-common/issues/11) — Isolate Lottie into its own product or behind a SwiftPM trait
-- [ ] [#12](https://github.com/rtorcato/swift-common/issues/12) — Bump `swift-tools-version` from 5.7 to 5.9+
+- [x] [#12](https://github.com/rtorcato/swift-common/issues/12) — Bump `swift-tools-version` from 5.7 to 5.9+
 - [ ] [#13](https://github.com/rtorcato/swift-common/issues/13) — Add tests for high-traffic Managers (Keychain / ImageCache / SystemTheme)
 - [ ] [#14](https://github.com/rtorcato/swift-common/issues/14) — Sendable audit for Swift 6 strict concurrency
 
