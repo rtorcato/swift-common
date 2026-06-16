@@ -1,3 +1,5 @@
+![homelab-nut](cover.png)
+
 # swift-common
 
 [![CI](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml)
