@@ -160,7 +160,7 @@ const config: Config = {
 							label: 'License',
 							href: 'https://github.com/rtorcato/swift-common/blob/main/LICENSE',
 						},
-						{ label: 'GitHub profile', href: GITHUB_PROFILE },
+						{ label: '@rtorcato', href: GITHUB_PROFILE },
 					],
 				},
 			],
