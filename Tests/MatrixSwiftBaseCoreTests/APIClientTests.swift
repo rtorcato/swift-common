@@ -50,7 +50,8 @@ final class APIClientTests: XCTestCase {
 
     private func makeClient(
         defaultHeaders: [String: String] = [:],
-        interceptor: APIClient.RequestInterceptor? = nil
+        interceptor: APIClient.RequestInterceptor? = nil,
+        retryPolicy: RetryPolicy = .never
     ) -> APIClient {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [MockURLProtocol.self]
@@ -59,7 +60,8 @@ final class APIClientTests: XCTestCase {
             baseURL: base,
             session: session,
             defaultHeaders: defaultHeaders,
-            interceptor: interceptor
+            interceptor: interceptor,
+            retryPolicy: retryPolicy
         )
     }
 
@@ -204,5 +206,82 @@ final class APIClientTests: XCTestCase {
         } catch {
             XCTFail("expected NetworkError, got \(error)")
         }
+    }
+
+    // MARK: - Retry policy
+
+    /// Thread-safe attempt counter for the mock handler (URLProtocol runs off-thread).
+    private final class Counter: @unchecked Sendable {
+        private let lock = NSLock()
+        private var value = 0
+        func increment() -> Int { lock.lock(); defer { lock.unlock() }; value += 1; return value }
+        var count: Int { lock.lock(); defer { lock.unlock() }; return value }
+    }
+
+    private func jsonResponse(_ request: URLRequest, status: Int, body: String) -> (HTTPURLResponse, Data?) {
+        let response = HTTPURLResponse(url: request.url!, statusCode: status, httpVersion: nil, headerFields: nil)!
+        return (response, Data(body.utf8))
+    }
+
+    func testRetriesOn503ThenSucceeds() async throws {
+        let counter = Counter()
+        MockURLProtocol.handler = { [self] request in
+            let attempt = counter.increment()
+            return attempt < 3
+                ? jsonResponse(request, status: 503, body: "busy")
+                : jsonResponse(request, status: 200, body: #"{"id":1,"name":"Ada"}"#)
+        }
+
+        let client = makeClient(retryPolicy: .fixed(retries: 3, delay: 0))
+        let user: User = try await client.send(GetUser())
+        XCTAssertEqual(user, User(id: 1, name: "Ada"))
+        XCTAssertEqual(counter.count, 3) // 2 failures + 1 success
+    }
+
+    func testDoesNotRetryOn404() async {
+        let counter = Counter()
+        MockURLProtocol.handler = { [self] request in
+            _ = counter.increment()
+            return jsonResponse(request, status: 404, body: "nope")
+        }
+
+        let client = makeClient(retryPolicy: .fixed(retries: 3, delay: 0))
+        _ = try? await client.send(GetUser()) as User?
+        XCTAssertEqual(counter.count, 1) // 404 is not transient
+    }
+
+    func testExhaustsRetriesThenThrows() async {
+        let counter = Counter()
+        MockURLProtocol.handler = { [self] request in
+            _ = counter.increment()
+            return jsonResponse(request, status: 500, body: "boom")
+        }
+
+        let client = makeClient(retryPolicy: .fixed(retries: 2, delay: 0))
+        do {
+            let _: User = try await client.send(GetUser())
+            XCTFail("expected error")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error.statusCode, 500)
+        } catch {
+            XCTFail("expected NetworkError, got \(error)")
+        }
+        XCTAssertEqual(counter.count, 3) // 1 initial + 2 retries
+    }
+
+    func testEndpointOverridesClientPolicy() async {
+        struct NoRetryEndpoint: Endpoint {
+            let path = "/users/1"
+            let retryPolicy: RetryPolicy? = .never
+        }
+        let counter = Counter()
+        MockURLProtocol.handler = { [self] request in
+            _ = counter.increment()
+            return jsonResponse(request, status: 500, body: "boom")
+        }
+
+        let client = makeClient(retryPolicy: .fixed(retries: 5, delay: 0))
+        _ = try? await client.send(NoRetryEndpoint()) as User?
+        XCTAssertEqual(counter.count, 1) // endpoint's .none wins over client's 5 retries
     }
 }
