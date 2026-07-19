@@ -178,6 +178,7 @@ body,
 /* ---------- Footer ---------- */
 .footer,
 .footer--dark {
+	margin-top: 4rem;
 	--ifm-footer-background-color: var(--sc-bg2);
 	--ifm-footer-color: var(--sc-text);
 	--ifm-footer-link-color: var(--sc-text);
