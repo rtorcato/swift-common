@@ -1,0 +1,79 @@
+/**
+ * Shared @rtorcato Docusaurus design tokens (shipped by @rtorcato/js-tooling —
+ * copy via `js-tooling copy docusaurus-theme-tokens`).
+ *
+ * The Geist font + navy-surface design-token base every sibling docs site
+ * shares. `@import` this from your `src/css/custom.css`, then override the
+ * accent (`--ifm-color-primary*` and `--jt-accent*`) with your brand colour:
+ *
+ *   @import "./_jt-tokens.css";
+ *   :root            { --ifm-color-primary: #F38020; --jt-accent: #F38020; }
+ *   [data-theme=dark]{ --ifm-color-primary: #ff9a4d; --jt-accent: #ff9a4d; }
+ *
+ * The default accent below is Docusaurus's neutral green — meant to be replaced.
+ */
+
+/* ---------- Fonts ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap");
+
+/* ---------- Light (default) ---------- */
+:root {
+	--ifm-color-primary: #2e8555;
+
+	--ifm-font-family-base: "Geist", system-ui, -apple-system, sans-serif;
+	--ifm-font-family-monospace: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+	--ifm-heading-font-weight: 800;
+	--ifm-code-font-size: 92%;
+
+	--ifm-background-color: #ffffff;
+	--ifm-background-surface-color: #ffffff;
+	--ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
+	--ifm-heading-color: #0a0e16;
+	--ifm-font-color-base: #374253;
+	--ifm-toc-border-color: rgba(12, 18, 28, 0.1);
+	--ifm-code-background: #f3f6f9;
+
+	/* Design tokens (surfaces/text/borders are shared; accent is per-project). */
+	--jt-accent: var(--ifm-color-primary);
+	--jt-on-accent: #ffffff;
+	--jt-bg: #ffffff;
+	--jt-bg2: #f6f8fb;
+	--jt-surface: #ffffff;
+	--jt-surface2: #f3f6f9;
+	--jt-code-bg: #f3f6f9;
+	--jt-border: rgba(12, 18, 28, 0.1);
+	--jt-border2: rgba(12, 18, 28, 0.16);
+	--jt-heading: #0a0e16;
+	--jt-text: #374253;
+	--jt-muted: #5b6675;
+	--jt-faint: #8a95a5;
+	--jt-shadow: 0 22px 50px -26px rgba(20, 28, 44, 0.3);
+}
+
+/* ---------- Dark ---------- */
+[data-theme="dark"] {
+	--ifm-color-primary: #25c2a0;
+
+	--ifm-background-color: #0a0e16;
+	--ifm-background-surface-color: #111824;
+	--ifm-navbar-background-color: #0a0e16;
+	--ifm-heading-color: #ffffff;
+	--ifm-font-color-base: #dfe5ee;
+	--ifm-toc-border-color: rgba(255, 255, 255, 0.08);
+	--ifm-code-background: #0d131d;
+
+	--jt-accent: var(--ifm-color-primary);
+	--jt-on-accent: #0a0e16;
+	--jt-bg: #0a0e16;
+	--jt-bg2: #0b101a;
+	--jt-surface: #111824;
+	--jt-surface2: #0d131d;
+	--jt-code-bg: #0c111b;
+	--jt-border: rgba(255, 255, 255, 0.08);
+	--jt-border2: rgba(255, 255, 255, 0.14);
+	--jt-heading: #ffffff;
+	--jt-text: #dfe5ee;
+	--jt-muted: #94a1b4;
+	--jt-faint: #647184;
+	--jt-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
