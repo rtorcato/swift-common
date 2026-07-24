@@ -1,20 +1,27 @@
-// Canonical sync-changelog for @rtorcato/* Docusaurus sites (shipped by
+// Canonical sync-changelog for @rtorcato/* docs sites (shipped by
 // @rtorcato/js-tooling — copy via `js-tooling copy docusaurus-sync-changelog`).
 //
-// Copies the root CHANGELOG.md into apps/docs/docs/changelog.md with Docusaurus
+// Copies the root CHANGELOG.md into the docs site's changelog page with
 // frontmatter, so semantic-release keeps owning a single canonical changelog
 // while the docs site renders it in-nav. The output file is gitignored — it is
-// regenerated on every docs build (wire it into apps/docs's `build`/`start`
+// regenerated on every docs build (wire it into the docs app's `build`/`start`
 // scripts; pnpm 8 doesn't run `pre*` hooks reliably, so chain it explicitly).
+//
+// The target defaults to Docusaurus's `apps/docs/docs/changelog.md`. Override
+// with the CHANGELOG_TARGET env var (path relative to the repo root) for other
+// layouts — e.g. a Fumadocs content root:
+//   CHANGELOG_TARGET=apps/web/content/docs/changelog.mdx node scripts/sync-changelog.mjs
+// The title/description frontmatter is framework-neutral (both Docusaurus and
+// Fumadocs read it), so only the path changes between frameworks.
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(here, '..')
 const source = resolve(repoRoot, 'CHANGELOG.md')
-const target = resolve(repoRoot, 'apps/docs/docs/changelog.md')
+const target = resolve(repoRoot, process.env.CHANGELOG_TARGET ?? 'apps/docs/docs/changelog.md')
 
 const frontmatter = `---
 title: Changelog
@@ -30,5 +37,6 @@ try {
 	body = '# Changelog\n\nNo releases recorded yet.\n'
 }
 
+mkdirSync(dirname(target), { recursive: true })
 writeFileSync(target, frontmatter + body)
 console.log(`sync-changelog: wrote ${target}`)
