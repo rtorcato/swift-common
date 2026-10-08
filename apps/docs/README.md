@@ -1,6 +1,6 @@
 # swift-common docs
 
-[Docusaurus](https://docusaurus.io/) site for [`swift-common`](https://github.com/rtorcato/swift-common) (the `MatrixSwiftBaseCore` / `MatrixSwiftBaseUI` SwiftPM library). Modelled on [`browser-common/apps/docs`](https://github.com/rtorcato/browser-common/tree/main/apps/docs). Deployed to GitHub Pages at `https://rtorcato.github.io/swift-common/` via [`.github/workflows/docs.yml`](../../.github/workflows/docs.yml).
+[Docusaurus](https://docusaurus.io/) site for [`swift-common`](https://github.com/rtorcato/swift-common) (the `MatrixSwiftBaseCore` / `MatrixSwiftBaseUI` SwiftPM library). Modelled on [`browser-common/apps/docs`](https://github.com/rtorcato/browser-common/tree/main/apps/docs). Deployed to Cloudflare at `https://docs.torcato.dev/swift-common/` via [`.github/workflows/docs.yml`](../../.github/workflows/docs.yml).
 
 ## Develop
 
