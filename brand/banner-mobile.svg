@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="786" viewBox="0 0 1280 786" role="img" aria-label="swift-common — SwiftUI package of reusable views and helpers to build apps faster.">
+	<defs>
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#0d1117"/>
+			<stop offset="1" stop-color="#090c13"/>
+		</linearGradient>
+		<radialGradient id="glow" cx="0.12" cy="0.05" r="0.55">
+			<stop offset="0" stop-color="#ff6f4d" stop-opacity="0.15"/>
+			<stop offset="1" stop-color="#ff6f4d" stop-opacity="0"/>
+		</radialGradient>
+		<radialGradient id="glow2" cx="0.92" cy="1" r="0.5">
+			<stop offset="0" stop-color="#6e7bff" stop-opacity="0.12"/>
+			<stop offset="1" stop-color="#6e7bff" stop-opacity="0"/>
+		</radialGradient>
+	</defs>
+
+	<rect width="1280" height="786" fill="url(#bg)"/>
+	<rect width="1280" height="786" fill="url(#glow)"/>
+	<rect width="1280" height="786" fill="url(#glow2)"/>
+
+	<!-- Logo mark: brand/favicon.svg — edit that file to change it on every canvas. -->
+	<image href="favicon.svg" x="565" y="104" width="150" height="150"/>
+
+	<text x="640" y="360" text-anchor="middle" font-family="'Avenir Next', Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-1.8"><tspan fill="#e6edf3">swift-</tspan><tspan fill="#ff6f4d">common</tspan></text>
+
+	<text text-anchor="middle" font-family="'Avenir Next', Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="30" fill="#9ba6b8">
+		<tspan x="640" y="510">SwiftUI package of reusable views and</tspan>
+		<tspan x="640" y="554">helpers to build apps faster.</tspan>
+	</text>
+
+</svg>

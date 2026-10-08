@@ -6,7 +6,7 @@ const config: Config = {
 	title: 'swift-common',
 	tagline:
 		'Cross-platform Swift utilities for Apple platforms — Foundation Core + SwiftUI UI, from a single SwiftPM package.',
-	favicon: 'img/logo.svg',
+	favicon: 'img/favicon.svg',
 
 	url: 'https://docs.torcato.dev',
 	baseUrl: '/swift-common/',
@@ -83,6 +83,7 @@ const config: Config = {
 	],
 
 	themeConfig: {
+		image: 'img/social-card.png',
 		colorMode: {
 			defaultMode: 'dark',
 			respectPrefersColorScheme: true,
