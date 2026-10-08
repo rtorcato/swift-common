@@ -8,7 +8,7 @@ const config: Config = {
 		'Cross-platform Swift utilities for Apple platforms — Foundation Core + SwiftUI UI, from a single SwiftPM package.',
 	favicon: 'img/logo.svg',
 
-	url: 'https://rtorcato.github.io',
+	url: 'https://docs.torcato.dev',
 	baseUrl: '/swift-common/',
 
 	organizationName: 'rtorcato',

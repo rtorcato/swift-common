@@ -8,7 +8,7 @@
 
 A reusable foundation library for Apple platforms — the Swift counterpart to [`@rtorcato/js-common`](https://github.com/rtorcato/js-common). Built on top of Foundation and SwiftUI; designed to be added to any iOS / macOS app as a SwiftPM dependency.
 
-📚 **Documentation: <https://rtorcato.github.io/swift-common/>** (source under [`apps/docs/`](./apps/docs/))
+📚 **Documentation: <https://docs.torcato.dev/swift-common/>** (source under [`apps/docs/`](./apps/docs/))
 
 The library ships as **two products** so consumers only pay for what they use:
 
