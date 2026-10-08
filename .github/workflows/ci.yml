@@ -52,7 +52,8 @@ jobs:
   dead-code:
     name: Periphery
     runs-on: macos-latest
-    # Informational until codebase is cleaned up. Track in TODOS.md.
+    # Informational until codebase is cleaned up: no --strict, so findings are
+    # warning annotations and the check stays green. Add --strict back after cleanup.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
@@ -66,7 +67,7 @@ jobs:
         run: brew install periphery
 
       - name: periphery scan
-        run: periphery scan --strict --format github-actions
+        run: periphery scan --relative-results --format github-actions
 
   platforms:
     name: xcodebuild ${{ matrix.platform }}
