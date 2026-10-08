@@ -14,51 +14,70 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
-  build:
+  # https://docs.torcato.dev/swift-common/
+  # Pinned to a tag, never @main: this job hands over the Cloudflare secrets.
+  cloudflare:
+    permissions:
+      contents: read
+    uses: rtorcato/repo-tooling/.github/workflows/docs-deploy-cloudflare.yml@v6.0.0
+    with:
+      build-filter: '@rtorcato/swift-common-docs'
+      worker-name: swift-common-docs
+      base-path: /swift-common/
+      route: docs.torcato.dev/swift-common/*
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  # Old site: rtorcato.github.io/swift-common/ now only redirects to the new address.
+  # GitHub Pages can't redirect server-side, so every path gets a meta-refresh
+  # stub (index.html, plus 404.html so deep links land on the same page there).
+  # ponytail: delete these two jobs once Pages is disabled in the repo settings.
+  pages-redirect-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Write redirect stub
+        run: |
+          mkdir -p stub
+          cat > stub/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+          <meta charset="utf-8">
+          <title>swift-common docs have moved</title>
+          <link rel="canonical" href="https://docs.torcato.dev/swift-common/">
+          <meta name="robots" content="noindex">
+          <meta http-equiv="refresh" content="0; url=https://docs.torcato.dev/swift-common/">
+          <script>
+          location.replace('https://docs.torcato.dev' + location.pathname + location.search + location.hash)
+          </script>
+          </head>
+          <body>
+          <p>The swift-common docs have moved to <a href="https://docs.torcato.dev/swift-common/">docs.torcato.dev/swift-common</a>.</p>
+          </body>
+          </html>
+          EOF
+          cp stub/index.html stub/404.html
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11.1.3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile=false
-
-      - name: Build docs
-        run: pnpm --filter @rtorcato/swift-common-docs build
-
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/docs/build
+          path: stub
 
-  deploy:
+  pages-redirect-deploy:
+    needs: pages-redirect-build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
