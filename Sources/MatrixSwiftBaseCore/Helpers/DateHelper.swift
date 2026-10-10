@@ -7,8 +7,8 @@
 
 import Foundation
 
-class DateHelper {
-    
+public class DateHelper {
+
     static let instance = DateHelper()
     private init() { }
     
@@ -19,14 +19,14 @@ class DateHelper {
     }()
     
     // MARK: Checking if current Date is Today
-    static func isToday(date: Date) -> Bool {
+    public static func isToday(date: Date) -> Bool {
         let currentDay: Date = Date()
         let calendar = Calendar.current
         return calendar.isDate(currentDay, inSameDayAs: date)
     }
-    
+
     // MARK: Checking currentHour
-    static func isCurrentHour(date: Date) -> Bool {
+    public static func isCurrentHour(date: Date) -> Bool {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
         let currentHour = calendar.component(.hour, from: Date())
@@ -40,16 +40,50 @@ class DateHelper {
         return formatter.string(from: date)
     }
     // MARK: Get current time interval
-    static func getCurrentTimeInterval() -> TimeInterval {
+    public static func getCurrentTimeInterval() -> TimeInterval {
         let startTime = NSDate()
         let interval = startTime.timeIntervalSince1970
         return interval
     }
-    
-    static func getEndDate(calComponent: Calendar.Component = .second, value: Int) -> Date? {
+
+    public static func getEndDate(calComponent: Calendar.Component = .second, value: Int) -> Date? {
         let calendar = Calendar.current
         let endDate = calendar.date(byAdding: calComponent, value: value, to: Date())
         return endDate
+    }
+
+    // MARK: ISO-8601
+
+    private static let iso8601Formatter = ISO8601DateFormatter()
+
+    /// ISO-8601 string, e.g. `"2026-07-09T15:00:00Z"`.
+    public static func iso8601String(from date: Date) -> String {
+        iso8601Formatter.string(from: date)
+    }
+
+    /// Parse an ISO-8601 string. Returns nil if it doesn't parse.
+    public static func date(fromISO8601 string: String) -> Date? {
+        iso8601Formatter.date(from: string)
+    }
+
+    // MARK: Relative time
+
+    private static let relativeFormatter = RelativeDateTimeFormatter()
+
+    /// Human relative string, e.g. `"3 hours ago"`, `"in 2 days"`.
+    public static func relativeString(for date: Date, relativeTo reference: Date = Date()) -> String {
+        relativeFormatter.localizedString(for: date, relativeTo: reference)
+    }
+
+    // MARK: Timezone-aware formatting
+
+    /// Format a date with an explicit format, time zone, and locale.
+    public static func string(from date: Date, format: String, timeZone: TimeZone = .current, locale: Locale = .current) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = timeZone
+        formatter.locale = locale
+        return formatter.string(from: date)
     }
     
     // MARK: Extracting Date
