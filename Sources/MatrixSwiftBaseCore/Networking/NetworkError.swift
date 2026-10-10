@@ -46,6 +46,25 @@ public enum NetworkError: LocalizedError {
         return nil
     }
 
+    /// Whether this error is transient and worth retrying: 5xx / 429 responses
+    /// and recoverable transport failures (timeouts, dropped connections).
+    public var isRetryable: Bool {
+        switch self {
+        case .http(let code, _):
+            return code == 429 || (500..<600).contains(code)
+        case .transport(let urlError):
+            switch urlError.code {
+            case .timedOut, .networkConnectionLost, .cannotConnectToHost,
+                 .dnsLookupFailed, .notConnectedToInternet, .cannotFindHost:
+                return true
+            default:
+                return false
+            }
+        default:
+            return false
+        }
+    }
+
     /// Maps an arbitrary `Error` to a `NetworkError`, preserving `URLError`
     /// and cancellation semantics.
     public static func map(_ error: Error) -> NetworkError {

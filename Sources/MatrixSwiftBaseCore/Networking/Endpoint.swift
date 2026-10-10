@@ -30,6 +30,9 @@ public protocol Endpoint {
 
     /// Optional base URL override. When `nil`, the client's `baseURL` is used.
     var baseURL: URL? { get }
+
+    /// Optional retry policy override. When `nil`, the client's policy is used.
+    var retryPolicy: RetryPolicy? { get }
 }
 
 public extension Endpoint {
@@ -38,6 +41,7 @@ public extension Endpoint {
     var headers: [String: String] { [:] }
     var body: RequestBody { .empty }
     var baseURL: URL? { nil }
+    var retryPolicy: RetryPolicy? { nil }
 
     /// Builds a `URLRequest` for this endpoint, merging the supplied base URL,
     /// default headers, and encoder.
