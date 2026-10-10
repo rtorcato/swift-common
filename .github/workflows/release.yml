@@ -18,6 +18,8 @@ jobs:
   release:
     name: semantic-release
     runs-on: ubuntu-latest
+    # Gates every release on the `release` environment's required reviewers.
+    environment: release
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v4
