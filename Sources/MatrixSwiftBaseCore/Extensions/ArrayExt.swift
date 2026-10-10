@@ -28,6 +28,14 @@ public extension Array {
     }
 }
 
+public extension Array {
+
+    /// Return a new array with the `nil` elements removed, unwrapping the rest.
+    func compactNonNil<Wrapped>() -> [Wrapped] where Element == Wrapped? {
+        compactMap { $0 }
+    }
+}
+
 public extension Array where Element: Hashable {
 
     /// Return the array with duplicates removed, preserving original order.
