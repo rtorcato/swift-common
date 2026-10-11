@@ -152,7 +152,7 @@ See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, 
 
 ## Releasing
 
-Merging to `main` does not cut a release. Releases are batched: closing a milestone, or dispatching `release.yml` by hand, runs semantic-release once and tags everything merged since the last tag.
+Merging to `main` does not cut a release. Releases are batched: closing a milestone, or dispatching `release.yml` by hand, runs semantic-release once and tags everything merged since the last tag. The run then waits in the `release` environment until rtorcato approves it.
 
 ## License
 

@@ -49,10 +49,18 @@ jobs:
       cancel-in-progress: ${{ needs.in-flight.outputs.publishing != 'true' }}
     name: semantic-release
     runs-on: ubuntu-latest
+    # Holds every release until a required reviewer on the `release`
+    # environment approves it.
+    environment: release
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v4
         with:
+          # The tip, not the event's SHA: the job starts after approval, and
+          # semantic-release refuses a checkout the branch has moved past. A
+          # dispatch releases the branch it ran from; a closed milestone
+          # releases the default branch.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.repository.default_branch }}
           fetch-depth: 0
           persist-credentials: false
 
