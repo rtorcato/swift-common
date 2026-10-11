@@ -1,21 +1,52 @@
 name: Release
 
+# Batched releases: merging to main never publishes. A release runs only when
+# a milestone is closed or the workflow is dispatched by hand, and ships
+# everything merged since the last tag.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+  milestone:
+    types: [closed]
 
 permissions:
   contents: write
   issues: write
   pull-requests: write
 
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
+  # Is a release already publishing? Then this request must queue behind it,
+  # not cancel it mid-publish. One still waiting has published nothing, so
+  # superseding that one is safe.
+  in-flight:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      publishing: ${{ steps.check.outputs.publishing }}
+    steps:
+      - name: Check for a release already publishing
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          publishing=false
+          # A run waiting for approval is `waiting`, not `in_progress`.
+          for run in $(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/release.yml/runs?status=in_progress" --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID) | .id"); do
+            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run/jobs" --jq '.jobs[] | select(.status == "in_progress" and .name != "in-flight") | .name' | grep -q .; then
+              publishing=true
+            fi
+          done
+          echo "publishing=$publishing" >> "$GITHUB_OUTPUT"
+          if [ "$publishing" = true ]; then
+            echo "::notice::A release is already publishing; this one runs after it."
+          fi
+
   release:
+    needs: in-flight
+    # Supersede a run still waiting, never one publishing.
+    concurrency:
+      group: release
+      cancel-in-progress: ${{ needs.in-flight.outputs.publishing != 'true' }}
     name: semantic-release
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"

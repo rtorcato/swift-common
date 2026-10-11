@@ -150,6 +150,10 @@ The test suite is intentionally narrow at this stage (foundation utilities have 
 
 See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, and `TODOS.md` for the active backlog.
 
+## Releasing
+
+Merging to `main` does not cut a release. Releases are batched: closing a milestone, or dispatching `release.yml` by hand, runs semantic-release once and tags everything merged since the last tag.
+
 ## License
 
 [Apache License 2.0](./LICENSE). Copyright 2026 Richard Torcato.
