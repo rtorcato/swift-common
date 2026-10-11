@@ -15,7 +15,7 @@ jobs:
     name: swift build + test
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Select latest stable Xcode
         uses: maxim-lobanov/setup-xcode@v1
@@ -43,7 +43,7 @@ jobs:
     name: SwiftLint
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install SwiftLint
         run: brew install swiftlint
       - name: swiftlint --strict
@@ -56,7 +56,7 @@ jobs:
     # warning annotations and the check stays green. Add --strict back after cleanup.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Select latest stable Xcode
         uses: maxim-lobanov/setup-xcode@v1
@@ -81,7 +81,7 @@ jobs:
           - tvOS
           - watchOS
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Select latest stable Xcode
         uses: maxim-lobanov/setup-xcode@v1
