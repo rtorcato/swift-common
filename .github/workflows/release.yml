@@ -54,7 +54,7 @@ jobs:
     environment: release
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # The tip, not the event's SHA: the job starts after approval, and
           # semantic-release refuses a checkout the branch has moved past. A
@@ -70,7 +70,7 @@ jobs:
           node-version: 22
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           run_install: false
 
