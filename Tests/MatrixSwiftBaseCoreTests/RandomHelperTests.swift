@@ -40,4 +40,28 @@ final class RandomHelperTests: XCTestCase {
         let generated = RandomHelper.string(length: 100)
         XCTAssertTrue(generated.allSatisfy { allowed.contains($0) })
     }
+
+    func testElementsSampleCountAndDistinctness() {
+        let source = Array(1...10)
+        let sample = RandomHelper.elements(from: source, count: 4)
+        XCTAssertEqual(sample.count, 4)
+        XCTAssertEqual(Set(sample).count, 4) // no duplicates
+        XCTAssertTrue(sample.allSatisfy { source.contains($0) })
+    }
+
+    func testElementsClampsToCollectionSize() {
+        let sample = RandomHelper.elements(from: [1, 2, 3], count: 10)
+        XCTAssertEqual(Set(sample), [1, 2, 3])
+        XCTAssertEqual(RandomHelper.elements(from: [1, 2, 3], count: 0), [])
+    }
+
+    func testSeededGeneratorIsDeterministic() {
+        var genA = SeededGenerator(seed: 42)
+        var genB = SeededGenerator(seed: 42)
+        let source = Array(1...20)
+        XCTAssertEqual(
+            RandomHelper.elements(from: source, count: 5, using: &genA),
+            RandomHelper.elements(from: source, count: 5, using: &genB)
+        )
+    }
 }
