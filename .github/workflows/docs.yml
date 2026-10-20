@@ -21,7 +21,7 @@ jobs:
   cloudflare:
     permissions:
       contents: read
-    uses: rtorcato/repo-tooling/.github/workflows/docs-deploy-cloudflare.yml@v6.0.0
+    uses: rtorcato/repo-tooling/.github/workflows/docs-deploy-cloudflare.yml@v6.1.1
     with:
       build-filter: '@rtorcato/swift-common-docs'
       worker-name: swift-common-docs
