@@ -106,12 +106,6 @@
 .navbar__link--active {
 	color: var(--sc-heading);
 }
-/* Wordmark is baked into the SVG logo — hide the navbar title to avoid
-   duplication. Leave the mobile drawer brand row alone. */
-.navbar > .navbar__inner .navbar__title,
-.navbar > .navbar__title {
-	display: none;
-}
 
 /* ---------- Backgrounds ---------- */
 html,
