@@ -1,6 +1,12 @@
 import type * as Preset from '@docusaurus/preset-classic'
 import type { Config } from '@docusaurus/types'
+import { footerCopyright, GITHUB_PROFILE, projectFamilyItems } from '@rtorcato/shared-docs'
 import { themes as prismThemes } from 'prism-react-renderer'
+
+// The @rtorcato family, from the shared single source of truth
+// (@rtorcato/shared-docs). Surfaced as a navbar "Projects" dropdown and in the
+// footer, so a change to the family list lands on every site's next build.
+const PROJECT_FAMILY = projectFamilyItems()
 
 const config: Config = {
 	title: 'swift-common',
@@ -69,6 +75,9 @@ const config: Config = {
 	],
 
 	plugins: [
+		// `torcato.dev /` navbar breadcrumb + `← torcato.dev` drawer row. The footer
+		// row comes from footerCopyright() below.
+		'@rtorcato/shared-docs/docusaurus',
 		[
 			'@easyops-cn/docusaurus-search-local',
 			{
@@ -103,6 +112,12 @@ const config: Config = {
 				{ to: '/docs', position: 'left', label: 'Docs' },
 				{ to: '/docs/api/core', position: 'left', label: 'API' },
 				{
+					type: 'dropdown',
+					label: 'Projects',
+					position: 'left',
+					items: [{ label: 'All on GitHub →', href: GITHUB_PROFILE }, ...PROJECT_FAMILY],
+				},
+				{
 					href: 'https://github.com/rtorcato/swift-common',
 					label: 'GitHub',
 					position: 'right',
@@ -130,16 +145,13 @@ const config: Config = {
 					],
 				},
 				{
-					title: 'Sibling projects',
-					items: [
-						{ label: 'js-common', href: 'https://rtorcato.github.io/js-common/' },
-						{ label: 'browser-common', href: 'https://rtorcato.github.io/browser-common/' },
-						{ label: 'js-tooling', href: 'https://rtorcato.github.io/js-tooling/' },
-					],
+					title: 'Projects',
+					items: PROJECT_FAMILY,
 				},
 				{
 					title: 'Community',
 					items: [
+						{ label: '@rtorcato', href: GITHUB_PROFILE },
 						{
 							label: 'License',
 							href: 'https://github.com/rtorcato/swift-common/blob/main/LICENSE',
@@ -147,7 +159,7 @@ const config: Config = {
 					],
 				},
 			],
-			copyright: `Copyright © ${new Date().getFullYear()} Richard Torcato. Built with Docusaurus.`,
+			copyright: footerCopyright(),
 		},
 		prism: {
 			theme: prismThemes.vsDark,

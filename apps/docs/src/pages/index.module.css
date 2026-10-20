@@ -220,11 +220,6 @@
 	grid-template-columns: repeat(4, 1fr);
 	gap: 16px;
 }
-.siblingGrid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 16px;
-}
 .card {
 	display: block;
 	padding: 22px;
@@ -314,8 +309,7 @@
 	.pillarGrid {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.catGrid,
-	.siblingGrid {
+	.catGrid {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
@@ -331,8 +325,7 @@
 }
 @media (max-width: 560px) {
 	.pillarGrid,
-	.catGrid,
-	.siblingGrid {
+	.catGrid {
 		grid-template-columns: 1fr;
 	}
 }

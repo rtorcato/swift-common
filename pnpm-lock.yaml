@@ -57,6 +57,9 @@ importers:
       '@docusaurus/types':
         specifier: ^3.8.1
         version: 3.10.1(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.15))(html-minifier-terser@7.2.0)(postcss@8.5.15)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@rtorcato/shared-docs':
+        specifier: ^1.17.0
+        version: 1.17.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.17
@@ -1645,6 +1648,19 @@ packages:
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+
+  '@rtorcato/shared-docs@1.17.0':
+    resolution: {integrity: sha512-oWaABnA0X8JliORgddmnI2swfZotHdimkPWat+korowzFDtqYk1S6Rv2JbylQaBvjbgkisoUxip7HgLtdGrvIA==}
+    engines: {node: '>=22'}
+    hasBin: true
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -8727,6 +8743,11 @@ snapshots:
       config-chain: 1.1.13
 
   '@polka/url@1.0.0-next.29': {}
+
+  '@rtorcato/shared-docs@1.17.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    optionalDependencies:
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
   '@sec-ant/readable-stream@0.4.1': {}
 
