@@ -1,0 +1,15 @@
+{
+  "name": "swift-common",
+  "owner": {
+    "name": "Richard Torcato",
+    "email": "rtorcato@me.com"
+  },
+  "description": "Claude Code skill for swift-common — Swift utilities and SwiftUI components for Apple platforms.",
+  "plugins": [
+    {
+      "name": "swift-common",
+      "source": "./",
+      "description": "Teaches Claude to use swift-common correctly: the Core/UI product split, platform guards, and the APIClient and helper conventions."
+    }
+  ]
+}

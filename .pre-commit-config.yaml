@@ -12,6 +12,15 @@ repos:
         stages: [commit-msg]
         args: [feat, fix, chore, docs, refactor, test, build, ci, perf, style, revert]
 
+  - repo: local
+    hooks:
+      - id: check-agents
+        name: AGENTS.md matches skills/swift-common/SKILL.md
+        entry: node scripts/sync-agents.mjs --check
+        language: system
+        pass_filenames: false
+        files: ^(AGENTS\.md|skills/swift-common/SKILL\.md)$
+
 default_install_hook_types:
   - pre-commit
   - commit-msg
