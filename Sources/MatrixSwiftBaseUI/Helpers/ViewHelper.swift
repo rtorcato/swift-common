@@ -8,15 +8,17 @@
 import Foundation
 import SwiftUI
 
-public final class ViewHelper {
+public final class ViewHelper: Sendable {
     
     static let instance = ViewHelper() // Singleton
     
 #if os(iOS)
-   public static func getScreenRect() -> CGRect {
+    @MainActor
+    public static func getScreenRect() -> CGRect {
         return UIScreen.main.bounds
     }
 
+    @MainActor
     public static func getSafeArea() -> UIEdgeInsets {
         guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return .zero}
         guard let safeArea = window.windows.first?.safeAreaInsets else {return .zero}

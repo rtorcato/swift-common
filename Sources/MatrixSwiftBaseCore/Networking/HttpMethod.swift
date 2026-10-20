@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct HTTPMethod: RawRepresentable, Equatable, Hashable {
+public struct HTTPMethod: RawRepresentable, Equatable, Hashable, Sendable {
     public static let connect = HTTPMethod(rawValue: "CONNECT")
     public static let delete = HTTPMethod(rawValue: "DELETE")
     public static let get = HTTPMethod(rawValue: "GET")

@@ -8,6 +8,7 @@
 import Foundation
 import MessageUI
 
+@MainActor
 public class MessageUIManager {
     /// The delegate required by `MFMailComposeViewController`
     private let mailComposeDelegate = MailDelegate()
@@ -63,17 +64,18 @@ public class MessageUIManager {
     
     // Delegate for view controller as `MFMailComposeViewControllerDelegate`
     private class MailDelegate: NSObject, MFMailComposeViewControllerDelegate {
-        func mailComposeController(_ controller: MFMailComposeViewController,
-                                   didFinishWith result: MFMailComposeResult,
-                                   error: Error?) {
-            controller.dismiss(animated: true)
+        nonisolated func mailComposeController(_ controller: MFMailComposeViewController,
+                                               didFinishWith result: MFMailComposeResult,
+                                               error: Error?) {
+            // UIKit calls this on the main thread.
+            MainActor.assumeIsolated { controller.dismiss(animated: true) }
         }
     }
     
     // Delegate for view controller as `MFMessageComposeViewControllerDelegate`
     private class MessageDelegate: NSObject, MFMessageComposeViewControllerDelegate {
-        func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-            controller.dismiss(animated: true)
+        nonisolated func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+            MainActor.assumeIsolated { controller.dismiss(animated: true) }
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import CryptoKit
 
-final class CryptoHelper {
+final class CryptoHelper: Sendable {
     
     static let shared = CryptoHelper() // Singleton
     

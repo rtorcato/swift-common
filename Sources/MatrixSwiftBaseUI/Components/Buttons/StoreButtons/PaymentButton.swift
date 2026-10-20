@@ -79,6 +79,7 @@ extension PaymentButton {
 #endif
     }
     
+    @MainActor
     class Coordinator: NSObject {
         var action: () -> Void
         // paymentButtonType: .checkout

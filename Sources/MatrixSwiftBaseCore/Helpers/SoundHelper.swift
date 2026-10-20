@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 
+@MainActor
 public final class SoundHelper {
     
     public static let shared = SoundHelper() // Singleton

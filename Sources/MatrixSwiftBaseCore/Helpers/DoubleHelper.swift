@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DoubleHelper {
+final class DoubleHelper: Sendable {
     
     static let instance = DoubleHelper() // Singleton
     

@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 
-final class QrCodeHelper {
+final class QrCodeHelper: Sendable {
     
     static let instance = QrCodeHelper() // Singleton
     

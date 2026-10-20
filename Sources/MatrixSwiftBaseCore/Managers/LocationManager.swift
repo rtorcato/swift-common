@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+@MainActor
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
 let manager = CLLocationManager()
@@ -25,13 +26,20 @@ let manager = CLLocationManager()
         manager.requestLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
-        isLoading = false
+    // CLLocationManagerDelegate isn't main-actor isolated, so hop back to
+    // publish the result.
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let coordinate = locations.first?.coordinate
+        Task { @MainActor in
+            self.location = coordinate
+            self.isLoading = false
+        }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error getting location", error)
-        isLoading = false
+        Task { @MainActor in
+            self.isLoading = false
+        }
     }
 }

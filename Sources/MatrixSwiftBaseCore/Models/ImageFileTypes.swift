@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ImageFileTypes: String, CaseIterable {
+enum ImageFileTypes: String, CaseIterable, Sendable {
     case jpeg
     case png
     case gif

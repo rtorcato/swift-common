@@ -13,6 +13,7 @@ public struct KeyboardHelper {
 
 #if os(iOS)
 extension KeyboardHelper {
+    @MainActor
     public static func dismissKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

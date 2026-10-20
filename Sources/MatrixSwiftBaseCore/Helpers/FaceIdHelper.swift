@@ -9,7 +9,7 @@
 import Foundation
 import LocalAuthentication
 
-final class FaceIdHelper {
+final class FaceIdHelper: Sendable {
             
     static let instance = FaceIdHelper() // Singleton
     

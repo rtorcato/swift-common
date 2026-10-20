@@ -21,7 +21,8 @@ enum DataScannerAccessStatusType {
     case scannerNotAvailable
 }
 
-class VisionKitHelper {
+@MainActor
+final class VisionKitHelper {
     var dataScannerAccessStatus: DataScannerAccessStatusType = .notDetermined
     var scanType: ScanType = .barcode
 //    var recognizedDataType: DataScannerViewController.RecognizedDataType {

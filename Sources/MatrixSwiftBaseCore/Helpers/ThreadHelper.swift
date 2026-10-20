@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ThreadHelper {
+final class ThreadHelper: Sendable {
     
     static let shared = ThreadHelper() // Singleton
     

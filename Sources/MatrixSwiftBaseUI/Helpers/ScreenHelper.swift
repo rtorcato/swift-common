@@ -24,6 +24,7 @@ public struct ScreenHelper {
 
 #if os(iOS)
 extension ScreenHelper {
+    @MainActor
     public static func getScreenSize() -> CGSize {
         return UIScreen.main.bounds.size
     }

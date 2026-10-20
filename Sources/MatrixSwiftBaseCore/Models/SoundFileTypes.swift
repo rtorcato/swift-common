@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SoundFileTypes: String, CaseIterable {
+public enum SoundFileTypes: String, CaseIterable, Sendable {
     case mp3
     case wav
     case m4a

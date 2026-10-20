@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 #if os(iOS)
+@MainActor
 public final class HapticsHelper {
     
     static let hapticsEnabledKeyName = "hapticsEnabled"

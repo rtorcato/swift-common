@@ -8,7 +8,7 @@
 import SwiftUI
 import MatrixSwiftBaseCore
 
-final class WebImageHelper {
+final class WebImageHelper: Sendable {
 
     static let instance = WebImageHelper()
 
@@ -35,7 +35,7 @@ final class WebImageHelper {
         return image
     }
 
-    func fetchImage(_ imageUrl: String, completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+    func fetchImage(_ imageUrl: String, completionHandler: @escaping @Sendable (_ image: UIImage?, _ error: Error?) -> Void) {
         guard let url = URL(string: imageUrl) else {
             completionHandler(nil, NetworkError.invalidURL(imageUrl))
             return
