@@ -42,8 +42,9 @@ apps/docs/
 │   │   └── InstallTabs.module.css
 │   └── css/custom.css          # Infima theme overrides (Swift orange + navy)
 ├── static/img/
-│   ├── logo.svg                # wordmark, light mode
-│   └── logo-dark.svg           # wordmark, dark mode
+│   ├── favicon.svg             # solid smartphone tile
+│   ├── logo.svg                # tint tile mark, light mode
+│   └── logo-dark.svg           # tint tile mark, dark mode
 ├── docusaurus.config.ts        # site config, navbar, footer, Geist fonts
 ├── sidebars.ts                 # Start here / API Reference / Releases
 ├── tsconfig.json
