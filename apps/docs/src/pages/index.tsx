@@ -4,6 +4,7 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import type { ReactElement } from 'react'
 import InstallTabs from '@site/src/components/InstallTabs'
+import UseWithAI from '@site/src/components/UseWithAI'
 import styles from './index.module.css'
 
 /* ------------------------------------------------------------------ */
@@ -314,6 +315,7 @@ export default function Home(): ReactElement {
 		>
 			<main>
 				<Hero />
+				<UseWithAI />
 				<Pillars />
 				<Categories />
 				<Siblings self="@rtorcato/swift-common" />

@@ -1,0 +1,13 @@
+{
+  "name": "swift-common",
+  "description": "Teaches Claude to use swift-common correctly: the Core/UI product split, platform guards, and the APIClient and helper conventions.",
+  "author": {
+    "name": "Richard Torcato",
+    "email": "rtorcato@me.com",
+    "url": "https://github.com/rtorcato"
+  },
+  "homepage": "https://docs.torcato.dev/swift-common/",
+  "repository": "https://github.com/rtorcato/swift-common",
+  "license": "Apache-2.0",
+  "keywords": ["swift", "swiftui", "spm", "ios", "macos"]
+}
