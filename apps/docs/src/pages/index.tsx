@@ -1,6 +1,8 @@
 import Link from '@docusaurus/Link'
+import useBaseUrl from '@docusaurus/useBaseUrl'
 import Siblings from '@rtorcato/shared-docs/components/Siblings'
 import Layout from '@theme/Layout'
+import ThemedImage from '@theme/ThemedImage'
 import clsx from 'clsx'
 import type { ReactElement } from 'react'
 import InstallTabs from '@site/src/components/InstallTabs'
@@ -189,10 +191,18 @@ let user: User = try await client.send(.users.me)`
 /* ------------------------------------------------------------------ */
 
 function Hero(): ReactElement {
+	const mark = {
+		light: useBaseUrl('/img/logo.svg'),
+		dark: useBaseUrl('/img/logo-dark.svg'),
+	}
 	return (
 		<header className={styles.hero}>
 			<div className={styles.heroGlow} aria-hidden />
 			<div className={styles.heroInner}>
+				{/* Decorative: the wordmark beside it carries the name. */}
+				<div className={styles.heroMarkWrap}>
+					<ThemedImage className={styles.heroMark} alt="" sources={mark} />
+				</div>
 				<div className={styles.wordmark}>
 					<span className={styles.wmSwift}>swift</span>
 					<span className={styles.wmDash}>-</span>
