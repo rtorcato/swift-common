@@ -81,22 +81,46 @@ Modern async/await HTTP client built on `URLSession`.
 |---|---|
 | `APIClient` | Send `Endpoint` requests, decode responses |
 | `Endpoint` | Type-safe request description (path, method, headers, body) |
-| `HttpMethod` | `GET` / `POST` / `PUT` / `PATCH` / `DELETE` |
-| `RequestBody` | JSON / form / multipart payloads |
+| `HTTPMethod` | `GET` / `POST` / `PUT` / `PATCH` / `DELETE` / … |
+| `RequestBody` | Empty / raw data / JSON / form payloads |
 | `NetworkError` | Typed errors (no `Error` casts at call site) |
 
 ### Example
 
 ```swift
+import Foundation
+import MatrixSwiftBaseCore
+
 struct User: Decodable { let id: Int; let name: String }
 
-let endpoint = Endpoint<User>(
-    path: "/users/me",
-    method: .get
-)
+// `Endpoint` is a protocol: conform a type (often an enum) to it.
+// Only `path` is required; `method` defaults to `.get`.
+enum UsersAPI: Endpoint {
+    case me
+    case rename(String)
+
+    var path: String {
+        switch self {
+        case .me: return "/users/me"
+        case .rename: return "/users/me/name"
+        }
+    }
+    var method: HTTPMethod {
+        switch self {
+        case .me: return .get
+        case .rename: return .patch
+        }
+    }
+    var body: RequestBody {
+        switch self {
+        case .me: return .empty
+        case .rename(let name): return .json(["name": name])
+        }
+    }
+}
 
 let client = APIClient(baseURL: URL(string: "https://api.example.com")!)
-let user = try await client.send(endpoint)
+let user = try await client.send(UsersAPI.me, as: User.self)
 ```
 
 Retry policy is on the roadmap (`TODOS.md`).

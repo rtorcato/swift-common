@@ -15,7 +15,7 @@ the popular community packages listed below.
 
 - **Stateful managers** with a unified API: `KeychainManager`, `ImageCache`,
   `SystemThemeManager`, `LocationManager`, `BeaconDetector`.
-- **Networking** — `APIClient`, `HttpMethod`, `NetworkError` (retry policy
+- **Networking** — `APIClient`, `HTTPMethod`, `NetworkError` (retry policy
   planned, [#23](https://github.com/rtorcato/swift-common/issues/23)).
 - **Validation rules** and **domain helpers** — `CurrencyHelper`,
   `CryptoHelper`, `JsonHelper`, `DateHelper`, `MathHelper`, etc.
