@@ -3,6 +3,7 @@ import SwiftUI
 import MatrixSwiftBaseCore
 @testable import MatrixSwiftBaseUI
 
+@MainActor
 final class SystemThemeManagerTests: XCTestCase {
 
     // `SystemThemeManager` stores its choice in UserDefaults.standard under this key.
