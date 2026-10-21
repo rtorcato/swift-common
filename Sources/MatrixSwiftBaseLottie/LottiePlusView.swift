@@ -19,10 +19,10 @@ public struct LottiePlusView: UIViewRepresentable {
     let animationView: LottieAnimationView
     
     public init(name: String,
-         loopMode: LottieLoopMode = .playOnce,
-         animationSpeed: CGFloat = 1,
-         contentMode: UIView.ContentMode = .scaleAspectFit,
-         play: Binding<Bool> = .constant(true)) {
+                loopMode: LottieLoopMode = .playOnce,
+                animationSpeed: CGFloat = 1,
+                contentMode: UIView.ContentMode = .scaleAspectFit,
+                play: Binding<Bool> = .constant(true)) {
         self.name = name
         self.animationView = LottieAnimationView(name: name)
         self.loopMode = loopMode
