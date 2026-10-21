@@ -1,7 +1,7 @@
 <!-- brand-kit:banner:start -->
 <picture>
   <source media="(max-width: 640px)" srcset="./brand/banner-mobile.png">
-  <img src="./brand/banner.png" alt="swift-common banner" width="1600">
+  <img src="./brand/banner.png" alt="SwiftUI package of reusable views and helpers to build apps faster." width="1600">
 </picture>
 <!-- brand-kit:banner:end -->
 
