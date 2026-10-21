@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Swift Package library of cross-platform Apple utilities. Vendored (consumers depend on the git URL or local path); not published to a registry, no enforced semver tags.
+A Swift Package library of cross-platform Apple utilities. Vendored (consumers depend on the git URL or local path); not published to a registry. Releases are tagged; tags are batched and cut when a milestone closes.
 
 Ships three SwiftPM library products:
 
