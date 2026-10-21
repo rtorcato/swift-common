@@ -15,7 +15,7 @@ A SwiftPM package of Apple-platform utilities by rtorcato, shipped as two librar
 .product(name: "MatrixSwiftBaseUI", package: "swift-common"),
 ```
 
-In Xcode: File → Add Package Dependencies…, paste the repo URL, link the product(s) you need. The package is vendored (git URL or local path); it is not published to a registry and has no enforced semver tags.
+In Xcode: File → Add Package Dependencies…, paste the repo URL, link the product(s) you need. The package is vendored (git URL or local path); it is not published to a registry. Releases are tagged; tags are batched and cut when a milestone closes. Pin a version tag in `Package.swift` so updates are deliberate.
 
 ## Pick the product
 
