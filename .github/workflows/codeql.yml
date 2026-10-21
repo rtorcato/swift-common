@@ -29,9 +29,11 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: swift
+          build-mode: manual
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+      # autobuild built every scheme (~19 min); one SwiftPM build is enough to extract.
+      - name: swift build
+        run: swift build
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3
