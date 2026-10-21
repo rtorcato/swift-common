@@ -8,6 +8,7 @@
 import SwiftUI
 import StoreKit
 
+@MainActor
 public final class StoreKitHelper {
     #if os(iOS)
     @Environment(\.requestReview) private var storeKitRequestReview

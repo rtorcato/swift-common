@@ -13,7 +13,7 @@ public struct AnimatableFontModifier: AnimatableModifier {
     var weight: Font.Weight = .regular
     var design: Font.Design = .default
     
-    public var animatableData: Double {
+    nonisolated public var animatableData: Double {
         get { size }
         set { size = newValue }
     }

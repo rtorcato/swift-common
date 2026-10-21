@@ -12,6 +12,7 @@ final public class WebLinkHelper {
     //    @Environment(\.openURL) var openURL
     
     #if os(iOS)
+    @MainActor
     public static func openWebLink(_ urlString: String) {
         guard let url = URL(string: urlString) else {
             return
@@ -28,6 +29,7 @@ final public class WebLinkHelper {
     
     // Open the iOS system settings for the app
     #if os(iOS)
+    @MainActor
     public static func openAppSystemSettings() {
         WebLinkHelper.openWebLink(UIApplication.openSettingsURLString)
     }

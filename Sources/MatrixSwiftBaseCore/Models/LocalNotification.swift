@@ -36,7 +36,7 @@ public struct LocalNotification {
         self.repeats = repeats
     }
     
-    public enum ScheduleType {
+    public enum ScheduleType: Sendable {
         case time, calendar
     }
     

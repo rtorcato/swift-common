@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import MatrixSwiftBaseCore
 
-final class ImageHelper {
+final class ImageHelper: Sendable {
 
     static let instance = ImageHelper()
 

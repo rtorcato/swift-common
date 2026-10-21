@@ -8,6 +8,7 @@
 import SwiftUI
 import MatrixSwiftBaseCore
 
+@MainActor
 public final class SystemThemeManager: ObservableObject {
     @AppStorage("appSystemTheme") public var appSystemTheme: String = SystemThemes.unspecified.rawValue
 //    @Published public var isUsingSystemSettings:Bool = false

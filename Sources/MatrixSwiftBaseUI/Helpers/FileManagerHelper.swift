@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public final class FileManagerHelper {
+public final class FileManagerHelper: Sendable {
     
     public static let shared = FileManagerHelper() // Singleton
     

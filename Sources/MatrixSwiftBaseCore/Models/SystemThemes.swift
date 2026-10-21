@@ -9,7 +9,7 @@ import Foundation
 // import UIKit
 
 // check LocalizedStringKey instead of string for localization!
-public enum SystemThemes: String, CaseIterable, Equatable, Identifiable {
+public enum SystemThemes: String, CaseIterable, Equatable, Identifiable, Sendable {
     case unspecified
     case dark
     case light

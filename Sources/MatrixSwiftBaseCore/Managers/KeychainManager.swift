@@ -8,7 +8,7 @@
 import Foundation
 import Security
 
-public final class KeychainManager {
+public final class KeychainManager: Sendable {
 
     public static func savePassword(
         service: String,

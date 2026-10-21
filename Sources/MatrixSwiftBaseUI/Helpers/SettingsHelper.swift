@@ -1,6 +1,7 @@
 import SwiftUI
 
 public enum SettingsHelper {
+    @MainActor
     public static func openAppSystemSettings() {
         #if os(iOS) || os(tvOS) || os(visionOS)
         let settingsString = UIApplication.openSettingsURLString

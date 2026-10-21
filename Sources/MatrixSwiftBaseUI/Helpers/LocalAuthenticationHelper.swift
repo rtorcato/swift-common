@@ -10,6 +10,7 @@ import SwiftUI
 #if os(iOS)
 import LocalAuthentication
 
+@MainActor
 final class LocalAuthenticationHelper {
     private(set) var context: LAContext
     private(set) var canEvaluatePolicy = false

@@ -9,6 +9,7 @@ import Foundation
 import Network
 import SwiftUI
 
+@MainActor
 final public class NetworkState: ObservableObject {
     @Published public private(set) var isConnected = false
     @Published public private(set) var isCellular = false
@@ -22,13 +23,13 @@ final public class NetworkState: ObservableObject {
     public func start() {
         nwMonitor.start(queue: workerQueue)
         nwMonitor.pathUpdateHandler = { [weak self] path in
-            DispatchQueue.main.async {
-                self?.isConnected = path.status == .satisfied
-                self?.isCellular = path.usesInterfaceType(.cellular)
-                guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0)}).first else {
-                    self?.currentInterface = nil
-                    return
-                }
+            // Read the path on the monitor's queue, publish on the main actor.
+            let isConnected = path.status == .satisfied
+            let isCellular = path.usesInterfaceType(.cellular)
+            let interface = NWInterface.InterfaceType.allCases.first { path.usesInterfaceType($0) }
+            DispatchQueue.main.async { [weak self] in
+                self?.isConnected = isConnected
+                self?.isCellular = isCellular
                 self?.currentInterface = interface
             }
         }
@@ -40,7 +41,7 @@ final public class NetworkState: ObservableObject {
 }
 
 extension NWInterface.InterfaceType: CaseIterable {
-    public static var allCases: [NWInterface.InterfaceType] = [
+    public static let allCases: [NWInterface.InterfaceType] = [
         .other, .wifi, .cellular, .loopback, .wiredEthernet
     ]
 }

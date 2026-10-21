@@ -12,6 +12,7 @@ public struct SafeAreaHelper {
     
     /// Gets the safe area of for the top of the application
     /// - Returns: returns CGFloat with top
+    @MainActor
     public static func getSafeAreaTop() -> CGFloat {
         let keyWindow = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})

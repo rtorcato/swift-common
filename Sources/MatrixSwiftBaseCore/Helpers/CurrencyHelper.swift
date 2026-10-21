@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class CurrencyHelper {
+public final class CurrencyHelper: Sendable {
     
     static let instance = CurrencyHelper()
     private init() { }

@@ -2,6 +2,10 @@
 
 import PackageDescription
 
+// Swift 6 strict concurrency checking (#14). An experimental feature rather
+// than unsafeFlags, so the package stays usable as a dependency.
+let strictConcurrency: [SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency")]
+
 let package = Package(
     name: "MatrixSwiftBase",
     platforms: [.iOS(.v16), .macOS(.v13), .tvOS(.v16), .watchOS(.v9)],
@@ -15,12 +19,14 @@ let package = Package(
     targets: [
         .target(
             name: "MatrixSwiftBaseCore",
-            path: "Sources/MatrixSwiftBaseCore"
+            path: "Sources/MatrixSwiftBaseCore",
+            swiftSettings: strictConcurrency
         ),
         .target(
             name: "MatrixSwiftBaseUI",
             dependencies: ["MatrixSwiftBaseCore"],
-            path: "Sources/MatrixSwiftBaseUI"
+            path: "Sources/MatrixSwiftBaseUI",
+            swiftSettings: strictConcurrency
         ),
         .testTarget(
             name: "MatrixSwiftBaseCoreTests",

@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
+@MainActor
 final class CameraHelper {
     
     static let instance = CameraHelper() // Singleton

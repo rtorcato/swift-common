@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 // import Stripe
 
-final class NfcHelper {
+final class NfcHelper: Sendable {
     
     static let instance = NfcHelper() // Singleton
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DateHelper {
+final class DateHelper: Sendable {
     
     static let instance = DateHelper()
     private init() { }

@@ -11,7 +11,7 @@ import SwiftUI
 import UIKit
 #endif
 
-public final class AppHelper {
+public final class AppHelper: Sendable {
     
     //    public static let instance = AppHelper() // Singleton
     //
@@ -36,12 +36,14 @@ public final class AppHelper {
     }
     
 #if os(iOS)
+    @MainActor
     static var hasDynamicIsland: Bool {
         UIDevice.current.name == "iPhone 14 Pro" || UIDevice.current.name == "iPhone 14 Pro Max"
     }
 #endif
     
 #if os(iOS)
+    @MainActor
     static var deviceName: String {
         return UIDevice.current.name
     }
@@ -55,6 +57,7 @@ public final class AppHelper {
     }
     
 #if os(iOS)
+    @MainActor
     public static var currentScene: UIWindowScene? {
         UIApplication.shared.connectedScenes
             .first { $0.activationState == .foregroundActive } as? UIWindowScene
@@ -62,6 +65,7 @@ public final class AppHelper {
 #endif
     
 #if os(iOS)
+    @MainActor
     public static func isUsingSplitView() -> Bool {
         guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
         return screen.windows.first?.frame.size != screen.screen.bounds.size
@@ -74,11 +78,13 @@ public final class AppHelper {
     //    }
     
 #if os(iOS)
+    @MainActor
     public static let deviceType: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 #endif
     
     // hides the tab bar default appearance
 #if os(iOS)
+    @MainActor
     public static func hideTabBarAppearance() {
         UITabBar.appearance().isHidden = true
     }
@@ -93,6 +99,7 @@ public final class AppHelper {
         //
     }
 #if os(iOS)
+    @MainActor
     public static func getFirstWindowRootViewController() -> UIViewController? {
         guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return nil

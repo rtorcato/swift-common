@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class LocalFileHelper {
+final class LocalFileHelper: Sendable {
     
     static let instance = LocalFileHelper()
     private init() { }
