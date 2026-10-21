@@ -6,12 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Swift Package library of cross-platform Apple utilities. Vendored (consumers depend on the git URL or local path); not published to a registry, no enforced semver tags.
 
-Ships two SwiftPM library products:
+Ships three SwiftPM library products:
 
 - **`MatrixSwiftBaseCore`** — pure Foundation utilities. Never imports SwiftUI / UIKit / AppKit. Sources under `Sources/MatrixSwiftBaseCore/`.
 - **`MatrixSwiftBaseUI`** — SwiftUI components and SwiftUI-coupled helpers. Depends on Core. Sources under `Sources/MatrixSwiftBaseUI/`.
+- **`MatrixSwiftBaseLottie`** — Lottie animation views, isolated so only consumers who link it pull in the Lottie dependency. Sources under `Sources/MatrixSwiftBaseLottie/`. Anything that imports Lottie goes here, never in UI.
 
-When adding a new file, decide which target it belongs to by its imports: if it needs SwiftUI / UIKit / AppKit / PhotosUI / MessageUI / Lottie, it goes in UI; otherwise Core. UI code may `import MatrixSwiftBaseCore`; Core must never reference UI types.
+When adding a new file, decide which target it belongs to by its imports: if it needs SwiftUI / UIKit / AppKit / PhotosUI / MessageUI, it goes in UI; otherwise Core. UI code may `import MatrixSwiftBaseCore`; Core must never reference UI types.
 
 ## Platforms
 

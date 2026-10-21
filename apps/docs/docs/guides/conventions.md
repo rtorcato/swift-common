@@ -12,7 +12,8 @@ Every new file lives in exactly one target:
 | File needs… | Target | Folder |
 |---|---|---|
 | Only Foundation (or pure Swift) | `MatrixSwiftBaseCore` | `Sources/MatrixSwiftBaseCore/` |
-| SwiftUI / UIKit / AppKit / PhotosUI / MessageUI / Lottie | `MatrixSwiftBaseUI` | `Sources/MatrixSwiftBaseUI/` |
+| SwiftUI / UIKit / AppKit / PhotosUI / MessageUI | `MatrixSwiftBaseUI` | `Sources/MatrixSwiftBaseUI/` |
+| Lottie | `MatrixSwiftBaseLottie` | `Sources/MatrixSwiftBaseLottie/` |
 
 **Rules:**
 

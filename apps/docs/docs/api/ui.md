@@ -21,7 +21,7 @@ Reusable SwiftUI views.
 | **Containers** | `CardContainer`, `ColumnStack`, `FlipView`, `HVStack`, `RectangleView`, `RowStack`, `SlideHorizontalPanel`, `SlideOutPanel` |
 | **Forms** | `FormWrapper` |
 | **WebView** | `WebViewContainer`, `WebViewModel`, `WebViewSampleView` |
-| Standalone | `CardFlip`, `CopyTextView`, `EmojiList`, `LazyView`, `LoadingView`, `LottiePlusView`, `MapView`, `OverlayShield`, `QrCodeImage`, `RatingView`, `RotatingBall`, `StickyHeader` |
+| Standalone | `CardFlip`, `CopyTextView`, `EmojiList`, `LazyView`, `LoadingView`, `MapView`, `OverlayShield`, `QrCodeImage`, `RatingView`, `RotatingBall`, `StickyHeader` |
 
 ### Example
 
@@ -72,7 +72,6 @@ struct ContentView: View {
 |---|---|
 | `ActivityView` | UIKit share sheet wrapper |
 | `BlurView`, `BlurWindow` | Visual-effect blur backdrops |
-| `LottieView`, `LottieSampleView`, `ResizableLottieView` | Lottie animation hosts |
 | `ResponsiveView` | Adapt to size-class changes |
 | `SignUpAppleButton` | Apple sign-in button wrapper |
 | `WebView` | WKWebView wrapper |
