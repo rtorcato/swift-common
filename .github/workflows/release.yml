@@ -12,6 +12,9 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  # Lets the release job dispatch docs.yml after a publish, so the changelog
+  # page (built from the GitHub Releases API) picks the new version up.
+  actions: write
 
 jobs:
   # Is a release already publishing? Then this request must queue behind it,
@@ -81,3 +84,23 @@ jobs:
         run: pnpm exec semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      # The docs changelog page is built from the GitHub Releases API at docs
+      # build time, and no release commit lands on main (the code-scanning-main
+      # ruleset rejects one), so a publish only reaches the site once the site is
+      # rebuilt. docs.yml cannot subscribe to `release`: that event runs with
+      # `github.ref` set to the tag, and the `github-pages` environment only
+      # accepts deployments from `main`. Dispatching on `main` keeps that intact.
+      - name: Redeploy the docs after a publish
+        # The publish has already happened; a hiccup here must not fail the job.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(git tag --points-at HEAD | head -1)
+          if [ -z "$tag" ]; then
+            echo "No tag on HEAD, semantic-release published nothing. Skipping."
+            exit 0
+          fi
+          echo "Published $tag, dispatching docs.yml on main."
+          gh workflow run docs.yml --ref main
