@@ -18,7 +18,7 @@ A reusable foundation library for Apple platforms — the Swift counterpart to [
 
 📚 **Documentation: <https://docs.torcato.dev/swift-common/>** (source under [`apps/docs/`](./apps/docs/))
 
-The library ships as **two products** so consumers only pay for what they use:
+The library ships as **three products** so consumers only pay for what they use:
 
 - **`MatrixSwiftBaseCore`** — pure Foundation utilities. No `import SwiftUI` / `import UIKit` / `import AppKit`. Safe to depend on from anywhere, including command-line tools.
   - **Helpers:** `DateHelper`, `MathHelper`, `RandomHelper`, `SleepHelper`, `JsonHelper`, `CryptoHelper`, `CurrencyHelper`, `CoreDataHelper`, `NetworkHelper`, `SoundHelper`, etc.
@@ -30,6 +30,7 @@ The library ships as **two products** so consumers only pay for what they use:
   - **Components / Views / Modifiers / Shapes / Styles** — buttons, containers, form wrappers, loading views, blur effects, rounded corners.
   - **UI Helpers** — `AlertHelper`, `KeyboardHelper`, `ColorHelper`, `SafeAreaHelper`, `SizeClassHelper`, `ScreenHelper`, `StringHelper`, etc.
   - **UI Managers** — `KeychainManager`, `ImageCache`, `ImagePicker`, `SystemThemeManager`, `BeaconDetector`, `SoundManager`, `MessageUIManager`.
+- **`MatrixSwiftBaseLottie`** — Lottie animation views. Depends on [lottie-ios](https://github.com/airbnb/lottie-ios); Core and UI consumers never link it. Not available on watchOS (the target compiles empty there).
 
 A consumer depending on just `MatrixSwiftBaseCore` never compiles or links any UI code — Swift's product isolation gives the same effect as keeping the UI in a separate repo, without the operational tax.
 
@@ -69,7 +70,7 @@ Add the package to your `Package.swift`:
 .package(url: "https://github.com/rtorcato/swift-common", branch: "main"),
 ```
 
-…then add one or both products to your target's dependencies:
+…then add the products you need to your target's dependencies:
 
 ```swift
 // Just the utilities
@@ -78,6 +79,9 @@ Add the package to your `Package.swift`:
 // Utilities + UI primitives
 .product(name: "MatrixSwiftBaseCore", package: "swift-common"),
 .product(name: "MatrixSwiftBaseUI", package: "swift-common"),
+
+// Lottie animation views
+.product(name: "MatrixSwiftBaseLottie", package: "swift-common"),
 ```
 
 Then import the modules you actually use:
@@ -85,6 +89,7 @@ Then import the modules you actually use:
 ```swift
 import MatrixSwiftBaseCore
 import MatrixSwiftBaseUI   // only if you need the SwiftUI primitives
+import MatrixSwiftBaseLottie   // only if you need the Lottie views
 ```
 
 Or in Xcode: **File → Add Package Dependencies…**, paste the repo URL, and pick which product(s) to link.

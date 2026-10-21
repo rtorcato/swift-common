@@ -14,7 +14,7 @@ description: Add swift-common to your project via SwiftPM, from Package.swift or
 .package(url: "https://github.com/rtorcato/swift-common", branch: "main"),
 ```
 
-Then add one or both products to your target's dependencies:
+Then add the products you need to your target's dependencies:
 
 ```swift
 // Just the utilities
@@ -23,13 +23,16 @@ Then add one or both products to your target's dependencies:
 // Utilities + SwiftUI primitives
 .product(name: "MatrixSwiftBaseCore", package: "swift-common"),
 .product(name: "MatrixSwiftBaseUI", package: "swift-common"),
+
+// Lottie animation views (adds the lottie-ios dependency; not for watchOS)
+.product(name: "MatrixSwiftBaseLottie", package: "swift-common"),
 ```
 
 ### Xcode
 
 1. **File → Add Package Dependencies…**
 2. Paste `https://github.com/rtorcato/swift-common` in the search field.
-3. Select which product(s) to link — `MatrixSwiftBaseCore`, `MatrixSwiftBaseUI`, or both.
+3. Select which product(s) to link — `MatrixSwiftBaseCore`, `MatrixSwiftBaseUI`, `MatrixSwiftBaseLottie`.
 
 ## Import
 
@@ -40,6 +43,9 @@ import MatrixSwiftBaseCore
 
 // only if you need the SwiftUI primitives
 import MatrixSwiftBaseUI
+
+// only if you need the Lottie views
+import MatrixSwiftBaseLottie
 ```
 
 ## Requirements
