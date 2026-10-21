@@ -135,7 +135,7 @@ const CATEGORIES: Category[] = [
 		name: 'Networking',
 		count: 'async/await',
 		desc: 'APIClient + Endpoint + typed NetworkError. URLSession under the hood.',
-		chips: ['APIClient', 'Endpoint', 'HttpMethod', 'NetworkError'],
+		chips: ['APIClient', 'Endpoint', 'HTTPMethod', 'NetworkError'],
 		target: 'Core',
 	},
 	{
@@ -175,7 +175,8 @@ const CATEGORIES: Category[] = [
 	},
 ]
 
-const HERO_CODE = `import MatrixSwiftBaseCore
+const HERO_CODE = `import Foundation
+import MatrixSwiftBaseCore
 
 // Helpers
 let clamped = MathHelper.clamp(150, min: 0, max: 100)
@@ -183,8 +184,11 @@ try await SleepHelper.milliseconds(250)
 let token = RandomHelper.string(length: 32)
 
 // Networking
+struct User: Decodable { let id: Int; let name: String }
+struct Me: Endpoint { let path = "/users/me" }
+
 let client = APIClient(baseURL: URL(string: "https://api.example.com")!)
-let user: User = try await client.send(.users.me)`
+let user: User = try await client.send(Me())`
 
 /* ------------------------------------------------------------------ */
 /* Sections                                                            */
