@@ -1,0 +1,89 @@
+/* UseWithAI.module.css — copied from @rtorcato/shared-docs; three stacked "Use with AI" cards, one per audience.
+   Self-contained section/heading styles; themed via Infima (--ifm-*) and the
+   design tokens (--jt-*) so it follows the site's colour mode.
+
+   Fallbacks are `light-dark(light, dark)` pairs, not dark-mode snapshots, per
+   the boundary rule in CLAUDE.md — they only ever evaluate on a host that has
+   not imported repo-tooling's theme-tokens.css. Both halves of every pair are
+   lifted from that file (--jt-surface, --jt-border, --jt-heading, --jt-muted);
+   no new colour is introduced here.
+
+   `color-scheme` is deliberately NOT set: Docusaurus declares it at :root, so
+   light-dark() follows the site's theme toggle rather than the OS preference. */
+
+.section {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 54px 24px 8px;
+}
+.sectionHead {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	flex-wrap: wrap;
+	margin-bottom: 24px;
+}
+.h2 {
+	margin: 0 0 8px;
+	font-size: 30px;
+	letter-spacing: -0.02em;
+	font-weight: 800;
+	color: var(--ifm-heading-color, light-dark(#0a0e16, #ffffff));
+}
+.sub {
+	margin: 0;
+	font-size: 16px;
+	color: var(--ifm-color-emphasis-700, light-dark(#5b6675, #94a1b4));
+}
+.viewAll {
+	align-self: flex-end;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--ifm-color-primary);
+}
+.viewAll:hover {
+	color: var(--ifm-color-primary);
+}
+
+.aiStack {
+	display: grid;
+	gap: 16px;
+}
+.card {
+	padding: 22px;
+	background: var(--jt-surface, light-dark(#ffffff, #111824));
+	border: 1px solid
+		var(--ifm-color-emphasis-200, light-dark(rgba(12, 18, 28, 0.1), rgba(255, 255, 255, 0.08)));
+	border-radius: 14px;
+}
+.cardTitle {
+	font-weight: 700;
+	font-size: 15px;
+	color: var(--ifm-heading-color, light-dark(#0a0e16, #ffffff));
+	margin-bottom: 5px;
+}
+.cardDesc {
+	font-size: 13px;
+	line-height: 1.55;
+	color: var(--ifm-color-emphasis-700, light-dark(#5b6675, #94a1b4));
+	margin-bottom: 14px;
+}
+/* The commands are the point of each card, so they get the card's full width
+   rather than CommandBlock's own 560px hero cap — `npx skills add <repo>
+   --skill <skill>` overruns 560px and would scroll for no reason. */
+.cmds > div {
+	max-width: 100%;
+}
+
+@media (max-width: 480px) {
+	.section {
+		padding: 40px 16px 8px;
+	}
+	.card {
+		padding: 18px 16px;
+	}
+	.h2 {
+		font-size: 25px;
+	}
+}

@@ -30,7 +30,7 @@ fi
 img=apps/docs/static/img
 if [ -d apps/docs ]; then
 	mkdir -p "$img"
-	for f in favicon.svg favicon.ico social-card.png; do
+	for f in favicon.svg social-card.png; do
 		if [ -f "brand/$f" ] && [ ! -e "$img/$f" ]; then
 			cp "brand/$f" "$img/$f"
 			echo "copied: $img/$f"

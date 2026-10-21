@@ -49,7 +49,7 @@ public final class KeychainManager: Sendable {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         
-        guard status != errSecSuccess else {
+        guard status == errSecSuccess else {
             throw KeychainError.unknown(status)
         }
         let data = (result as? Data) ?? Data()

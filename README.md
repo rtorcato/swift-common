@@ -118,6 +118,25 @@ struct ContentView: View {
 }
 ```
 
+## Use with AI
+
+A skill ships in the repo so AI coding tools use swift-common the way it's meant to be used.
+
+**Any agent with the [`skills`](https://www.npmjs.com/package/skills) CLI** — install it straight from GitHub, no clone:
+
+```bash
+npx skills add https://github.com/rtorcato/swift-common --skill swift-common
+```
+
+**[Claude Code](https://claude.com/claude-code)** — register the marketplace once, then install the plugin:
+
+```bash
+/plugin marketplace add rtorcato/swift-common
+/plugin install swift-common@swift-common
+```
+
+**Other tools (Cursor, Copilot, Codex)** — read the repo's [`AGENTS.md`](AGENTS.md), which carries the same rules, or copy it into your project's agent config. This is a Swift package, so nothing is bundled into your build or `node_modules`.
+
 ## Development
 
 The repository is set up for an Xcode-primary workflow but also supports the CLI.

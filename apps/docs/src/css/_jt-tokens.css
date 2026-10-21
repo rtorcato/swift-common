@@ -1,6 +1,6 @@
 /**
- * Shared @rtorcato Docusaurus design tokens (shipped by @rtorcato/js-tooling —
- * copy via `js-tooling copy docusaurus-theme-tokens`).
+ * Shared @rtorcato Docusaurus design tokens (now shipped by @rtorcato/shared-docs —
+ * written by `shared-docs init`).
  *
  * The Geist font + navy-surface design-token base every sibling docs site
  * shares. `@import` this from your `src/css/custom.css`, then override the

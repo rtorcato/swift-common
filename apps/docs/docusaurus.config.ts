@@ -98,14 +98,12 @@ const config: Config = {
 			respectPrefersColorScheme: true,
 		},
 		navbar: {
-			// The "swift-common" wordmark with orange "common" is baked into the
-			// SVG logo (light + dark variants), so the title stays empty.
-			title: '',
+			title: 'swift-common',
 			logo: {
 				alt: 'swift-common',
 				src: 'img/logo.svg',
 				srcDark: 'img/logo-dark.svg',
-				width: 168,
+				width: 26,
 				height: 26,
 			},
 			items: [

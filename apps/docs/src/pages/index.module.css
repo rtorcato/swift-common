@@ -23,6 +23,21 @@
 	text-align: center;
 }
 
+/* Family mark above the wordmark. The wrapper centres it: Docusaurus sets
+   display: initial on the themed img, which would beat a display: block here. */
+.heroMarkWrap {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 22px;
+}
+.heroMark {
+	width: 72px;
+	height: 72px;
+}
+:global(html[data-theme="dark"]) .heroMark {
+	filter: drop-shadow(0 0 28px color-mix(in srgb, var(--sc-accent) 45%, transparent));
+}
+
 /* Text-only wordmark — "swift" in heading color, "-common" with the dash faint
    and "common" in Swift orange. */
 .wordmark {
