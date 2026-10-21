@@ -56,7 +56,7 @@ import MatrixSwiftBaseLottie
 
 ## Pinning to a release
 
-The repo does not currently tag semver releases — vendored consumers track `main`. Tagged releases are planned ([#6](https://github.com/rtorcato/swift-common/issues/6)). Once tags land, pin like:
+Releases are tagged; tags are batched and cut when a milestone closes. Until a tag covers what you need, vendored consumers can track `main`. Pin a version tag so updates are deliberate:
 
 ```swift
 .package(url: "https://github.com/rtorcato/swift-common", from: "0.1.0"),
