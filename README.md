@@ -12,7 +12,8 @@
 [![CI](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml)
 [![Deploy Docs](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/rtorcato)
+
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="40">](https://buymeacoffee.com/rtorcato)
 
 A reusable foundation library for Apple platforms — the Swift counterpart to [`@rtorcato/js-common`](https://github.com/rtorcato/js-common). Built on top of Foundation and SwiftUI; designed to be added to any iOS / macOS app as a SwiftPM dependency.
 
