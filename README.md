@@ -12,6 +12,9 @@
 [![CI](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml)
 [![Deploy Docs](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml)
+[![Swift 5.9+](https://img.shields.io/badge/Swift-5.9%2B-orange.svg)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/Platforms-iOS%2016%20%7C%20macOS%2013%20%7C%20tvOS%2016%20%7C%20watchOS%209-lightgrey.svg)](https://developer.apple.com)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="40">](https://buymeacoffee.com/rtorcato)
 
