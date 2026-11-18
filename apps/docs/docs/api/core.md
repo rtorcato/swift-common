@@ -123,13 +123,25 @@ let client = APIClient(baseURL: URL(string: "https://api.example.com")!)
 let user = try await client.send(UsersAPI.me, as: User.self)
 ```
 
-Retry policy is on the roadmap (`TODOS.md`).
+### Retry
+
+`APIClient` takes a `retryPolicy` (default `.never`). An `Endpoint` can override it with its own `retryPolicy`. A `Retry-After` header from the server wins over the computed delay.
+
+```swift
+let client = APIClient(
+    baseURL: URL(string: "https://api.example.com")!,
+    retryPolicy: .exponentialBackoff(retries: 3, base: 0.5)
+)
+// or .fixed(retries: 2, delay: 1)
+```
 
 ## Concurrency
 
 | Type | Purpose |
 |---|---|
 | `IntervalHelper` | Repeating timer wrappers compatible with structured concurrency |
+| `CancellationScope` | AbortController-style scope: start tasks with `task(_:)`, cancel them all with `cancel()` |
+| `withCancellableTask` | Run an async operation that stops when a scope is cancelled |
 
 ## Errors / Logging
 

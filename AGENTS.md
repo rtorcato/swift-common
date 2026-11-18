@@ -84,7 +84,7 @@ let user: User = try await client.send(UsersAPI.me)
 
 - `Endpoint` requires only `path`; `method` (`.get`), `queryItems`, `headers`, `body` (`.empty`) and `baseURL` have defaults.
 - `client.send(_:)` returns raw `Data`; `client.send(_:as:)` decodes a `Decodable`.
-- `APIClient.init` takes optional `session`, `defaultHeaders`, `decoder`, `encoder`, `interceptor` (async, mutates the `URLRequest`, e.g. to add auth) and `logger`.
+- `APIClient.init` takes optional `session`, `defaultHeaders`, `decoder`, `encoder`, `interceptor` (async, mutates the `URLRequest`, e.g. to add auth) `logger` and `retryPolicy` (`.never`, `.fixed(retries:delay:)`, `.exponentialBackoff(...)`; an `Endpoint` can override it, and `Retry-After` is honoured). For AbortController-style cancellation use `CancellationScope`.
 - Failures are `NetworkError`: `.invalidURL`, `.invalidResponse`, `.http(statusCode:data:)`, `.decoding`, `.encoding`, `.transport(URLError)`, `.cancelled`, `.unknown`. Switch on it, or use `error.statusCode` for HTTP errors.
 - It is a thin `URLSession` client. For multipart, OAuth or heavy interceptor chains, use Alamofire instead.
 
