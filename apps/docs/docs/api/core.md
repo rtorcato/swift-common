@@ -23,7 +23,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `CryptoHelper` | Hashing, key derivation (CryptoKit) |
 | `CurrencyHelper` | Currency formatting via `NumberFormatter` |
 | `CodableHelper` | Partial JSON decode by key path, key omission, deep merge, snake/camel case |
-| `DateHelper` | Date construction, formatting, arithmetic |
+| `DateHelper` | ISO-8601, relative time, time-zone formatting, business-day math, RFC 822 parsing |
 | `DoubleHelper` | Rounding, formatting, conversions |
 | `EmojiHelper` | Emoji utilities |
 | `EnvHelper` | Read environment variables / process info |
@@ -33,14 +33,17 @@ Stateless `public final class FooHelper` containers with static methods.
 | `JsonHelper` | JSON encode/decode convenience |
 | `LocaleHelper` | Locale inspection and a thread-safe runtime locale override |
 | `MathHelper` | `clamp`, `lerp`, common math |
+| `NumberHelper` | Locale-aware parsing (`Int`/`Double`/`Decimal`), decimal/percent/scientific/compact formatting, numeric validation, clamping |
 | `MimeTypeHelper` | Filename ↔ MIME type via `UniformTypeIdentifiers` |
 | `PluralizationHelper` | Inline English "1 file / 5 files" formatting (use `.stringsdict` for CLDR) |
-| `RandomHelper` | Random numbers, strings, picks |
+| `RandomHelper` | Random numbers, strings, picks; sampling with or without replacement; `SeededGenerator` for reproducible results |
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
 | `SoundHelper` | Audio file utilities |
+| `SystemInfoHelper` | OS name and version, device model, locale, bundle ID, app version and build |
 | `StringHelper` | Common string transforms |
 | `ThreadHelper` | Thread / queue introspection |
+| `TimeZoneHelper` | Time-zone lookup, DST-aware offsets, wall-clock conversion between zones |
 | `UnitHelper` | Unit conversions |
 
 ### Example
@@ -50,6 +53,10 @@ let clamped = MathHelper.clamp(150, min: 0, max: 100) // 100
 try await SleepHelper.milliseconds(250)
 let token = RandomHelper.string(length: 32)
 let mime  = MimeTypeHelper.mimeType(forFilename: "doc.pdf") // "application/pdf"
+let short = NumberHelper.compact(1_200)                       // "1.2K"
+let due   = DateHelper.addingBusinessDays(3, to: Date())      // skips weekends
+var rng   = SeededGenerator(seed: 42)
+let picks = [1, 2, 3, 4, 5].randomElements(count: 2, using: &rng) // same every run
 let name  = CodableHelper.value(String.self, at: "user.name", in: data)
 let label = PluralizationHelper.format(5, singular: "file", plural: "files") // "5 files"
 ```
@@ -136,6 +143,30 @@ Retry policy is on the roadmap (`TODOS.md`).
 |---|---|
 | `IntervalHelper` | Repeating timer wrappers compatible with structured concurrency |
 
+## Events
+
+| Type | Purpose |
+|---|---|
+| `EventBus` | Typed, Combine-backed event bus with `on` / `off` / `emit`; replaces stringly-typed `NotificationCenter` wrappers |
+| `Event` | `Sendable` marker protocol for event types |
+
+### Example
+
+```swift
+struct UserLoggedIn: Event { let userID: String }
+
+let token = EventBus.shared.on(UserLoggedIn.self) { event in
+    print(event.userID)          // runs on the emitter's thread
+}
+EventBus.shared.emit(UserLoggedIn(userID: "abc"))
+EventBus.shared.off(token)
+
+// Or compose with Combine, e.g. to deliver on the main queue:
+let cancellable = EventBus.shared.publisher(for: UserLoggedIn.self)
+    .receive(on: DispatchQueue.main)
+    .sink { print($0.userID) }
+```
+
 ## Errors / Logging
 
 | Type | Purpose |
@@ -167,4 +198,23 @@ Value-typed enums / structs used across the library.
 
 | Type | Purpose |
 |---|---|
-| `Validations` | Email / phone / URL / general string validators. Will be expanded into a `Validator<T>` protocol layer per [TODOS.md](https://github.com/rtorcato/swift-common/blob/main/TODOS.md). |
+| `Validator<Value>` | Protocol for composable rules: `.and(_:)`, `.or(_:)`, `.negated()`, `.asRule()`; works as `some` / `any Validator<String>` |
+| `ValidationRule<Value>` | Closure-backed validator, composable with `&&`, `\|\|` and `!` |
+| `EmailValidator` / `PhoneValidator` / `URLValidator` | Wrap the existing `Validations` checks |
+| `CreditCardValidator` | Luhn checksum, 12–19 digits, spaces and dashes allowed |
+| `PasswordValidator` | Configurable `Requirements`: length, upper, lower, digit, special character |
+| `PostalCodeValidator` | Per-region patterns (US, CA, GB, DE, FR, IT, ES, AU, NL, JP, IN, and more), permissive fallback |
+| `Validations` | The original static entry points; still supported |
+
+### Example
+
+```swift
+let password = PasswordValidator(requirements: .init(minLength: 12, requiresSpecialCharacter: true))
+password.isValid("Correct-Horse-9")                    // true
+
+let signup = EmailValidator().and(ValidationRule { !$0.hasSuffix("@example.com") })
+signup.isValid("me@torcato.dev")                       // true
+
+PostalCodeValidator(regionCode: "CA").isValid("K1A 0B1") // true
+CreditCardValidator().isValid("4111 1111 1111 1111")   // true
+```
