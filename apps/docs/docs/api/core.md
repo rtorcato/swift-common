@@ -22,6 +22,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `CoreDataHelper` | Lightweight Core Data setup helpers |
 | `CryptoHelper` | Hashing, key derivation (CryptoKit) |
 | `CurrencyHelper` | Currency formatting via `NumberFormatter` |
+| `CodableHelper` | Partial JSON decode by key path, key omission, deep merge, snake/camel case |
 | `DateHelper` | Date construction, formatting, arithmetic |
 | `DoubleHelper` | Rounding, formatting, conversions |
 | `EmojiHelper` | Emoji utilities |
@@ -30,8 +31,10 @@ Stateless `public final class FooHelper` containers with static methods.
 | `FunctionHelper` | Debounce / throttle / memoize-style wrappers |
 | `GeometryHelper` | Geometric calculations (no UIKit) |
 | `JsonHelper` | JSON encode/decode convenience |
+| `LocaleHelper` | Locale inspection and a thread-safe runtime locale override |
 | `MathHelper` | `clamp`, `lerp`, common math |
 | `MimeTypeHelper` | Filename ↔ MIME type via `UniformTypeIdentifiers` |
+| `PluralizationHelper` | Inline English "1 file / 5 files" formatting (use `.stringsdict` for CLDR) |
 | `RandomHelper` | Random numbers, strings, picks |
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
@@ -47,6 +50,8 @@ let clamped = MathHelper.clamp(150, min: 0, max: 100) // 100
 try await SleepHelper.milliseconds(250)
 let token = RandomHelper.string(length: 32)
 let mime  = MimeTypeHelper.mimeType(forFilename: "doc.pdf") // "application/pdf"
+let name  = CodableHelper.value(String.self, at: "user.name", in: data)
+let label = PluralizationHelper.format(5, singular: "file", plural: "files") // "5 files"
 ```
 
 ## Extensions

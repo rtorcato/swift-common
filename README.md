@@ -22,7 +22,7 @@ A reusable foundation library for Apple platforms — the Swift counterpart to [
 The library ships as **three products** so consumers only pay for what they use:
 
 - **`MatrixSwiftBaseCore`** — pure Foundation utilities. No `import SwiftUI` / `import UIKit` / `import AppKit`. Safe to depend on from anywhere, including command-line tools.
-  - **Helpers:** `DateHelper`, `MathHelper`, `RandomHelper`, `SleepHelper`, `JsonHelper`, `CryptoHelper`, `CurrencyHelper`, `CoreDataHelper`, `NetworkHelper`, `SoundHelper`, etc.
+  - **Helpers:** `DateHelper`, `MathHelper`, `RandomHelper`, `SleepHelper`, `JsonHelper`, `CryptoHelper`, `CurrencyHelper`, `CoreDataHelper`, `NetworkHelper`, `SoundHelper`, `CodableHelper`, `LocaleHelper`, `PluralizationHelper`, etc.
   - **Extensions:** `Array+`, `Set+`, `Bool+`, `Date+`, `URL+`.
   - **Networking / State / Validations / Models:** `HttpMethod`, `NetworkError`, validation rules, file-type enums.
   - **Managers:** `LocationManager` (more to come as the SwiftUI coupling is unwound).
