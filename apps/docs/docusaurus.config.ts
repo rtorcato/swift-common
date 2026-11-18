@@ -160,7 +160,7 @@ const config: Config = {
 			copyright: footerCopyright(),
 		},
 		prism: {
-			theme: prismThemes.vsDark,
+			theme: prismThemes.github,
 			darkTheme: prismThemes.vsDark,
 			additionalLanguages: ['bash', 'json', 'swift'],
 		},
