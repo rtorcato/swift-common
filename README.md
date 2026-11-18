@@ -185,7 +185,7 @@ See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, 
 
 ## Releasing
 
-Merging to `main` does not cut a release. Releases are batched: closing a milestone, or dispatching `release.yml` by hand, runs semantic-release once and tags everything merged since the last tag. The run then waits in the `release` environment until rtorcato approves it.
+Merging to `main` does not cut a release. Releases use [Changesets](https://github.com/changesets/changesets): a PR that changes the library adds a changeset (`pnpm changeset`), and every push to `main` opens or updates a "Version Packages" PR. Merging that PR is the release. The run then waits in the `release` environment until rtorcato approves it, then tags `vX.Y.Z` and creates the GitHub Release. Nothing is published to npm, because SwiftPM resolves by tag. Closing a milestone releases nothing.
 
 ## License
 

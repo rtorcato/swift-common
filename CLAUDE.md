@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Swift Package library of cross-platform Apple utilities. Vendored (consumers depend on the git URL or local path); not published to a registry. Releases are tagged; tags are batched and cut when a milestone closes.
+A Swift Package library of cross-platform Apple utilities. Vendored (consumers depend on the git URL or local path); not published to a registry. Releases are tagged `vX.Y.Z` by Changesets: add a changeset (`pnpm changeset`) to every PR that changes the library; merging the "Version Packages" PR is the release, gated by the `release` environment. Closing a milestone releases nothing.
 
 Ships three SwiftPM library products:
 
