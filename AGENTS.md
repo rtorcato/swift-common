@@ -41,7 +41,7 @@ let chunks = [1, 2, 3, 4, 5].chunked(into: 2)          // [[1,2],[3,4],[5]]
 let item = ["a", "b"][safe: 5]                         // nil, no crash
 ```
 
-Other helpers: `DateHelper`, `CryptoHelper`, `CurrencyHelper`, `JsonHelper`, `MimeTypeHelper`, `RegexHelper`, `StringHelper`, `UnitHelper`, `EnvHelper`, `AsyncHelpers`, `FunctionHelper`. Extensions live in `ArrayExt`, `DateExt`, `DictionaryExt`, `SetExt`, `URLExt`, `BoolExt`. Managers: `KeychainManager`, `LocationManager`. Logging: `AppLogger`. Errors: `AppError`.
+Other helpers: `DateHelper`, `CryptoHelper`, `CurrencyHelper`, `JsonHelper`, `MimeTypeHelper`, `RegexHelper`, `StringHelper`, `UnitHelper`, `SystemInfoHelper` (OS, device model, app version), `EnvHelper`, `AsyncHelpers`, `FunctionHelper`. Extensions live in `ArrayExt`, `DateExt`, `DictionaryExt`, `SetExt`, `URLExt`, `BoolExt`. Managers: `KeychainManager`, `LocationManager`. Logging: `AppLogger`. Errors: `AppError`. Events: `EventBus` (typed `on`/`off`/`emit`; conform payloads to `Event`, which is `Sendable`; handlers are `@Sendable` and run on the emitter's thread).
 
 Read the helper's source for its exact signature before calling it; do not guess parameter labels.
 
