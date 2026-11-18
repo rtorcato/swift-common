@@ -36,6 +36,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
 | `SoundHelper` | Audio file utilities |
+| `SystemInfoHelper` | OS name and version, device model, locale, bundle ID, app version and build |
 | `StringHelper` | Common string transforms |
 | `ThreadHelper` | Thread / queue introspection |
 | `UnitHelper` | Unit conversions |
@@ -131,6 +132,30 @@ Retry policy is on the roadmap (`TODOS.md`).
 |---|---|
 | `IntervalHelper` | Repeating timer wrappers compatible with structured concurrency |
 
+## Events
+
+| Type | Purpose |
+|---|---|
+| `EventBus` | Typed, Combine-backed event bus with `on` / `off` / `emit`; replaces stringly-typed `NotificationCenter` wrappers |
+| `Event` | `Sendable` marker protocol for event types |
+
+### Example
+
+```swift
+struct UserLoggedIn: Event { let userID: String }
+
+let token = EventBus.shared.on(UserLoggedIn.self) { event in
+    print(event.userID)          // runs on the emitter's thread
+}
+EventBus.shared.emit(UserLoggedIn(userID: "abc"))
+EventBus.shared.off(token)
+
+// Or compose with Combine, e.g. to deliver on the main queue:
+let cancellable = EventBus.shared.publisher(for: UserLoggedIn.self)
+    .receive(on: DispatchQueue.main)
+    .sink { print($0.userID) }
+```
+
 ## Errors / Logging
 
 | Type | Purpose |
@@ -162,4 +187,23 @@ Value-typed enums / structs used across the library.
 
 | Type | Purpose |
 |---|---|
-| `Validations` | Email / phone / URL / general string validators. Will be expanded into a `Validator<T>` protocol layer per [TODOS.md](https://github.com/rtorcato/swift-common/blob/main/TODOS.md). |
+| `Validator<Value>` | Protocol for composable rules: `.and(_:)`, `.or(_:)`, `.negated()`, `.asRule()`; works as `some` / `any Validator<String>` |
+| `ValidationRule<Value>` | Closure-backed validator, composable with `&&`, `\|\|` and `!` |
+| `EmailValidator` / `PhoneValidator` / `URLValidator` | Wrap the existing `Validations` checks |
+| `CreditCardValidator` | Luhn checksum, 12–19 digits, spaces and dashes allowed |
+| `PasswordValidator` | Configurable `Requirements`: length, upper, lower, digit, special character |
+| `PostalCodeValidator` | Per-region patterns (US, CA, GB, DE, FR, IT, ES, AU, NL, JP, IN, and more), permissive fallback |
+| `Validations` | The original static entry points; still supported |
+
+### Example
+
+```swift
+let password = PasswordValidator(requirements: .init(minLength: 12, requiresSpecialCharacter: true))
+password.isValid("Correct-Horse-9")                    // true
+
+let signup = EmailValidator().and(ValidationRule { !$0.hasSuffix("@example.com") })
+signup.isValid("me@torcato.dev")                       // true
+
+PostalCodeValidator(regionCode: "CA").isValid("K1A 0B1") // true
+CreditCardValidator().isValid("4111 1111 1111 1111")   // true
+```
