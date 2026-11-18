@@ -22,7 +22,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `CoreDataHelper` | Lightweight Core Data setup helpers |
 | `CryptoHelper` | Hashing, key derivation (CryptoKit) |
 | `CurrencyHelper` | Currency formatting via `NumberFormatter` |
-| `DateHelper` | Date construction, formatting, arithmetic |
+| `DateHelper` | ISO-8601, relative time, time-zone formatting, business-day math, RFC 822 parsing |
 | `DoubleHelper` | Rounding, formatting, conversions |
 | `EmojiHelper` | Emoji utilities |
 | `EnvHelper` | Read environment variables / process info |
@@ -31,14 +31,16 @@ Stateless `public final class FooHelper` containers with static methods.
 | `GeometryHelper` | Geometric calculations (no UIKit) |
 | `JsonHelper` | JSON encode/decode convenience |
 | `MathHelper` | `clamp`, `lerp`, common math |
+| `NumberHelper` | Locale-aware parsing (`Int`/`Double`/`Decimal`), decimal/percent/scientific/compact formatting, numeric validation, clamping |
 | `MimeTypeHelper` | Filename ↔ MIME type via `UniformTypeIdentifiers` |
-| `RandomHelper` | Random numbers, strings, picks |
+| `RandomHelper` | Random numbers, strings, picks; sampling with or without replacement; `SeededGenerator` for reproducible results |
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
 | `SoundHelper` | Audio file utilities |
 | `SystemInfoHelper` | OS name and version, device model, locale, bundle ID, app version and build |
 | `StringHelper` | Common string transforms |
 | `ThreadHelper` | Thread / queue introspection |
+| `TimeZoneHelper` | Time-zone lookup, DST-aware offsets, wall-clock conversion between zones |
 | `UnitHelper` | Unit conversions |
 
 ### Example
@@ -48,6 +50,10 @@ let clamped = MathHelper.clamp(150, min: 0, max: 100) // 100
 try await SleepHelper.milliseconds(250)
 let token = RandomHelper.string(length: 32)
 let mime  = MimeTypeHelper.mimeType(forFilename: "doc.pdf") // "application/pdf"
+let short = NumberHelper.compact(1_200)                       // "1.2K"
+let due   = DateHelper.addingBusinessDays(3, to: Date())      // skips weekends
+var rng   = SeededGenerator(seed: 42)
+let picks = [1, 2, 3, 4, 5].randomElements(count: 2, using: &rng) // same every run
 ```
 
 ## Extensions
