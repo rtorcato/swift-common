@@ -1,71 +1,43 @@
 name: Release
 
-# Batched releases: merging to main never publishes. A release runs only when
-# a milestone is closed or the workflow is dispatched by hand, and ships
-# everything merged since the last tag.
+# Changesets, batched (rtorcato/repo-tooling#938). Every push to main opens or
+# updates the "Version Packages" PR and releases nothing. Merging that PR is the
+# release: its push runs the `publish` job, which waits for one `release`
+# approval, then tags vX.Y.Z and creates the GitHub Release. Nothing goes to
+# npm: SwiftPM resolves consumers by tag. A manual dispatch tags anything
+# versioned but not yet tagged (hotfix). Closing a milestone releases nothing.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
-  milestone:
-    types: [closed]
-
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  # Lets the release job dispatch docs.yml after a publish, so the changelog
-  # page (built from the GitHub Releases API) picks the new version up.
-  actions: write
 
 jobs:
-  # Is a release already publishing? Then this request must queue behind it,
-  # not cancel it mid-publish. One still waiting has published nothing, so
-  # superseding that one is safe.
-  in-flight:
+  # No environment: it only opens or updates the Version Packages PR, so it
+  # never asks for an approval.
+  version:
+    # Release only from the default branch; a dispatch from another is skipped.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    # Its own group, so a publish waiting for approval never holds it: a group
+    # keeps only one pending run, and a Version Packages PR merge queued behind
+    # that wait would be dropped by the next push.
+    concurrency:
+      group: release-version
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     permissions:
-      actions: read
+      contents: write
+      pull-requests: write
     outputs:
-      publishing: ${{ steps.check.outputs.publishing }}
+      release: ${{ steps.untagged.outputs.release }}
     steps:
-      - name: Check for a release already publishing
-        id: check
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          publishing=false
-          # A run waiting for approval is `waiting`, not `in_progress`.
-          for run in $(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/release.yml/runs?status=in_progress" --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID) | .id"); do
-            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run/jobs" --jq '.jobs[] | select(.status == "in_progress" and .name != "in-flight") | .name' | grep -q .; then
-              publishing=true
-            fi
-          done
-          echo "publishing=$publishing" >> "$GITHUB_OUTPUT"
-          if [ "$publishing" = true ]; then
-            echo "::notice::A release is already publishing; this one runs after it."
-          fi
-
-  release:
-    needs: in-flight
-    # Supersede a run still waiting, never one publishing.
-    concurrency:
-      group: release
-      cancel-in-progress: ${{ needs.in-flight.outputs.publishing != 'true' }}
-    name: semantic-release
-    runs-on: ubuntu-latest
-    # Holds every release until a required reviewer on the `release`
-    # environment approves it.
-    environment: release
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - uses: actions/checkout@v7
+      - name: Checkout repository
+        uses: actions/checkout@v7
         with:
-          # The tip, not the event's SHA: the job starts after approval, and
-          # semantic-release refuses a checkout the branch has moved past. A
-          # dispatch releases the branch it ran from; a closed milestone
-          # releases the default branch.
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.repository.default_branch }}
           fetch-depth: 0
-          persist-credentials: false
+          # RELEASE_TOKEN (admin PAT) lets the action push the Version Packages
+          # branch, and its PR then runs CI; GITHUB_TOKEN-made PRs trigger none.
+          # Falls back to GITHUB_TOKEN when no PAT is set.
+          token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Set up Node
         uses: actions/setup-node@v7
@@ -77,30 +49,117 @@ jobs:
         with:
           run_install: false
 
+      # `changeset version` needs no build, and the token is checked out, so no
+      # dependency install script runs.
       - name: Install release tooling
-        run: pnpm install --frozen-lockfile=false --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: semantic-release
-        run: pnpm exec semantic-release
+      # No publish script: with changesets pending this opens or updates the
+      # Version Packages PR; with none it does nothing.
+      - name: Open or update the Version Packages PR
+        id: changesets
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          github-token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          version-script: pnpm changeset version
+          commit-message: 'chore(release): version packages'
+          pr-title: 'chore(release): version packages'
+
+      # Nothing pending and package.json holds a version with no tag yet: this
+      # push merged the Version Packages PR.
+      - name: Check for a version with no tag yet
+        id: untagged
+        if: steps.changesets.outputs.has-changesets == 'false'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::v$version has no tag yet"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: version
+    # The Version Packages PR merge, or a dispatch. Any other push skips this
+    # job, so it never queues an approval request.
+    if: github.event_name == 'workflow_dispatch' || needs.version.outputs.release == 'true'
+    # Holds the run until a required reviewer approves it.
+    environment: release
+    # Queue rather than cancel: a newer publish waits for the one ahead of it
+    # (approval included) instead of killing one already in flight.
+    concurrency:
+      group: release
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    permissions:
+      # Creates the tag and release, and dispatches docs.yml afterwards.
+      actions: write
+      contents: write
+      # The failure reporter below opens an issue.
+      issues: write
+    steps:
+      # The commit that triggered the run, not the tip: a changeset merged while
+      # this waited for approval must not change what gets tagged.
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Tag and create the GitHub Release
+        id: release
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          tag="v$version"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "::notice::$tag already exists, nothing to release."
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          scripts/release-notes.sh "$version" > "$RUNNER_TEMP/notes.md"
+          if [ ! -s "$RUNNER_TEMP/notes.md" ]; then
+            echo "::error::CHANGELOG.md has no section for $version."
+            exit 1
+          fi
+          # Creates the tag on this commit through the API, so no git push or
+          # stored credential is needed.
+          gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" \
+            --notes-file "$RUNNER_TEMP/notes.md"
+          echo "published=true" >> "$GITHUB_OUTPUT"
 
-      # The docs changelog page is built from the GitHub Releases API at docs
-      # build time, and no release commit lands on main (the code-scanning-main
-      # ruleset rejects one), so a publish only reaches the site once the site is
-      # rebuilt. docs.yml cannot subscribe to `release`: that event runs with
+      # The changelog page is built from the GitHub Releases API at docs build
+      # time, so a release only reaches the site once the site is rebuilt.
+      # docs.yml cannot subscribe to `release` itself: that event runs with
       # `github.ref` set to the tag, and the `github-pages` environment only
-      # accepts deployments from `main`. Dispatching on `main` keeps that intact.
-      - name: Redeploy the docs after a publish
-        # The publish has already happened; a hiccup here must not fail the job.
+      # accepts deployments from `main`.
+      - name: Redeploy the docs after a release
+        if: steps.release.outputs.published == 'true'
+        # The release already exists by now; a hiccup here must not fail the job.
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          tag=$(git tag --points-at HEAD | head -1)
-          if [ -z "$tag" ]; then
-            echo "No tag on HEAD, semantic-release published nothing. Skipping."
-            exit 0
-          fi
-          echo "Published $tag, dispatching docs.yml on main."
-          gh workflow run docs.yml --ref main
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: gh workflow run docs.yml --repo "$GITHUB_REPOSITORY" --ref "$DEFAULT_BRANCH"
+
+      - name: Report release failure
+        if: failure()
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Release failed on ${context.sha.slice(0, 7)}`,
+              body: [
+                `The \`publish\` job failed on \`${context.sha}\`.`,
+                '',
+                'Check whether the tag and GitHub Release exist before assuming nothing shipped.',
+                '',
+                `[View the run](${runUrl})`,
+              ].join('\n'),
+              labels: ['bug'],
+            })
