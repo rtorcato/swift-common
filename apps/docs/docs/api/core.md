@@ -37,6 +37,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
 | `SoundHelper` | Audio file utilities |
+| `SystemInfoHelper` | OS name and version, device model, locale, bundle ID, app version and build |
 | `StringHelper` | Common string transforms |
 | `ThreadHelper` | Thread / queue introspection |
 | `TimeZoneHelper` | Time-zone lookup, DST-aware offsets, wall-clock conversion between zones |
@@ -136,6 +137,30 @@ Retry policy is on the roadmap (`TODOS.md`).
 | Type | Purpose |
 |---|---|
 | `IntervalHelper` | Repeating timer wrappers compatible with structured concurrency |
+
+## Events
+
+| Type | Purpose |
+|---|---|
+| `EventBus` | Typed, Combine-backed event bus with `on` / `off` / `emit`; replaces stringly-typed `NotificationCenter` wrappers |
+| `Event` | `Sendable` marker protocol for event types |
+
+### Example
+
+```swift
+struct UserLoggedIn: Event { let userID: String }
+
+let token = EventBus.shared.on(UserLoggedIn.self) { event in
+    print(event.userID)          // runs on the emitter's thread
+}
+EventBus.shared.emit(UserLoggedIn(userID: "abc"))
+EventBus.shared.off(token)
+
+// Or compose with Combine, e.g. to deliver on the main queue:
+let cancellable = EventBus.shared.publisher(for: UserLoggedIn.self)
+    .receive(on: DispatchQueue.main)
+    .sink { print($0.userID) }
+```
 
 ## Errors / Logging
 
