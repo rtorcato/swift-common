@@ -28,3 +28,4 @@
 - [ ] `swift build` + `swift test` pass
 - [ ] `swiftlint --strict` clean
 - [ ] Conventional Commit message
+- [ ] Changeset added (`pnpm changeset`) if the library changes

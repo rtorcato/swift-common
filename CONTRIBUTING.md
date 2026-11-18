@@ -45,8 +45,12 @@ the library must compile on iOS 16+, macOS 13+, tvOS 16+, watchOS 9+.
 
 This repo uses [Conventional Commits](https://www.conventionalcommits.org/),
 enforced by a commit-msg hook (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`,
-`test:`, `build:`, `ci:`, `perf:`, `style:`, `revert:`). Releases are cut
-automatically by semantic-release from these messages.
+`test:`, `build:`, `ci:`, `perf:`, `style:`, `revert:`).
+
+Releases use [Changesets](https://github.com/changesets/changesets). A PR that
+changes the library adds a changeset with `pnpm changeset` (pick `patch`,
+`minor` or `major`). Merging to `main` releases nothing; the maintainer
+approves the release separately.
 
 One-time hook setup:
 

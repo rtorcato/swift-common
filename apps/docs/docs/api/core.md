@@ -55,7 +55,7 @@ Drop-in additions to Foundation types.
 
 | File | What it adds |
 |---|---|
-| `ArrayExt` | `chunked(into:)`, `subscript(safe:)`, etc. |
+| `ArrayExt` | `chunked(into:)`, `subscript(safe:)`, `compactNonNil()`, etc. |
 | `BoolExt` | Display / negation helpers |
 | `DateExt` | Component access, formatting shortcuts |
 | `DictionaryExt` | Merge, transform helpers |
@@ -157,6 +157,18 @@ Value-typed enums / structs used across the library.
 | `LocalNotification` | Notification payload struct |
 | `SoundFileTypes` | `.mp3` / `.wav` / `.caf` / etc. |
 | `SystemThemes` | `.light` / `.dark` / `.system` |
+
+## Type aliases
+
+Shared aliases in `Types/Aliases.swift`.
+
+| Alias | Definition |
+|---|---|
+| `JSONDictionary` | `[String: Any]` |
+| `JSONArray` | `[Any]` |
+| `Completion<T>` | `(Result<T, Error>) -> Void` |
+| `VoidCompletion` | `() -> Void` |
+| `Bytes` | `[UInt8]` |
 
 ## Validations
 
