@@ -174,4 +174,23 @@ Shared aliases in `Types/Aliases.swift`.
 
 | Type | Purpose |
 |---|---|
-| `Validations` | Email / phone / URL / general string validators. Will be expanded into a `Validator<T>` protocol layer per [TODOS.md](https://github.com/rtorcato/swift-common/blob/main/TODOS.md). |
+| `Validator<Value>` | Protocol for composable rules: `.and(_:)`, `.or(_:)`, `.negated()`, `.asRule()`; works as `some` / `any Validator<String>` |
+| `ValidationRule<Value>` | Closure-backed validator, composable with `&&`, `\|\|` and `!` |
+| `EmailValidator` / `PhoneValidator` / `URLValidator` | Wrap the existing `Validations` checks |
+| `CreditCardValidator` | Luhn checksum, 12–19 digits, spaces and dashes allowed |
+| `PasswordValidator` | Configurable `Requirements`: length, upper, lower, digit, special character |
+| `PostalCodeValidator` | Per-region patterns (US, CA, GB, DE, FR, IT, ES, AU, NL, JP, IN, and more), permissive fallback |
+| `Validations` | The original static entry points; still supported |
+
+### Example
+
+```swift
+let password = PasswordValidator(requirements: .init(minLength: 12, requiresSpecialCharacter: true))
+password.isValid("Correct-Horse-9")                    // true
+
+let signup = EmailValidator().and(ValidationRule { !$0.hasSuffix("@example.com") })
+signup.isValid("me@torcato.dev")                       // true
+
+PostalCodeValidator(regionCode: "CA").isValid("K1A 0B1") // true
+CreditCardValidator().isValid("4111 1111 1111 1111")   // true
+```
