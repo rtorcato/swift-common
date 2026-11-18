@@ -49,11 +49,11 @@ public final class SystemInfoHelper: Sendable {
         #endif
         var systemInfo = utsname()
         uname(&systemInfo)
-        let identifier = withUnsafeBytes(of: &systemInfo.machine) { raw -> String in
-            let bytes = raw.prefix { $0 != 0 }
-            return String(decoding: bytes, as: UTF8.self)
+        let identifier = withUnsafeBytes(of: &systemInfo.machine) { raw -> String? in
+            String(bytes: raw.prefix { $0 != 0 }, encoding: .utf8)
         }
-        return identifier.isEmpty ? nil : identifier
+        guard let identifier, !identifier.isEmpty else { return nil }
+        return identifier
         #else
         return nil
         #endif
