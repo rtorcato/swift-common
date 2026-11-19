@@ -37,11 +37,13 @@ import MatrixSwiftBaseCore
 let v = MathHelper.clamp(150, min: 0, max: 100)        // 100
 try await SleepHelper.milliseconds(250)                // async, throws on cancellation
 let token = RandomHelper.string(length: 32)
+var rng = SeededGenerator(seed: 42)                    // deterministic RNG for tests
+let picks = [1, 2, 3, 4].randomElements(count: 2, using: &rng)
 let chunks = [1, 2, 3, 4, 5].chunked(into: 2)          // [[1,2],[3,4],[5]]
 let item = ["a", "b"][safe: 5]                         // nil, no crash
 ```
 
-Other helpers: `DateHelper`, `CryptoHelper`, `CurrencyHelper`, `JsonHelper`, `MimeTypeHelper`, `RegexHelper`, `StringHelper`, `UnitHelper`, `SystemInfoHelper` (OS, device model, app version), `EnvHelper`, `AsyncHelpers`, `FunctionHelper`. Extensions live in `ArrayExt`, `DateExt`, `DictionaryExt`, `SetExt`, `URLExt`, `BoolExt`. Managers: `KeychainManager`, `LocationManager`. Logging: `AppLogger`. Errors: `AppError`. Validation: `Validator<Value>` protocol (`.and`/`.or`/`.negated`) with `EmailValidator`, `PhoneValidator`, `URLValidator`, `CreditCardValidator` (Luhn), `PasswordValidator(requirements:)`, `PostalCodeValidator(regionCode:)`, and `ValidationRule { ... }` for custom closures; the older `Validations` statics still work. Events: `EventBus` (typed `on`/`off`/`emit`; conform payloads to `Event`, which is `Sendable`; handlers are `@Sendable` and run on the emitter's thread).
+Other helpers: `DateHelper` (ISO-8601, relative time, business days), `NumberHelper` (locale-aware parse/format, compact, validation), `TimeZoneHelper`, `CryptoHelper`, `CurrencyHelper`, `JsonHelper`, `MimeTypeHelper`, `RegexHelper`, `StringHelper`, `UnitHelper`, `SystemInfoHelper` (OS, device model, app version), `EnvHelper`, `AsyncHelpers`, `FunctionHelper`, `CodableHelper`, `LocaleHelper`, `PluralizationHelper`. Extensions live in `ArrayExt`, `DateExt`, `DictionaryExt`, `SetExt`, `URLExt`, `BoolExt`. Managers: `KeychainManager`, `LocationManager`. Logging: `AppLogger`. Errors: `AppError`. Validation: `Validator<Value>` protocol (`.and`/`.or`/`.negated`) with `EmailValidator`, `PhoneValidator`, `URLValidator`, `CreditCardValidator` (Luhn), `PasswordValidator(requirements:)`, `PostalCodeValidator(regionCode:)`, and `ValidationRule { ... }` for custom closures; the older `Validations` statics still work. Events: `EventBus` (typed `on`/`off`/`emit`; conform payloads to `Event`, which is `Sendable`; handlers are `@Sendable` and run on the emitter's thread).
 
 Read the helper's source for its exact signature before calling it; do not guess parameter labels.
 
@@ -84,7 +86,7 @@ let user: User = try await client.send(UsersAPI.me)
 
 - `Endpoint` requires only `path`; `method` (`.get`), `queryItems`, `headers`, `body` (`.empty`) and `baseURL` have defaults.
 - `client.send(_:)` returns raw `Data`; `client.send(_:as:)` decodes a `Decodable`.
-- `APIClient.init` takes optional `session`, `defaultHeaders`, `decoder`, `encoder`, `interceptor` (async, mutates the `URLRequest`, e.g. to add auth) and `logger`.
+- `APIClient.init` takes optional `session`, `defaultHeaders`, `decoder`, `encoder`, `interceptor` (async, mutates the `URLRequest`, e.g. to add auth) `logger` and `retryPolicy` (`.never`, `.fixed(retries:delay:)`, `.exponentialBackoff(...)`; an `Endpoint` can override it, and `Retry-After` is honoured). For AbortController-style cancellation use `CancellationScope`.
 - Failures are `NetworkError`: `.invalidURL`, `.invalidResponse`, `.http(statusCode:data:)`, `.decoding`, `.encoding`, `.transport(URLError)`, `.cancelled`, `.unknown`. Switch on it, or use `error.statusCode` for HTTP errors.
 - It is a thin `URLSession` client. For multipart, OAuth or heavy interceptor chains, use Alamofire instead.
 

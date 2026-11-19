@@ -22,7 +22,8 @@ Stateless `public final class FooHelper` containers with static methods.
 | `CoreDataHelper` | Lightweight Core Data setup helpers |
 | `CryptoHelper` | Hashing, key derivation (CryptoKit) |
 | `CurrencyHelper` | Currency formatting via `NumberFormatter` |
-| `DateHelper` | Date construction, formatting, arithmetic |
+| `CodableHelper` | Partial JSON decode by key path, key omission, deep merge, snake/camel case |
+| `DateHelper` | ISO-8601, relative time, time-zone formatting, business-day math, RFC 822 parsing |
 | `DoubleHelper` | Rounding, formatting, conversions |
 | `EmojiHelper` | Emoji utilities |
 | `EnvHelper` | Read environment variables / process info |
@@ -30,15 +31,19 @@ Stateless `public final class FooHelper` containers with static methods.
 | `FunctionHelper` | Debounce / throttle / memoize-style wrappers |
 | `GeometryHelper` | Geometric calculations (no UIKit) |
 | `JsonHelper` | JSON encode/decode convenience |
+| `LocaleHelper` | Locale inspection and a thread-safe runtime locale override |
 | `MathHelper` | `clamp`, `lerp`, common math |
+| `NumberHelper` | Locale-aware parsing (`Int`/`Double`/`Decimal`), decimal/percent/scientific/compact formatting, numeric validation, clamping |
 | `MimeTypeHelper` | Filename ↔ MIME type via `UniformTypeIdentifiers` |
-| `RandomHelper` | Random numbers, strings, picks |
+| `PluralizationHelper` | Inline English "1 file / 5 files" formatting (use `.stringsdict` for CLDR) |
+| `RandomHelper` | Random numbers, strings, picks; sampling with or without replacement; `SeededGenerator` for reproducible results |
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
 | `SoundHelper` | Audio file utilities |
 | `SystemInfoHelper` | OS name and version, device model, locale, bundle ID, app version and build |
 | `StringHelper` | Common string transforms |
 | `ThreadHelper` | Thread / queue introspection |
+| `TimeZoneHelper` | Time-zone lookup, DST-aware offsets, wall-clock conversion between zones |
 | `UnitHelper` | Unit conversions |
 
 ### Example
@@ -48,6 +53,12 @@ let clamped = MathHelper.clamp(150, min: 0, max: 100) // 100
 try await SleepHelper.milliseconds(250)
 let token = RandomHelper.string(length: 32)
 let mime  = MimeTypeHelper.mimeType(forFilename: "doc.pdf") // "application/pdf"
+let short = NumberHelper.compact(1_200)                       // "1.2K"
+let due   = DateHelper.addingBusinessDays(3, to: Date())      // skips weekends
+var rng   = SeededGenerator(seed: 42)
+let picks = [1, 2, 3, 4, 5].randomElements(count: 2, using: &rng) // same every run
+let name  = CodableHelper.value(String.self, at: "user.name", in: data)
+let label = PluralizationHelper.format(5, singular: "file", plural: "files") // "5 files"
 ```
 
 ## Extensions
@@ -56,7 +67,7 @@ Drop-in additions to Foundation types.
 
 | File | What it adds |
 |---|---|
-| `ArrayExt` | `chunked(into:)`, `subscript(safe:)`, etc. |
+| `ArrayExt` | `chunked(into:)`, `subscript(safe:)`, `compactNonNil()`, etc. |
 | `BoolExt` | Display / negation helpers |
 | `DateExt` | Component access, formatting shortcuts |
 | `DictionaryExt` | Merge, transform helpers |
@@ -124,13 +135,25 @@ let client = APIClient(baseURL: URL(string: "https://api.example.com")!)
 let user = try await client.send(UsersAPI.me, as: User.self)
 ```
 
-Retry policy is on the roadmap (`TODOS.md`).
+### Retry
+
+`APIClient` takes a `retryPolicy` (default `.never`). An `Endpoint` can override it with its own `retryPolicy`. A `Retry-After` header from the server wins over the computed delay.
+
+```swift
+let client = APIClient(
+    baseURL: URL(string: "https://api.example.com")!,
+    retryPolicy: .exponentialBackoff(retries: 3, base: 0.5)
+)
+// or .fixed(retries: 2, delay: 1)
+```
 
 ## Concurrency
 
 | Type | Purpose |
 |---|---|
 | `IntervalHelper` | Repeating timer wrappers compatible with structured concurrency |
+| `CancellationScope` | AbortController-style scope: start tasks with `task(_:)`, cancel them all with `cancel()` |
+| `withCancellableTask` | Run an async operation that stops when a scope is cancelled |
 
 ## Events
 
@@ -182,6 +205,18 @@ Value-typed enums / structs used across the library.
 | `LocalNotification` | Notification payload struct |
 | `SoundFileTypes` | `.mp3` / `.wav` / `.caf` / etc. |
 | `SystemThemes` | `.light` / `.dark` / `.system` |
+
+## Type aliases
+
+Shared aliases in `Types/Aliases.swift`.
+
+| Alias | Definition |
+|---|---|
+| `JSONDictionary` | `[String: Any]` |
+| `JSONArray` | `[Any]` |
+| `Completion<T>` | `(Result<T, Error>) -> Void` |
+| `VoidCompletion` | `() -> Void` |
+| `Bytes` | `[UInt8]` |
 
 ## Validations
 

@@ -12,6 +12,9 @@
 [![CI](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/codeql.yml)
 [![Deploy Docs](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml/badge.svg)](https://github.com/rtorcato/swift-common/actions/workflows/docs.yml)
+[![Swift 5.9+](https://img.shields.io/badge/Swift-5.9%2B-orange.svg)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/Platforms-iOS%2016%20%7C%20macOS%2013%20%7C%20tvOS%2016%20%7C%20watchOS%209-lightgrey.svg)](https://developer.apple.com)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="40">](https://buymeacoffee.com/rtorcato)
 
@@ -22,7 +25,7 @@ A reusable foundation library for Apple platforms — the Swift counterpart to [
 The library ships as **three products** so consumers only pay for what they use:
 
 - **`MatrixSwiftBaseCore`** — pure Foundation utilities. No `import SwiftUI` / `import UIKit` / `import AppKit`. Safe to depend on from anywhere, including command-line tools.
-  - **Helpers:** `DateHelper`, `MathHelper`, `RandomHelper`, `SleepHelper`, `JsonHelper`, `CryptoHelper`, `CurrencyHelper`, `CoreDataHelper`, `NetworkHelper`, `SoundHelper`, `SystemInfoHelper`, etc.
+  - **Helpers:** `DateHelper`, `NumberHelper`, `TimeZoneHelper`, `MathHelper`, `RandomHelper`, `SleepHelper`, `JsonHelper`, `CryptoHelper`, `CurrencyHelper`, `CoreDataHelper`, `NetworkHelper`, `SoundHelper`, `SystemInfoHelper`, `CodableHelper`, `LocaleHelper`, `PluralizationHelper`, etc.
   - **Events:** `EventBus`, a typed Combine-backed `on` / `off` / `emit` bus.
   - **Extensions:** `Array+`, `Set+`, `Bool+`, `Date+`, `URL+`.
   - **Networking / State / Validations / Models:** `HttpMethod`, `NetworkError`, a composable `Validator` layer (email, phone, URL, credit card, password, postal code), file-type enums.
@@ -43,7 +46,8 @@ A consumer depending on just `MatrixSwiftBaseCore` never compiles or links any U
 **Belongs here:**
 
 - Stateful managers (`KeychainManager`, `ImageCache`, `SystemThemeManager`, `LocationManager`, `BeaconDetector`).
-- Networking — `APIClient`, `HttpMethod`, `NetworkError` (retry policy planned, [#23](https://github.com/rtorcato/swift-common/issues/23)).
+- Concurrency — `CancellationScope` for AbortController-style cancellation, `IntervalHelper`.
+- Networking — `APIClient`, `HttpMethod`, `NetworkError` with configurable retry (`RetryPolicy`).
 - Validation rules and domain helpers (`CurrencyHelper`, `CryptoHelper`, `JsonHelper`, `DateHelper`, `MathHelper`).
 - SwiftUI primitives tuned to my conventions — components, containers, modifiers, shapes, styles.
 

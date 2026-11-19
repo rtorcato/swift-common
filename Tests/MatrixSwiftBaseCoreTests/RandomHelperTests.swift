@@ -40,4 +40,51 @@ final class RandomHelperTests: XCTestCase {
         let generated = RandomHelper.string(length: 100)
         XCTAssertTrue(generated.allSatisfy { allowed.contains($0) })
     }
+
+    func testElementsSampleCountAndDistinctness() {
+        let source = Array(1...10)
+        let sample = RandomHelper.elements(from: source, count: 4)
+        XCTAssertEqual(sample.count, 4)
+        XCTAssertEqual(Set(sample).count, 4) // no duplicates
+        XCTAssertTrue(sample.allSatisfy { source.contains($0) })
+    }
+
+    func testElementsClampsToCollectionSize() {
+        let sample = RandomHelper.elements(from: [1, 2, 3], count: 10)
+        XCTAssertEqual(Set(sample), [1, 2, 3])
+        XCTAssertEqual(RandomHelper.elements(from: [1, 2, 3], count: 0), [])
+    }
+
+    func testSeededGeneratorIsDeterministic() {
+        var genA = SeededGenerator(seed: 42)
+        var genB = SeededGenerator(seed: 42)
+        let source = Array(1...20)
+        XCTAssertEqual(
+            RandomHelper.elements(from: source, count: 5, using: &genA),
+            RandomHelper.elements(from: source, count: 5, using: &genB)
+        )
+    }
+
+    func testSamplesWithReplacementReturnsExactCount() {
+        let sample = RandomHelper.samples(from: [1, 2], count: 10)
+        XCTAssertEqual(sample.count, 10)
+        XCTAssertTrue(sample.allSatisfy { [1, 2].contains($0) })
+        XCTAssertEqual(RandomHelper.samples(from: [Int](), count: 3), [])
+    }
+
+    func testCollectionRandomElements() {
+        let source = Set(1...10)
+        let distinct = source.randomElements(count: 4)
+        XCTAssertEqual(Set(distinct).count, 4)
+        XCTAssertEqual(source.randomElements(count: 25, withReplacement: true).count, 25)
+    }
+
+    func testSeededSamplesAreDeterministic() {
+        var genA = SeededGenerator(seed: 7)
+        var genB = SeededGenerator(seed: 7)
+        XCTAssertEqual(
+            Array(1...20).randomElements(count: 8, withReplacement: true, using: &genA),
+            Array(1...20).randomElements(count: 8, withReplacement: true, using: &genB)
+        )
+    }
 }
