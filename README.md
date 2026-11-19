@@ -46,7 +46,8 @@ A consumer depending on just `MatrixSwiftBaseCore` never compiles or links any U
 **Belongs here:**
 
 - Stateful managers (`KeychainManager`, `ImageCache`, `SystemThemeManager`, `LocationManager`, `BeaconDetector`).
-- Networking — `APIClient`, `HttpMethod`, `NetworkError` (retry policy planned, [#23](https://github.com/rtorcato/swift-common/issues/23)).
+- Concurrency — `CancellationScope` for AbortController-style cancellation, `IntervalHelper`.
+- Networking — `APIClient`, `HttpMethod`, `NetworkError` with configurable retry (`RetryPolicy`).
 - Validation rules and domain helpers (`CurrencyHelper`, `CryptoHelper`, `JsonHelper`, `DateHelper`, `MathHelper`).
 - SwiftUI primitives tuned to my conventions — components, containers, modifiers, shapes, styles.
 
