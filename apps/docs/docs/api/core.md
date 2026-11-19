@@ -22,6 +22,7 @@ Stateless `public final class FooHelper` containers with static methods.
 | `CoreDataHelper` | Lightweight Core Data setup helpers |
 | `CryptoHelper` | Hashing, key derivation (CryptoKit) |
 | `CurrencyHelper` | Currency formatting via `NumberFormatter` |
+| `CodableHelper` | Partial JSON decode by key path, key omission, deep merge, snake/camel case |
 | `DateHelper` | ISO-8601, relative time, time-zone formatting, business-day math, RFC 822 parsing |
 | `DoubleHelper` | Rounding, formatting, conversions |
 | `EmojiHelper` | Emoji utilities |
@@ -30,9 +31,11 @@ Stateless `public final class FooHelper` containers with static methods.
 | `FunctionHelper` | Debounce / throttle / memoize-style wrappers |
 | `GeometryHelper` | Geometric calculations (no UIKit) |
 | `JsonHelper` | JSON encode/decode convenience |
+| `LocaleHelper` | Locale inspection and a thread-safe runtime locale override |
 | `MathHelper` | `clamp`, `lerp`, common math |
 | `NumberHelper` | Locale-aware parsing (`Int`/`Double`/`Decimal`), decimal/percent/scientific/compact formatting, numeric validation, clamping |
 | `MimeTypeHelper` | Filename ↔ MIME type via `UniformTypeIdentifiers` |
+| `PluralizationHelper` | Inline English "1 file / 5 files" formatting (use `.stringsdict` for CLDR) |
 | `RandomHelper` | Random numbers, strings, picks; sampling with or without replacement; `SeededGenerator` for reproducible results |
 | `RegexHelper` | Regex compile-and-test helpers |
 | `SleepHelper` | Sleep in ms / seconds (async-safe) |
@@ -54,6 +57,8 @@ let short = NumberHelper.compact(1_200)                       // "1.2K"
 let due   = DateHelper.addingBusinessDays(3, to: Date())      // skips weekends
 var rng   = SeededGenerator(seed: 42)
 let picks = [1, 2, 3, 4, 5].randomElements(count: 2, using: &rng) // same every run
+let name  = CodableHelper.value(String.self, at: "user.name", in: data)
+let label = PluralizationHelper.format(5, singular: "file", plural: "files") // "5 files"
 ```
 
 ## Extensions
