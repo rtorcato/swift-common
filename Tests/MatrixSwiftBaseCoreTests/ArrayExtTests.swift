@@ -49,4 +49,14 @@ final class ArrayExtTests: XCTestCase {
         XCTAssertEqual(result["even"], [2, 4])
         XCTAssertEqual(result["odd"], [1, 3, 5])
     }
+
+    func testCompactNonNilDropsNils() {
+        let result = [1, nil, 2, nil, 3].compactNonNil()
+        XCTAssertEqual(result, [1, 2, 3])
+    }
+
+    func testCompactNonNilAllNilReturnsEmpty() {
+        let result = [Int?.none, nil, nil].compactNonNil()
+        XCTAssertEqual(result, [])
+    }
 }
