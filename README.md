@@ -186,7 +186,7 @@ The test suite is intentionally narrow at this stage (foundation utilities have 
 - Multi-platform code: guard platform-specific APIs with `#if canImport(UIKit)` or `#if os(iOS)` etc.
 - Commits: Conventional Commits, enforced by the commit-msg hook.
 
-See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, and `TODOS.md` for the active backlog.
+See `CLAUDE.md` for the conventions Claude Code uses when working in this repo, `TODOS.md` for the active backlog, and `ROADMAP.md` for the milestone plan.
 
 ## Releasing
 
