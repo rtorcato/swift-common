@@ -38,8 +38,10 @@ jobs:
             exit 0
           fi
           # Anything outside apps/docs/ and *.md counts as code.
-          if git diff --name-only --no-renames "$BASE_SHA"...HEAD \
-            | grep -Ev '^apps/docs/|\.md$' | grep -q .; then
+          # Capture first: a failing git diff aborts the step (bash -e), so the
+          # job fails and the required jobs build instead of reading docs-only.
+          files=$(git diff --name-only --no-renames "$BASE_SHA"...HEAD)
+          if printf '%s\n' "$files" | grep -Ev '^apps/docs/|\.md$' | grep -q .; then
             echo "code=true" >> "$GITHUB_OUTPUT"
           else
             echo "code=false" >> "$GITHUB_OUTPUT"
