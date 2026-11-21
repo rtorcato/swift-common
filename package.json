@@ -1,6 +1,6 @@
 {
   "name": "@rtorcato/swift-common",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Workspace root for the swift-common Swift package. Hosts the Docusaurus docs site under apps/docs. The Swift library itself is unaffected by this file.",
   "repository": {
