@@ -218,25 +218,28 @@ body,
 }
 
 /* ---------- Code ----------
-   Prism is vsDark in both light & dark mode (to match the navy aesthetic),
-   so fenced code blocks must stay dark in BOTH themes — otherwise the pale
-   vsDark tokens wash out on a light background. */
+   Prism follows the colour mode (github in light, vsDark in dark), and the
+   surfaces come from the per-theme --sc-* tokens, so fenced blocks are light
+   in light mode and navy in dark mode. */
 .theme-code-block,
 div[class*="codeBlockContainer"],
 pre[class*="language-"] {
 	border: 1px solid var(--sc-border);
 	border-radius: 12px;
-	background: #0c111b !important;
+	background: var(--sc-code-bg) !important;
 }
 .theme-code-block code,
 pre[class*="language-"] code {
 	background: transparent !important;
-	color: #dfe5ee;
+	color: var(--sc-text);
 }
 div[class*="codeBlockTitle"] {
-	background: #0a0e16 !important;
-	color: #94a1b4 !important;
+	background: var(--sc-bg2) !important;
+	color: var(--sc-muted) !important;
 	border-bottom: 1px solid var(--sc-border);
+}
+[data-theme="dark"] div[class*="codeBlockTitle"] {
+	background: var(--sc-bg) !important;
 }
 [data-theme="light"] .theme-code-block,
 [data-theme="light"] div[class*="codeBlockContainer"],
